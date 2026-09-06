@@ -6,6 +6,7 @@ __all__ = [
     "evaluate_traditional_baseline",
     "get_model_registry",
     "ModelEvaluator",
+    "ScenarioAnalyzer",
     "ACTIVE_PRE_ROUTING_FEATURES",
     "ZERO_VARIANCE_FEATURES",
     "STRICTLY_EXCLUDED_COLUMNS",
@@ -14,6 +15,9 @@ __all__ = [
 
 
 def __getattr__(name: str):
+    if name == "ScenarioAnalyzer":
+        from . import scenario_analysis
+        return getattr(scenario_analysis, name)
     if name in [
         "ModelEvaluator",
         "ACTIVE_PRE_ROUTING_FEATURES",
