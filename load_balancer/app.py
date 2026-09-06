@@ -11,6 +11,7 @@ import urllib.request
 
 from config.backends import DEFAULT_BACKENDS
 from load_balancer.router import BaseRouter, get_router
+from monitoring.collector import MetricsCollector
 
 logger = logging.getLogger("load_balancer")
 
@@ -45,6 +46,15 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
             pass
 
     def do_GET(self):
+        # Direct metrics endpoint for the load balancer to report all backend metrics
+        if self.path in ("/lb-metrics", "/metrics/all"):
+            collector: MetricsCollector = getattr(self.server, "collector", None)
+            if collector:
+                self._send_json(200, collector.get_summary())
+            else:
+                self._send_json(500, {"error": "Metrics collector not initialized"})
+            return
+
         router: BaseRouter = getattr(self.server, "router", None)
         algorithm_name: str = getattr(self.server, "algorithm", "unknown")
         backend_timeout: float = getattr(self.server, "backend_timeout", 2.0)
@@ -160,6 +170,7 @@ def create_load_balancer(
     server.algorithm = algorithm
     server.backends = backends_list
     server.backend_timeout = backend_timeout
+    server.collector = MetricsCollector(backends=backends_list, timeout=backend_timeout)
     return server
 
 

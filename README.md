@@ -14,19 +14,17 @@ An experimental study evaluating whether machine-learning-assisted server select
 
 ---
 
-## Phase 2: Load Balancer Implementation
-
-### Architecture
+## Architecture Overview
 ```text
                  Client
                    │
                    │ HTTP
                    ▼
            ┌───────────────┐
-           │ Load Balancer │
-           │     :8000     │
-           └───────┬───────┘
-                   │
+           │ Load Balancer │ ── [MetricsCollector]
+           │     :8000     │           │
+           └───────┬───────┘           │ (Polls /metrics)
+                   │                   ▼
         ┌──────────┼──────────┐
         │          │          │
         ▼          ▼          ▼
@@ -34,48 +32,76 @@ An experimental study evaluating whether machine-learning-assisted server select
      :8001      :8002      :8003
 ```
 
-### Components
+---
+
+## Phase 1 & 2 Summary
 
 1. **Backend Server Nodes (`server/app.py`)**:
-   - Lightweight, reusable HTTP server instances implemented with Python standard library `ThreadingHTTPServer`.
+   - Reusable HTTP server instances implemented with Python standard library `ThreadingHTTPServer`.
    - Endpoints:
      - `GET /health`: Liveness probe returning server ID, status, and port.
      - `GET /process?duration=...`: Simulated computational workload returning completion status and duration.
-   - Configurable via CLI arguments (`--id`, `--host`, `--port`).
+   - Configurable via CLI arguments (`--id`, `--host`, `--port`, `--workers`).
 
 2. **Backend Configuration (`config/backends.py`)**:
    - Centralized list of backend URLs (`DEFAULT_BACKENDS = ["http://127.0.0.1:8001", "http://127.0.0.1:8002", "http://127.0.0.1:8003"]`).
 
 3. **Routing Abstraction (`load_balancer/router.py`)**:
-   - `BaseRouter`: Abstract base class providing `select(client_ip)` and `release(backend, success)` lifecycle hooks, along with a `route(client_ip)` context manager guaranteeing cleanup even on failures.
-   - **Round Robin (`RoundRobinRouter`)**:
-     - Sequentially cycles through configured backend servers.
-     - Thread-safe synchronization via `threading.Lock`.
-   - **Least Connections (`LeastConnectionsRouter`)**:
-     - Routes requests to the backend server with the lowest number of currently active connections.
-     - **Tie-Breaking Policy**: When multiple servers share the same minimum connection count, the server appearing earliest in the configured backend list (lowest index) is chosen deterministically.
-     - Thread-safe tracking with increment on `select()` and decrement on `release()`.
-     - *Clarification*: Connection counts here represent strictly internal load balancer routing state for decision making and do NOT represent the Phase 3 real-time server monitoring metrics.
-   - **IP Hash (`IPHashRouter`)**:
-     - Deterministically maps client IP addresses to servers using `hashlib.md5`.
-     - Formula: `int(hashlib.md5(ip.encode("utf-8")).hexdigest(), 16) % len(backends)`.
-     - Falls back to `127.0.0.1` if client IP is missing.
-   - Router Factory: `get_router(algorithm, backends)`.
+   - `BaseRouter`: Abstract base class providing `select(client_ip)` and `release(backend, success)` lifecycle hooks, along with a `route(client_ip)` context manager.
+   - **Round Robin (`RoundRobinRouter`)**: Thread-safe sequential cyclic routing.
+   - **Least Connections (`LeastConnectionsRouter`)**: Routes to lowest active connection count with deterministic lowest-index tie-breaking.
+   - **IP Hash (`IPHashRouter`)**: Deterministic client IP routing via `hashlib.md5`.
 
 4. **Central Load Balancer Server (`load_balancer/app.py`)**:
-   - Listens on configurable host and port (default `:8000`).
-   - Accepts client HTTP requests, selects a backend using the configured router, and transparently forwards requests.
-   - Adds `X-Backend-Server` response header identifying the servicing backend.
-   - Propagates client IP via `X-Forwarded-For`.
-   - Robust error handling:
-     - Returns `502 Bad Gateway` on connection refused or backend unavailability.
-     - Returns `504 Gateway Timeout` on backend request timeouts.
-   - Structured logging of routing events (algorithm, client IP, selected backend, path, status, duration).
+   - Listens on `:8000`, routes incoming client requests, preserves client IP via `X-Forwarded-For`, and adds `X-Backend-Server` response header.
+   - Handles backend failures returning `502 Bad Gateway` and timeouts returning `504 Gateway Timeout`.
 
-### Current Limitations
-- Health checks are passive; dead backends are not yet automatically removed from routing rotation.
-- Real-time CPU, memory, and latency metric collection is deferred to Phase 3.
-- Machine learning models and workload generators are deferred to later phases.
+---
+
+## Phase 3: Real-Time Metric Collection
+
+### Metric Definitions and Measurement Methodology
+
+| Metric | Unit | Measurement Mechanism | Sampling / Averaging Behavior |
+| :--- | :--- | :--- | :--- |
+| **CPU Utilization** | `%` (`0.0` – `100.0`) | `psutil.Process().cpu_percent(interval=None)` | Measures process-level CPU consumption between successive calls without blocking. |
+| **Memory Utilization** | `%` (`0.0` – `100.0`) | `psutil.Process().memory_percent()` | Physical RAM percentage occupied by the server process relative to total system memory. |
+| **Active Connections** | Count (`int >= 0`) | Server-side concurrency counter protected by `threading.Lock` | Incremented when request acquires execution worker slot; decremented in `finally` upon request completion. |
+| **Recent Avg Response Time** | `ms` (`float >= 0.0`) | High-resolution wall-clock timer `time.perf_counter()` per request | Moving average over the last 50 completed requests tracked via a bounded `collections.deque`. |
+| **Network Latency** | `ms` (`float >= 0.0`) | Probe round-trip time (`time.perf_counter()`) measured by collector; local socket TCP handshake on server | Collector measures real network RTT during probe requests; server measures local loopback connect latency with 1s caching. |
+| **Request Queue Length** | Count (`int >= 0`) | Server concurrency queue counter protected by `threading.Lock` | Incremented when request enters server waiting for an available worker thread semaphore slot; decremented once slot is acquired. |
+
+### Collection Architecture
+
+1. **Server Endpoint (`GET /metrics`)**:
+   - Exposes current runtime metrics directly in JSON format:
+   ```json
+   {
+     "server_id": "server-1",
+     "port": 8001,
+     "cpu_percent": 3.2,
+     "memory_percent": 0.15,
+     "active_connections": 1,
+     "avg_response_time_ms": 42.18,
+     "network_latency_ms": 0.35,
+     "request_queue_length": 0
+   }
+   ```
+   - Bypasses application worker concurrency queues so monitoring never starves during heavy load.
+
+2. **Metrics Collector (`monitoring/collector.py`)**:
+   - `MetricsCollector`: Abstraction to query individual backends (`collect_from_server`) or all servers (`collect_all`).
+   - Returns typed `ServerMetrics` dataclass instances.
+   - Measures real network probe latency between collector/load balancer and backend server.
+   - Graceful failure handling: unreachable or timed-out backends return `ServerMetrics(available=False, error=...)` with zeroed metric counters rather than throwing unhandled exceptions.
+
+3. **Load Balancer Aggregation (`GET /lb-metrics`)**:
+   - Central endpoint on the load balancer `:8000/lb-metrics` that polls and returns the consolidated metrics snapshot across all 3 backend servers.
+
+### Limitations
+- CPU utilization is process-specific rather than whole-system (defensible choice to isolate backend process resource consumption).
+- Queue length reflects requests awaiting worker thread allocation under the bounded semaphore; kernel socket backlog is not directly exposed by Python's standard `socketserver`.
+- Dataset recording and machine learning pipelines are intentionally deferred to subsequent phases.
 
 ---
 
