@@ -58,12 +58,20 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
         router: BaseRouter = getattr(self.server, "router", None)
         algorithm_name: str = getattr(self.server, "algorithm", "unknown")
         backend_timeout: float = getattr(self.server, "backend_timeout", 2.0)
+        recorder = getattr(self.server, "recorder", None)
         client_ip = self._extract_client_ip()
         start_time = time.time()
 
         if not router:
             self._send_json(500, {"error": "Load balancer router not initialized"})
             return
+
+        # Capture pre-routing metrics snapshot strictly BEFORE routing decision
+        pre_snapshot = None
+        if recorder and getattr(recorder, "is_recording", False):
+            collector = getattr(self.server, "collector", None)
+            if collector:
+                pre_snapshot = recorder.capture_pre_snapshot(collector, timestamp=start_time)
 
         with router.route(client_ip=client_ip) as backend:
             target_url = f"{backend.rstrip('/')}{self.path}"
@@ -142,7 +150,8 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                 )
 
             finally:
-                duration = time.time() - start_time
+                end_time = time.time()
+                duration = end_time - start_time
                 logger.info(
                     "[%s] client=%s backend=%s path=%s status=%d duration=%.4fs",
                     algorithm_name,
@@ -152,6 +161,26 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                     status_code,
                     duration,
                 )
+
+                # Record experimental observation if recording is active
+                if recorder and getattr(recorder, "is_recording", False) and pre_snapshot:
+                    req_rate = self.headers.get("X-Request-Rate")
+                    recorder.record_observation(
+                        pre_snapshot=pre_snapshot,
+                        experiment_id=self.headers.get("X-Experiment-ID"),
+                        request_id=self.headers.get("X-Request-ID"),
+                        workload_scenario=self.headers.get("X-Workload-Scenario"),
+                        request_type=self.path.split("?")[0].strip("/") or "root",
+                        request_size=int(self.headers.get("Content-Length", 0)),
+                        concurrency=int(self.headers.get("X-Concurrency", 1)),
+                        request_rate=float(req_rate) if req_rate else None,
+                        routing_algorithm=algorithm_name,
+                        selected_server=backend,
+                        actual_response_time=round(duration * 1000.0, 3),
+                        request_success=(200 <= status_code < 400),
+                        request_start=start_time,
+                        request_end=end_time,
+                    )
 
 
 def create_load_balancer(
@@ -171,6 +200,7 @@ def create_load_balancer(
     server.backends = backends_list
     server.backend_timeout = backend_timeout
     server.collector = MetricsCollector(backends=backends_list, timeout=backend_timeout)
+    server.recorder = None
     return server
 
 

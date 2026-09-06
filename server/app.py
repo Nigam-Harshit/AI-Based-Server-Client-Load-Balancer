@@ -69,7 +69,9 @@ class ServerRequestHandler(BaseHTTPRequestHandler):
                 avg_resp = 0.0
 
         proc: psutil.Process = self.server._process
-        cpu = proc.cpu_percent(interval=None)
+        num_cores = psutil.cpu_count() or 1
+        raw_cpu = proc.cpu_percent(interval=None)
+        cpu = round(min(100.0, max(0.0, raw_cpu / num_cores)), 2)
         mem = round(proc.memory_percent(), 3)
         net_lat = self._measure_network_latency()
 

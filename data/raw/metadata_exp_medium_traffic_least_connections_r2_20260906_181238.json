@@ -1,0 +1,21 @@
+{
+  "experiment_id": "exp_medium_traffic_least_connections_r2_20260906_181238",
+  "scenario": "medium_traffic",
+  "run_number": 2,
+  "routing_algorithm": "least_connections",
+  "seed": 44,
+  "concurrency": 5,
+  "num_requests": 25,
+  "request_rate": 15.0,
+  "request_duration": 0.03,
+  "target_url": "http://127.0.0.1:8000",
+  "backends": [
+    "http://127.0.0.1:8001",
+    "http://127.0.0.1:8002",
+    "http://127.0.0.1:8003"
+  ],
+  "software_version": "1.0.0-phase5",
+  "start_time": 1788698558.4522219,
+  "end_time": 1788698560.1407456,
+  "total_records": 25
+}

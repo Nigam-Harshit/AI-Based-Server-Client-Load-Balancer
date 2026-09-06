@@ -72,6 +72,7 @@ class WorkloadConfig:
     burst_interval: Optional[float] = None     # Pause between bursts in seconds
     seed: Optional[int] = 42                   # Random seed for reproducible runs
     scenario_name: str = "custom"
+    experiment_id: Optional[str] = None        # Associated experiment identifier
 
     def validate(self) -> None:
         """Validate configuration values."""
@@ -210,9 +211,20 @@ class WorkloadGenerator:
         error_msg = None
 
         try:
+            req_headers = {
+                "User-Agent": "WorkloadGenerator/1.0",
+                "X-Request-ID": str(request_id),
+                "X-Workload-Scenario": str(self.config.scenario_name),
+                "X-Concurrency": str(self.config.concurrency),
+            }
+            if self.config.experiment_id:
+                req_headers["X-Experiment-ID"] = str(self.config.experiment_id)
+            if self.config.request_rate:
+                req_headers["X-Request-Rate"] = str(self.config.request_rate)
+
             req = urllib.request.Request(
                 url=url,
-                headers={"User-Agent": "WorkloadGenerator/1.0", "X-Request-ID": str(request_id)},
+                headers=req_headers,
                 method="GET",
             )
             with urllib.request.urlopen(req, timeout=10.0) as resp:

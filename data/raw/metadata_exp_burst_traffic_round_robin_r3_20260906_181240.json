@@ -1,0 +1,21 @@
+{
+  "experiment_id": "exp_burst_traffic_round_robin_r3_20260906_181240",
+  "scenario": "burst_traffic",
+  "run_number": 3,
+  "routing_algorithm": "round_robin",
+  "seed": 45,
+  "concurrency": 10,
+  "num_requests": 20,
+  "request_rate": null,
+  "request_duration": 0.04,
+  "target_url": "http://127.0.0.1:8000",
+  "backends": [
+    "http://127.0.0.1:8001",
+    "http://127.0.0.1:8002",
+    "http://127.0.0.1:8003"
+  ],
+  "software_version": "1.0.0-phase5",
+  "start_time": 1788698560.141089,
+  "end_time": 1788698560.3416517,
+  "total_records": 20
+}

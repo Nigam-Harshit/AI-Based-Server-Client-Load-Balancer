@@ -1,0 +1,21 @@
+{
+  "experiment_id": "exp_low_traffic_round_robin_r1_20260906_181235",
+  "scenario": "low_traffic",
+  "run_number": 1,
+  "routing_algorithm": "round_robin",
+  "seed": 43,
+  "concurrency": 2,
+  "num_requests": 15,
+  "request_rate": 5.0,
+  "request_duration": 0.02,
+  "target_url": "http://127.0.0.1:8000",
+  "backends": [
+    "http://127.0.0.1:8001",
+    "http://127.0.0.1:8002",
+    "http://127.0.0.1:8003"
+  ],
+  "software_version": "1.0.0-phase5",
+  "start_time": 1788698555.4377172,
+  "end_time": 1788698558.4479277,
+  "total_records": 15
+}

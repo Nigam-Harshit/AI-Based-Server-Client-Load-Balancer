@@ -152,3 +152,66 @@ python -m pytest
 python -m client.workload_generator --scenario low_traffic --target http://127.0.0.1:8000
 python -m client.workload_generator --scenario burst_traffic --requests 30 --concurrency 10
 ```
+
+---
+
+## Phase 5: Experimental Data Collection
+
+### Objective
+Establish a reproducible pipeline that executes controlled workload scenarios across traditional routing algorithms (`round_robin`, `least_connections`, `ip_hash`), captures real-time pre-routing cluster state, records post-routing outcomes, assigns data-driven target labels, and validates the resulting dataset.
+
+### Pipeline Architecture
+```text
+Experiment Configuration (Scenario, Algorithm, Repetitions, Seed)
+                            │
+                            ▼
+                Controlled Workload Generator
+                            │
+                            ▼
+                      Load Balancer
+                     /      |      \
+                    ▼       ▼       ▼
+                Server 1  Server 2  Server 3
+                    \       |       /
+                     ▼      ▼      ▼
+                Real-Time Node Metrics
+                            │
+                            ▼
+                   Experiment Recorder
+                  /                   \
+                 ▼                     ▼
+          data/raw/             data/processed/
+      (Raw Observations)     (Validated & Labeled)
+                 │                     │
+                 └──────────┬──────────┘
+                            ▼
+                      Data Validator
+                            │
+                            ▼
+                   Data Quality Report
+```
+
+### Critical Temporal Separation (No Data Leakage)
+- For every incoming request, the complete cluster state (18 metrics: CPU, memory, active connections, response time, network latency, and queue length across all 3 servers) is captured **strictly before the routing decision**.
+- Routing outcome metrics (`actual_response_time`, `request_success`) and target labels (`best_server`) are populated only after request completion.
+- Feature vectors strictly avoid future leakage.
+
+### Label Generation Strategy
+- Labels are assigned independently of the algorithm's choice (`selected_server`).
+- Expected service cost is evaluated:
+  $$\text{Cost}(S_i) = \text{network\_latency}_i + \text{response\_time}_i \times (1 + \text{connections}_i + \text{queue\_length}_i)$$
+- The candidate server with minimum cost is labeled `best_server`.
+- When all servers exhibit near-identical cost (difference $\le 2\text{ms}$ on an idle cluster), the label is explicitly set to `None` rather than arbitrarily inventing a preference.
+
+### Data Quality Verification
+- Automated validation via `experiments.validator.DataValidator` verifies:
+  - 100% column presence across all 30 fields.
+  - Monotonic timestamp ordering (`timestamp <= request_start <= request_end`).
+  - Strict range boundaries for percentages $[0, 100]$, counts $\ge 0$, and durations $\ge 0$.
+  - Zero duplicate records per experiment.
+  - Absence of missing values on mandatory feature fields.
+
+### Executing Data Collection via CLI
+```bash
+python -m experiments.runner --scenario low_traffic --algorithm round_robin --runs 2
+```

@@ -1,0 +1,21 @@
+{
+  "experiment_id": "exp_mixed_ip_hash_r5_20260906_181241",
+  "scenario": "mixed",
+  "run_number": 5,
+  "routing_algorithm": "ip_hash",
+  "seed": 47,
+  "concurrency": 4,
+  "num_requests": 25,
+  "request_rate": 20.0,
+  "request_duration": 0.04,
+  "target_url": "http://127.0.0.1:8000",
+  "backends": [
+    "http://127.0.0.1:8001",
+    "http://127.0.0.1:8002",
+    "http://127.0.0.1:8003"
+  ],
+  "software_version": "1.0.0-phase5",
+  "start_time": 1788698561.1754363,
+  "end_time": 1788698562.5479054,
+  "total_records": 25
+}

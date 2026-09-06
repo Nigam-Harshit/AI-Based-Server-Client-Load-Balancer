@@ -1,0 +1,21 @@
+{
+  "experiment_id": "exp_dynamic_round_robin_r6_20260906_181242",
+  "scenario": "dynamic",
+  "run_number": 6,
+  "routing_algorithm": "round_robin",
+  "seed": 48,
+  "concurrency": 5,
+  "num_requests": 20,
+  "request_rate": null,
+  "request_duration": 0.03,
+  "target_url": "http://127.0.0.1:8000",
+  "backends": [
+    "http://127.0.0.1:8001",
+    "http://127.0.0.1:8002",
+    "http://127.0.0.1:8003"
+  ],
+  "software_version": "1.0.0-phase5",
+  "start_time": 1788698562.5572696,
+  "end_time": 1788698562.8492322,
+  "total_records": 20
+}

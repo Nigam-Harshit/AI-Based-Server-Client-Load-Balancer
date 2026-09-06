@@ -1,0 +1,21 @@
+{
+  "experiment_id": "exp_cpu_heavy_least_connections_r4_20260906_181240",
+  "scenario": "cpu_heavy",
+  "run_number": 4,
+  "routing_algorithm": "least_connections",
+  "seed": 46,
+  "concurrency": 3,
+  "num_requests": 15,
+  "request_rate": null,
+  "request_duration": 0.12,
+  "target_url": "http://127.0.0.1:8000",
+  "backends": [
+    "http://127.0.0.1:8001",
+    "http://127.0.0.1:8002",
+    "http://127.0.0.1:8003"
+  ],
+  "software_version": "1.0.0-phase5",
+  "start_time": 1788698560.3416517,
+  "end_time": 1788698561.1664925,
+  "total_records": 15
+}
