@@ -16,20 +16,20 @@ An experimental study evaluating whether machine-learning-assisted server select
 
 ## Architecture Overview
 ```text
-                 Client
-                   │
-                   │ HTTP
-                   ▼
-           ┌───────────────┐
-           │ Load Balancer │ ── [MetricsCollector]
-           │     :8000     │           │
-           └───────┬───────┘           │ (Polls /metrics)
-                   │                   ▼
-        ┌──────────┼──────────┐
-        │          │          │
-        ▼          ▼          ▼
-    Server 1   Server 2   Server 3
-     :8001      :8002      :8003
+          [Controlled Workload Generator]
+                         │
+                         │ HTTP Requests
+                         ▼
+                 ┌───────────────┐
+                 │ Load Balancer │ ── [MetricsCollector]
+                 │     :8000     │           │
+                 └───────┬───────┘           │ (Polls /metrics)
+                         │                   ▼
+              ┌──────────┼──────────┐
+              │          │          │
+              ▼          ▼          ▼
+          Server 1   Server 2   Server 3
+           :8001      :8002      :8003
 ```
 
 ---
@@ -41,6 +41,7 @@ An experimental study evaluating whether machine-learning-assisted server select
    - Endpoints:
      - `GET /health`: Liveness probe returning server ID, status, and port.
      - `GET /process?duration=...`: Simulated computational workload returning completion status and duration.
+     - `GET /metrics`: Real-time node metrics.
    - Configurable via CLI arguments (`--id`, `--host`, `--port`, `--workers`).
 
 2. **Backend Configuration (`config/backends.py`)**:
@@ -71,46 +72,83 @@ An experimental study evaluating whether machine-learning-assisted server select
 | **Network Latency** | `ms` (`float >= 0.0`) | Probe round-trip time (`time.perf_counter()`) measured by collector; local socket TCP handshake on server | Collector measures real network RTT during probe requests; server measures local loopback connect latency with 1s caching. |
 | **Request Queue Length** | Count (`int >= 0`) | Server concurrency queue counter protected by `threading.Lock` | Incremented when request enters server waiting for an available worker thread semaphore slot; decremented once slot is acquired. |
 
-### Collection Architecture
+---
 
-1. **Server Endpoint (`GET /metrics`)**:
-   - Exposes current runtime metrics directly in JSON format:
-   ```json
-   {
-     "server_id": "server-1",
-     "port": 8001,
-     "cpu_percent": 3.2,
-     "memory_percent": 0.15,
-     "active_connections": 1,
-     "avg_response_time_ms": 42.18,
-     "network_latency_ms": 0.35,
-     "request_queue_length": 0
-   }
-   ```
-   - Bypasses application worker concurrency queues so monitoring never starves during heavy load.
+## Phase 4: Controlled Workload Generator
 
-2. **Metrics Collector (`monitoring/collector.py`)**:
-   - `MetricsCollector`: Abstraction to query individual backends (`collect_from_server`) or all servers (`collect_all`).
-   - Returns typed `ServerMetrics` dataclass instances.
-   - Measures real network probe latency between collector/load balancer and backend server.
-   - Graceful failure handling: unreachable or timed-out backends return `ServerMetrics(available=False, error=...)` with zeroed metric counters rather than throwing unhandled exceptions.
+### Objective
+Create a reproducible traffic-generation engine capable of generating controlled traffic against local backend servers or the load balancer, verifying that varying traffic patterns produce measurable changes in the Phase-3 runtime metrics.
 
-3. **Load Balancer Aggregation (`GET /lb-metrics`)**:
-   - Central endpoint on the load balancer `:8000/lb-metrics` that polls and returns the consolidated metrics snapshot across all 3 backend servers.
+### Workload Generator Architecture (`client/workload_generator.py`)
+```text
+WorkloadConfig (parameters, scenario template, random seed)
+                    │
+                    ▼
+          WorkloadGenerator
+                    │
+   ThreadPoolExecutor (concurrency workers)
+        │           │           │
+        ▼           ▼           ▼
+    HTTP Req    HTTP Req    HTTP Req
+        │           │           │
+        └───────────┬───────────┘
+                    ▼
+     Target (Load Balancer / Server)
+                    │
+                    ▼
+        RequestRecords & Summary
+```
 
-### Limitations
-- CPU utilization is process-specific rather than whole-system (defensible choice to isolate backend process resource consumption).
-- Queue length reflects requests awaiting worker thread allocation under the bounded semaphore; kernel socket backlog is not directly exposed by Python's standard `socketserver`.
-- Dataset recording and machine learning pipelines are intentionally deferred to subsequent phases.
+### Configurable Parameters
+- `target_url`: Base URL of target (Load Balancer `:8000` or Server `:8001`).
+- `num_requests`: Total request count.
+- `concurrency`: Worker thread pool capacity.
+- `request_rate`: Optional target requests/sec throttle (or unthrottled).
+- `endpoint`: `/process`, `/health`, or `mixed`.
+- `request_duration`: Simulated execution duration for `/process?duration=...`.
+- `burst_size`: Requests per batch for burst traffic.
+- `burst_interval`: Interval between bursts in seconds.
+- `seed`: Fixed random seed ensuring deterministic request distributions.
+
+### Supported Scenarios
+
+| Scenario | Requests | Concurrency | Rate (req/s) | Endpoint | Duration (s) | Description |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `low_traffic` | 20 | 2 | 5.0 | `/process` | 0.02 | Baseline low-volume continuous traffic. |
+| `medium_traffic` | 50 | 5 | 15.0 | `/process` | 0.03 | Moderate sustained concurrent traffic. |
+| `high_traffic` | 100 | 15 | None | `/process` | 0.03 | High-concurrency unthrottled traffic. |
+| `burst_traffic` | 60 | 20 | None | `/process` | 0.04 | Batches of 20 concurrent requests with pauses. |
+| `cpu_heavy` | 30 | 5 | None | `/process` | 0.12 | Longer CPU processing workloads. |
+| `mixed` | 60 | 6 | 20.0 | `mixed` | Variable | Pseudo-random mix of `/health` and `/process`. |
+| `dynamic` | 80 | 10 | None | `/process` | 0.03 | Scaled multi-worker traffic profile. |
+
+All scenarios support parameter overrides programmatically or via CLI.
+
+### Reproducibility & Safety Constraints
+- **Reproducibility**: Mixed request choices and timings rely on seeded pseudo-random number generators (`random.Random(seed)`).
+- **Safety**: Traffic targets exclusively localhost (`127.0.0.1`). Workloads are bounded in requests, concurrency, and duration; all resources are released cleanly upon completion.
+- **Log Isolation**: Individual `RequestRecord` objects (latencies, status codes, timestamps) represent generator-side client logs and are strictly decoupled from the future Phase-5 experimental dataset.
+
+### Observed Metric Behavior
+During experimental validation against 3 local servers behind the load balancer under `burst_traffic`:
+- **Before Workload**: Active connections: `0`, Average response time: `0.0ms`, CPU utilization: `~3-4%`.
+- **During Workload**: Active connections rose to `4` (server-1), `4` (server-2), `3` (server-3); CPU consumption spiked to `28-43%` across nodes.
+- **After Workload**: Active connections returned to `0`; average response times settled at `~80.9ms` matching the workload duration.
 
 ---
 
 ## Running Tests
-Run all unit and integration tests using:
+Run all unit and integration tests:
 ```bash
 python -m unittest discover -s tests -p "test_*.py"
 ```
 Or with pytest:
 ```bash
 python -m pytest
+```
+
+### Running Workload Generator via CLI
+```bash
+python -m client.workload_generator --scenario low_traffic --target http://127.0.0.1:8000
+python -m client.workload_generator --scenario burst_traffic --requests 30 --concurrency 10
 ```
