@@ -76,6 +76,17 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
         with router.route(client_ip=client_ip) as backend:
             target_url = f"{backend.rstrip('/')}{self.path}"
             status_code = 502
+
+            # Extract ML observability headers if ML router was used
+            extra_response_headers = {"X-Backend-Server": backend}
+            if hasattr(router, "last_prediction") and router.last_prediction:
+                pred_meta = router.last_prediction
+                if pred_meta.get("predicted_server"):
+                    extra_response_headers["X-ML-Predicted-Server"] = str(pred_meta["predicted_server"])
+                if pred_meta.get("confidence") is not None:
+                    extra_response_headers["X-ML-Confidence"] = f"{pred_meta['confidence']:.4f}"
+                extra_response_headers["X-ML-Fallback"] = "true" if pred_meta.get("is_fallback") else "false"
+
             try:
                 req = urllib.request.Request(
                     url=target_url,
@@ -92,6 +103,8 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                         self.send_header("Content-Type", content_type)
                         self.send_header("Content-Length", str(len(body)))
                         self.send_header("X-Backend-Server", backend)
+                        for h_key, h_val in extra_response_headers.items():
+                            self.send_header(h_key, h_val)
                         self.end_headers()
                         self.wfile.write(body)
                     except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
@@ -108,6 +121,8 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                     self.send_header("Content-Type", content_type)
                     self.send_header("Content-Length", str(len(body)))
                     self.send_header("X-Backend-Server", backend)
+                    for h_key, h_val in extra_response_headers.items():
+                        self.send_header(h_key, h_val)
                     self.end_headers()
                     self.wfile.write(body)
                 except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
@@ -122,7 +137,7 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                         "message": f"Backend server unavailable: {e.reason}",
                         "backend": backend,
                     },
-                    extra_headers={"X-Backend-Server": backend},
+                    extra_headers=extra_response_headers,
                 )
 
             except TimeoutError:
@@ -134,7 +149,7 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                         "message": "Backend request timed out",
                         "backend": backend,
                     },
-                    extra_headers={"X-Backend-Server": backend},
+                    extra_headers=extra_response_headers,
                 )
 
             except Exception as e:
@@ -146,21 +161,28 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                         "message": str(e),
                         "backend": backend,
                     },
-                    extra_headers={"X-Backend-Server": backend},
+                    extra_headers=extra_response_headers,
                 )
 
             finally:
                 end_time = time.time()
                 duration = end_time - start_time
+                pred_info = ""
+                if hasattr(router, "last_prediction") and router.last_prediction:
+                    p = router.last_prediction
+                    pred_info = f" ml_pred={p.get('predicted_server')} conf={p.get('confidence')} fallback={p.get('is_fallback')}"
+
                 logger.info(
-                    "[%s] client=%s backend=%s path=%s status=%d duration=%.4fs",
+                    "[%s] client=%s backend=%s path=%s status=%d duration=%.4fs%s",
                     algorithm_name,
                     client_ip,
                     backend,
                     self.path,
                     status_code,
                     duration,
+                    pred_info,
                 )
+
 
                 # Record experimental observation if recording is active
                 if recorder and getattr(recorder, "is_recording", False) and pre_snapshot:
@@ -189,10 +211,13 @@ def create_load_balancer(
     algorithm: str = "round_robin",
     backends: Optional[List[str]] = None,
     backend_timeout: float = 2.0,
+    model_path: Optional[str] = None,
 ) -> ThreadingHTTPServer:
     """Create and configure a ThreadingHTTPServer instance for the load balancer."""
     backends_list = list(backends) if backends else list(DEFAULT_BACKENDS)
     router = get_router(algorithm, backends_list)
+    collector = MetricsCollector(backends=backends_list, timeout=backend_timeout)
+    router = get_router(algorithm, backends_list, collector=collector, model_path=model_path)
 
     server = ThreadingHTTPServer((host, port), LoadBalancerRequestHandler)
     server.router = router
@@ -200,6 +225,7 @@ def create_load_balancer(
     server.backends = backends_list
     server.backend_timeout = backend_timeout
     server.collector = MetricsCollector(backends=backends_list, timeout=backend_timeout)
+    server.collector = collector
     server.recorder = None
     return server
 
@@ -209,6 +235,7 @@ def run_load_balancer(
     port: int = 8000,
     algorithm: str = "round_robin",
     backends: Optional[List[str]] = None,
+    model_path: Optional[str] = None,
 ):
     """Run the load balancer HTTP server."""
     logging.basicConfig(
@@ -216,6 +243,13 @@ def run_load_balancer(
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     )
     httpd = create_load_balancer(host, port, algorithm, backends)
+    httpd = create_load_balancer(
+        host=host,
+        port=port,
+        algorithm=algorithm,
+        backends=backends,
+        model_path=model_path,
+    )
     logger.info(
         "Starting load balancer on %s:%d using %s with backends: %s",
         host,
@@ -238,7 +272,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--algorithm",
         default="round_robin",
-        choices=["round_robin", "least_connections", "ip_hash"],
+        choices=["round_robin", "least_connections", "ip_hash", "ml"],
         help="Routing algorithm to use (default: round_robin)",
     )
     parser.add_argument(
@@ -246,7 +280,20 @@ if __name__ == "__main__":
         default=None,
         help="Comma-separated list of backend URLs (e.g. http://127.0.0.1:8001,http://127.0.0.1:8002)",
     )
+    parser.add_argument(
+        "--model-path",
+        default=None,
+        help="Path to serialized ML model artifact (joblib format)",
+    )
     args = parser.parse_args()
 
     backends = [b.strip() for b in args.backends.split(",")] if args.backends else None
-    run_load_balancer(host=args.host, port=args.port, algorithm=args.algorithm, backends=backends)
+    run_load_balancer(
+        host=args.host,
+        port=args.port,
+        algorithm=args.algorithm,
+        backends=backends,
+        model_path=args.model_path,
+    )
+
+

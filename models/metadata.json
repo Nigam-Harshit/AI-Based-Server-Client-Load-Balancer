@@ -1,0 +1,43 @@
+{
+  "model_type": "RandomForest",
+  "artifact_path": "models\\random_forest.joblib",
+  "feature_names": [
+    "server_1_cpu",
+    "server_1_memory",
+    "server_1_connections",
+    "server_1_response_time",
+    "server_1_network_latency",
+    "server_2_cpu",
+    "server_2_memory",
+    "server_2_connections",
+    "server_2_response_time",
+    "server_2_network_latency",
+    "server_3_cpu",
+    "server_3_memory",
+    "server_3_connections",
+    "server_3_response_time",
+    "server_3_network_latency"
+  ],
+  "feature_count": 15,
+  "target_labels": [
+    "server-1",
+    "server-2",
+    "server-3"
+  ],
+  "label_to_id": {
+    "server-1": 0,
+    "server-2": 1,
+    "server-3": 2
+  },
+  "id_to_label": {
+    "0": "server-1",
+    "1": "server-2",
+    "2": "server-3"
+  },
+  "training_samples": 120,
+  "random_seed": 42,
+  "pipeline_steps": [
+    "clf"
+  ],
+  "created_at": "2026-09-07T16:03:12Z"
+}

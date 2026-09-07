@@ -215,3 +215,32 @@ Experiment Configuration (Scenario, Algorithm, Repetitions, Seed)
 ```bash
 python -m experiments.runner --scenario low_traffic --algorithm round_robin --runs 2
 ```
+
+---
+
+## Phase 8: ML-Driven Load Balancer Integration
+
+### Objective
+Integrate the trained ML classification model into the central HTTP Load Balancer with dynamic metric querying, safety fallbacks, pluggable model architectures, and full observability headers.
+
+### Key Capabilities
+1. **Integrated Machine Learning Router (`load_balancer/router.py`)**:
+   - `MLRouter` queries real-time metrics across backend servers and builds the exact 15-feature input representation.
+   - Evaluates probability distributions using `predict_proba` to calculate decision confidence.
+   - Preserves modularity: Supports `LogisticRegression` (primary baseline from Phase 7/7.5), `RandomForestClassifier`, or any joblib model artifact.
+2. **Safety & Fault Tolerance**:
+   - Live availability checking prevents routing to down or degraded nodes.
+   - Deterministic fallback to `LeastConnectionsRouter` if predictions target an offline node or if inference encounters an exception.
+3. **Observability**:
+   - Automatically attaches `X-ML-Predicted-Server`, `X-ML-Confidence`, and `X-ML-Fallback` HTTP response headers.
+
+### Starting the Load Balancer with ML Routing
+```bash
+# Start Load Balancer using ML routing (default Logistic Regression model)
+python -m load_balancer.app --port 8000 --algorithm ml
+
+# Specify an alternative model artifact
+python -m load_balancer.app --port 8000 --algorithm ml --model-path models/random_forest.joblib
+```
+Detailed integration documentation is available in [docs/ml_integration.md](docs/ml_integration.md).
+
