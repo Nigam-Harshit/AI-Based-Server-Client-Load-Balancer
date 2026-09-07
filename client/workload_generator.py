@@ -31,9 +31,11 @@ class RequestRecord:
     response_time: float  # in milliseconds
     backend_server: Optional[str] = None
     error: Optional[str] = None
+    response_headers: Optional[Dict[str, str]] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
+
 
 
 @dataclass
@@ -231,6 +233,7 @@ class WorkloadGenerator:
                 status_code = resp.status
                 success = (200 <= status_code < 400)
                 backend_server = resp.headers.get("X-Backend-Server")
+                resp_headers = dict(resp.headers)
                 # Also try to parse server_id from body if present
                 try:
                     body_json = json.loads(resp.read().decode("utf-8"))
@@ -244,21 +247,25 @@ class WorkloadGenerator:
             success = False
             error_msg = f"HTTP {e.code}: {e.reason}"
             backend_server = e.headers.get("X-Backend-Server")
+            resp_headers = dict(e.headers) if hasattr(e, "headers") and e.headers else None
 
         except urllib.error.URLError as e:
             status_code = 0
             success = False
             error_msg = f"Connection failed: {e.reason}"
+            resp_headers = None
 
         except TimeoutError:
             status_code = 0
             success = False
             error_msg = "Request timed out"
+            resp_headers = None
 
         except Exception as e:
             status_code = 0
             success = False
             error_msg = str(e)
+            resp_headers = None
 
         end_perf = time.perf_counter()
         response_time_ms = round((end_perf - start_perf) * 1000.0, 3)
@@ -276,7 +283,9 @@ class WorkloadGenerator:
             response_time=response_time_ms,
             backend_server=backend_server,
             error=error_msg,
+            response_headers=resp_headers,
         )
+
 
         with self._lock:
             self._records.append(record)

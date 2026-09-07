@@ -1,0 +1,201 @@
+{
+  "failure_and_recovery": {
+    "baseline": {
+      "status": "healthy",
+      "routed_backend": "http://127.0.0.1:8003",
+      "is_fallback": "false"
+    },
+    "failure_phase": {
+      "offline_server": "http://127.0.0.1:8003",
+      "total_sent": 10,
+      "successful": 10,
+      "fallback_count": 0,
+      "requests": [
+        {
+          "req_id": 1,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        },
+        {
+          "req_id": 2,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        },
+        {
+          "req_id": 3,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        },
+        {
+          "req_id": 4,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        },
+        {
+          "req_id": 5,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        },
+        {
+          "req_id": 6,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        },
+        {
+          "req_id": 7,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        },
+        {
+          "req_id": 8,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        },
+        {
+          "req_id": 9,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        },
+        {
+          "req_id": 10,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8001",
+          "fallback": "false",
+          "predicted": "http://127.0.0.1:8001"
+        }
+      ]
+    },
+    "recovery_phase": {
+      "recovered_server": "http://127.0.0.1:8003",
+      "total_sent": 10,
+      "successful": 10,
+      "fallback_count": 0,
+      "requests": [
+        {
+          "req_id": 1,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        },
+        {
+          "req_id": 2,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        },
+        {
+          "req_id": 3,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        },
+        {
+          "req_id": 4,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        },
+        {
+          "req_id": 5,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        },
+        {
+          "req_id": 6,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        },
+        {
+          "req_id": 7,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        },
+        {
+          "req_id": 8,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        },
+        {
+          "req_id": 9,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        },
+        {
+          "req_id": 10,
+          "status_code": 200,
+          "backend": "http://127.0.0.1:8003",
+          "fallback": "false"
+        }
+      ]
+    }
+  },
+  "short_burst_stress": {
+    "round_robin": {
+      "total_requests": 50,
+      "successful": 50,
+      "duration_s": 1.333,
+      "throughput_rps": 37.5,
+      "avg_latency_ms": 233.07,
+      "p50_latency_ms": 61.45,
+      "p95_latency_ms": 578.87,
+      "p99_latency_ms": 1089.79,
+      "max_latency_ms": 1090.69
+    },
+    "least_connections": {
+      "total_requests": 50,
+      "successful": 50,
+      "duration_s": 1.335,
+      "throughput_rps": 37.45,
+      "avg_latency_ms": 224.48,
+      "p50_latency_ms": 64.54,
+      "p95_latency_ms": 571.79,
+      "p99_latency_ms": 830.06,
+      "max_latency_ms": 1076.76
+    },
+    "ip_hash": {
+      "total_requests": 50,
+      "successful": 50,
+      "duration_s": 1.335,
+      "throughput_rps": 37.44,
+      "avg_latency_ms": 232.76,
+      "p50_latency_ms": 65.19,
+      "p95_latency_ms": 566.46,
+      "p99_latency_ms": 825.99,
+      "max_latency_ms": 1073.19
+    },
+    "ml": {
+      "total_requests": 50,
+      "successful": 50,
+      "duration_s": 1.111,
+      "throughput_rps": 44.99,
+      "avg_latency_ms": 416.67,
+      "p50_latency_ms": 391.53,
+      "p95_latency_ms": 906.06,
+      "p99_latency_ms": 957.92,
+      "max_latency_ms": 961.33
+    }
+  }
+}

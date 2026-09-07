@@ -1,0 +1,1382 @@
+{
+  "statistics": {
+    "burst_traffic::ip_hash": {
+      "scenario": "burst_traffic",
+      "algorithm": "ip_hash",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 49.92,
+        "median": 50.11,
+        "std": 0.69,
+        "min": 49.16,
+        "max": 50.49
+      },
+      "p50_latency_ms": {
+        "mean": 65.1,
+        "median": 63.64,
+        "std": 8.46,
+        "min": 57.46,
+        "max": 74.2
+      },
+      "p95_latency_ms": {
+        "mean": 570.39,
+        "median": 570.19,
+        "std": 2.62,
+        "min": 567.87,
+        "max": 573.1
+      },
+      "p99_latency_ms": {
+        "mean": 577.77,
+        "median": 576.7,
+        "std": 6.86,
+        "min": 571.5,
+        "max": 585.1
+      },
+      "workload_cpu_percent": {
+        "mean": 3.66,
+        "median": 3.55,
+        "std": 0.63,
+        "min": 3.09,
+        "max": 4.34
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "burst_traffic::least_connections": {
+      "scenario": "burst_traffic",
+      "algorithm": "least_connections",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 44.08,
+        "median": 48.09,
+        "std": 8.22,
+        "min": 34.63,
+        "max": 49.53
+      },
+      "p50_latency_ms": {
+        "mean": 66.19,
+        "median": 67.53,
+        "std": 5.58,
+        "min": 60.06,
+        "max": 70.98
+      },
+      "p95_latency_ms": {
+        "mean": 573.42,
+        "median": 572.01,
+        "std": 5.6,
+        "min": 568.66,
+        "max": 579.59
+      },
+      "p99_latency_ms": {
+        "mean": 654.32,
+        "median": 583.37,
+        "std": 125.3,
+        "min": 580.59,
+        "max": 799.0
+      },
+      "workload_cpu_percent": {
+        "mean": 3.13,
+        "median": 3.54,
+        "std": 0.74,
+        "min": 2.28,
+        "max": 3.57
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "burst_traffic::ml": {
+      "scenario": "burst_traffic",
+      "algorithm": "ml",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 44.4,
+        "median": 45.6,
+        "std": 3.75,
+        "min": 40.19,
+        "max": 47.4
+      },
+      "p50_latency_ms": {
+        "mean": 228.2,
+        "median": 191.86,
+        "std": 89.76,
+        "min": 162.31,
+        "max": 330.44
+      },
+      "p95_latency_ms": {
+        "mean": 777.15,
+        "median": 749.17,
+        "std": 131.43,
+        "min": 661.97,
+        "max": 920.32
+      },
+      "p99_latency_ms": {
+        "mean": 816.64,
+        "median": 784.23,
+        "std": 119.97,
+        "min": 716.21,
+        "max": 949.49
+      },
+      "workload_cpu_percent": {
+        "mean": 4.85,
+        "median": 5.24,
+        "std": 1.76,
+        "min": 2.93,
+        "max": 6.39
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "burst_traffic::round_robin": {
+      "scenario": "burst_traffic",
+      "algorithm": "round_robin",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 49.2,
+        "median": 49.13,
+        "std": 0.62,
+        "min": 48.61,
+        "max": 49.85
+      },
+      "p50_latency_ms": {
+        "mean": 65.52,
+        "median": 63.14,
+        "std": 4.23,
+        "min": 63.02,
+        "max": 70.4
+      },
+      "p95_latency_ms": {
+        "mean": 573.2,
+        "median": 572.28,
+        "std": 8.56,
+        "min": 565.14,
+        "max": 582.18
+      },
+      "p99_latency_ms": {
+        "mean": 578.89,
+        "median": 582.38,
+        "std": 7.81,
+        "min": 569.94,
+        "max": 584.35
+      },
+      "workload_cpu_percent": {
+        "mean": 3.71,
+        "median": 3.56,
+        "std": 0.71,
+        "min": 3.09,
+        "max": 4.49
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "cpu_heavy::ip_hash": {
+      "scenario": "cpu_heavy",
+      "algorithm": "ip_hash",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 35.91,
+        "median": 36.36,
+        "std": 0.9,
+        "min": 34.87,
+        "max": 36.49
+      },
+      "p50_latency_ms": {
+        "mean": 134.68,
+        "median": 132.58,
+        "std": 4.05,
+        "min": 132.1,
+        "max": 139.35
+      },
+      "p95_latency_ms": {
+        "mean": 151.61,
+        "median": 152.14,
+        "std": 4.21,
+        "min": 147.16,
+        "max": 155.53
+      },
+      "p99_latency_ms": {
+        "mean": 159.04,
+        "median": 156.57,
+        "std": 5.15,
+        "min": 155.59,
+        "max": 164.96
+      },
+      "workload_cpu_percent": {
+        "mean": 4.09,
+        "median": 3.72,
+        "std": 0.86,
+        "min": 3.48,
+        "max": 5.07
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "cpu_heavy::least_connections": {
+      "scenario": "cpu_heavy",
+      "algorithm": "least_connections",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 35.15,
+        "median": 35.1,
+        "std": 0.6,
+        "min": 34.58,
+        "max": 35.78
+      },
+      "p50_latency_ms": {
+        "mean": 136.79,
+        "median": 136.68,
+        "std": 2.96,
+        "min": 133.88,
+        "max": 139.8
+      },
+      "p95_latency_ms": {
+        "mean": 151.94,
+        "median": 152.86,
+        "std": 2.26,
+        "min": 149.36,
+        "max": 153.59
+      },
+      "p99_latency_ms": {
+        "mean": 155.91,
+        "median": 155.14,
+        "std": 1.92,
+        "min": 154.49,
+        "max": 158.1
+      },
+      "workload_cpu_percent": {
+        "mean": 2.95,
+        "median": 2.93,
+        "std": 0.62,
+        "min": 2.34,
+        "max": 3.58
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "cpu_heavy::ml": {
+      "scenario": "cpu_heavy",
+      "algorithm": "ml",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 26.96,
+        "median": 26.75,
+        "std": 0.87,
+        "min": 26.22,
+        "max": 27.92
+      },
+      "p50_latency_ms": {
+        "mean": 169.81,
+        "median": 173.05,
+        "std": 13.05,
+        "min": 155.45,
+        "max": 180.94
+      },
+      "p95_latency_ms": {
+        "mean": 228.09,
+        "median": 224.43,
+        "std": 15.44,
+        "min": 214.81,
+        "max": 245.04
+      },
+      "p99_latency_ms": {
+        "mean": 242.52,
+        "median": 234.68,
+        "std": 25.86,
+        "min": 221.49,
+        "max": 271.39
+      },
+      "workload_cpu_percent": {
+        "mean": 3.85,
+        "median": 4.28,
+        "std": 0.96,
+        "min": 2.75,
+        "max": 4.53
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "cpu_heavy::round_robin": {
+      "scenario": "cpu_heavy",
+      "algorithm": "round_robin",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 34.89,
+        "median": 34.87,
+        "std": 0.7,
+        "min": 34.2,
+        "max": 35.6
+      },
+      "p50_latency_ms": {
+        "mean": 139.15,
+        "median": 138.92,
+        "std": 1.12,
+        "min": 138.16,
+        "max": 140.36
+      },
+      "p95_latency_ms": {
+        "mean": 152.6,
+        "median": 152.33,
+        "std": 3.19,
+        "min": 149.55,
+        "max": 155.92
+      },
+      "p99_latency_ms": {
+        "mean": 159.28,
+        "median": 157.49,
+        "std": 3.28,
+        "min": 157.28,
+        "max": 163.07
+      },
+      "workload_cpu_percent": {
+        "mean": 3.31,
+        "median": 3.34,
+        "std": 0.44,
+        "min": 2.86,
+        "max": 3.74
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "dynamic::ip_hash": {
+      "scenario": "dynamic",
+      "algorithm": "ip_hash",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 211.68,
+        "median": 211.98,
+        "std": 7.85,
+        "min": 203.69,
+        "max": 219.38
+      },
+      "p50_latency_ms": {
+        "mean": 41.96,
+        "median": 41.38,
+        "std": 1.91,
+        "min": 40.4,
+        "max": 44.09
+      },
+      "p95_latency_ms": {
+        "mean": 58.21,
+        "median": 58.76,
+        "std": 1.12,
+        "min": 56.92,
+        "max": 58.94
+      },
+      "p99_latency_ms": {
+        "mean": 61.0,
+        "median": 61.02,
+        "std": 3.0,
+        "min": 58.0,
+        "max": 63.99
+      },
+      "workload_cpu_percent": {
+        "mean": 9.34,
+        "median": 9.45,
+        "std": 2.42,
+        "min": 6.87,
+        "max": 11.7
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "dynamic::least_connections": {
+      "scenario": "dynamic",
+      "algorithm": "least_connections",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 208.66,
+        "median": 209.64,
+        "std": 2.0,
+        "min": 206.36,
+        "max": 209.98
+      },
+      "p50_latency_ms": {
+        "mean": 41.71,
+        "median": 41.72,
+        "std": 1.62,
+        "min": 40.08,
+        "max": 43.32
+      },
+      "p95_latency_ms": {
+        "mean": 57.24,
+        "median": 59.0,
+        "std": 3.7,
+        "min": 52.98,
+        "max": 59.73
+      },
+      "p99_latency_ms": {
+        "mean": 62.75,
+        "median": 64.17,
+        "std": 3.69,
+        "min": 58.57,
+        "max": 65.52
+      },
+      "workload_cpu_percent": {
+        "mean": 10.95,
+        "median": 11.16,
+        "std": 0.59,
+        "min": 10.28,
+        "max": 11.41
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "dynamic::ml": {
+      "scenario": "dynamic",
+      "algorithm": "ml",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 50.0,
+        "median": 47.73,
+        "std": 4.43,
+        "min": 47.17,
+        "max": 55.11
+      },
+      "p50_latency_ms": {
+        "mean": 190.64,
+        "median": 193.89,
+        "std": 16.37,
+        "min": 172.89,
+        "max": 205.14
+      },
+      "p95_latency_ms": {
+        "mean": 251.86,
+        "median": 277.53,
+        "std": 49.77,
+        "min": 194.49,
+        "max": 283.55
+      },
+      "p99_latency_ms": {
+        "mean": 277.09,
+        "median": 305.85,
+        "std": 50.19,
+        "min": 219.13,
+        "max": 306.28
+      },
+      "workload_cpu_percent": {
+        "mean": 4.74,
+        "median": 4.98,
+        "std": 0.67,
+        "min": 3.98,
+        "max": 5.25
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "dynamic::round_robin": {
+      "scenario": "dynamic",
+      "algorithm": "round_robin",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 214.14,
+        "median": 213.92,
+        "std": 5.98,
+        "min": 208.27,
+        "max": 220.22
+      },
+      "p50_latency_ms": {
+        "mean": 41.29,
+        "median": 40.65,
+        "std": 1.21,
+        "min": 40.54,
+        "max": 42.68
+      },
+      "p95_latency_ms": {
+        "mean": 57.68,
+        "median": 57.01,
+        "std": 2.38,
+        "min": 55.71,
+        "max": 60.33
+      },
+      "p99_latency_ms": {
+        "mean": 62.64,
+        "median": 62.14,
+        "std": 1.7,
+        "min": 61.24,
+        "max": 64.53
+      },
+      "workload_cpu_percent": {
+        "mean": 11.31,
+        "median": 11.38,
+        "std": 1.99,
+        "min": 9.29,
+        "max": 13.27
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "high_traffic::ip_hash": {
+      "scenario": "high_traffic",
+      "algorithm": "ip_hash",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 201.1,
+        "median": 174.8,
+        "std": 61.33,
+        "min": 157.31,
+        "max": 271.19
+      },
+      "p50_latency_ms": {
+        "mean": 45.06,
+        "median": 43.67,
+        "std": 3.27,
+        "min": 42.71,
+        "max": 48.8
+      },
+      "p95_latency_ms": {
+        "mean": 53.9,
+        "median": 55.67,
+        "std": 5.06,
+        "min": 48.19,
+        "max": 57.84
+      },
+      "p99_latency_ms": {
+        "mean": 230.93,
+        "median": 66.66,
+        "std": 288.73,
+        "min": 61.81,
+        "max": 564.31
+      },
+      "workload_cpu_percent": {
+        "mean": 9.69,
+        "median": 8.2,
+        "std": 3.6,
+        "min": 7.07,
+        "max": 13.79
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "high_traffic::least_connections": {
+      "scenario": "high_traffic",
+      "algorithm": "least_connections",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 172.05,
+        "median": 171.49,
+        "std": 1.23,
+        "min": 171.2,
+        "max": 173.46
+      },
+      "p50_latency_ms": {
+        "mean": 41.15,
+        "median": 40.97,
+        "std": 1.71,
+        "min": 39.53,
+        "max": 42.94
+      },
+      "p95_latency_ms": {
+        "mean": 58.25,
+        "median": 56.24,
+        "std": 5.21,
+        "min": 54.34,
+        "max": 64.17
+      },
+      "p99_latency_ms": {
+        "mean": 227.3,
+        "median": 68.62,
+        "std": 280.16,
+        "min": 62.51,
+        "max": 550.78
+      },
+      "workload_cpu_percent": {
+        "mean": 7.33,
+        "median": 7.92,
+        "std": 1.23,
+        "min": 5.92,
+        "max": 8.16
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "high_traffic::ml": {
+      "scenario": "high_traffic",
+      "algorithm": "ml",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 49.57,
+        "median": 47.93,
+        "std": 9.89,
+        "min": 40.61,
+        "max": 60.18
+      },
+      "p50_latency_ms": {
+        "mean": 290.2,
+        "median": 274.25,
+        "std": 58.49,
+        "min": 241.33,
+        "max": 355.01
+      },
+      "p95_latency_ms": {
+        "mean": 369.03,
+        "median": 418.97,
+        "std": 86.74,
+        "min": 268.87,
+        "max": 419.24
+      },
+      "p99_latency_ms": {
+        "mean": 388.95,
+        "median": 436.48,
+        "std": 89.87,
+        "min": 285.3,
+        "max": 445.07
+      },
+      "workload_cpu_percent": {
+        "mean": 3.68,
+        "median": 3.8,
+        "std": 0.9,
+        "min": 2.72,
+        "max": 4.51
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "high_traffic::round_robin": {
+      "scenario": "high_traffic",
+      "algorithm": "round_robin",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 206.23,
+        "median": 174.1,
+        "std": 60.28,
+        "min": 168.83,
+        "max": 275.77
+      },
+      "p50_latency_ms": {
+        "mean": 44.28,
+        "median": 43.11,
+        "std": 3.29,
+        "min": 41.73,
+        "max": 47.99
+      },
+      "p95_latency_ms": {
+        "mean": 59.63,
+        "median": 58.6,
+        "std": 3.48,
+        "min": 56.78,
+        "max": 63.51
+      },
+      "p99_latency_ms": {
+        "mean": 394.98,
+        "median": 560.29,
+        "std": 288.71,
+        "min": 61.61,
+        "max": 563.05
+      },
+      "workload_cpu_percent": {
+        "mean": 8.38,
+        "median": 7.06,
+        "std": 4.1,
+        "min": 5.1,
+        "max": 12.97
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "low_traffic::ip_hash": {
+      "scenario": "low_traffic",
+      "algorithm": "ip_hash",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 4.99,
+        "median": 4.99,
+        "std": 0.0,
+        "min": 4.99,
+        "max": 4.99
+      },
+      "p50_latency_ms": {
+        "mean": 50.19,
+        "median": 48.72,
+        "std": 4.38,
+        "min": 46.73,
+        "max": 55.11
+      },
+      "p95_latency_ms": {
+        "mean": 65.44,
+        "median": 64.08,
+        "std": 2.99,
+        "min": 63.37,
+        "max": 68.86
+      },
+      "p99_latency_ms": {
+        "mean": 66.14,
+        "median": 64.85,
+        "std": 3.33,
+        "min": 63.65,
+        "max": 69.93
+      },
+      "workload_cpu_percent": {
+        "mean": 1.42,
+        "median": 1.41,
+        "std": 0.46,
+        "min": 0.97,
+        "max": 1.89
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "low_traffic::least_connections": {
+      "scenario": "low_traffic",
+      "algorithm": "least_connections",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 4.98,
+        "median": 4.98,
+        "std": 0.01,
+        "min": 4.98,
+        "max": 4.99
+      },
+      "p50_latency_ms": {
+        "mean": 52.16,
+        "median": 52.23,
+        "std": 1.27,
+        "min": 50.86,
+        "max": 53.39
+      },
+      "p95_latency_ms": {
+        "mean": 62.64,
+        "median": 62.17,
+        "std": 0.97,
+        "min": 62.0,
+        "max": 63.75
+      },
+      "p99_latency_ms": {
+        "mean": 67.94,
+        "median": 66.54,
+        "std": 4.91,
+        "min": 63.88,
+        "max": 73.39
+      },
+      "workload_cpu_percent": {
+        "mean": 1.16,
+        "median": 1.25,
+        "std": 0.42,
+        "min": 0.7,
+        "max": 1.52
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "low_traffic::ml": {
+      "scenario": "low_traffic",
+      "algorithm": "ml",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 4.99,
+        "median": 4.99,
+        "std": 0.0,
+        "min": 4.99,
+        "max": 4.99
+      },
+      "p50_latency_ms": {
+        "mean": 79.57,
+        "median": 82.07,
+        "std": 8.69,
+        "min": 69.91,
+        "max": 86.74
+      },
+      "p95_latency_ms": {
+        "mean": 111.13,
+        "median": 116.34,
+        "std": 10.36,
+        "min": 99.2,
+        "max": 117.85
+      },
+      "p99_latency_ms": {
+        "mean": 124.43,
+        "median": 131.65,
+        "std": 17.3,
+        "min": 104.69,
+        "max": 136.95
+      },
+      "workload_cpu_percent": {
+        "mean": 1.88,
+        "median": 1.79,
+        "std": 0.39,
+        "min": 1.55,
+        "max": 2.31
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "low_traffic::round_robin": {
+      "scenario": "low_traffic",
+      "algorithm": "round_robin",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 4.99,
+        "median": 4.99,
+        "std": 0.01,
+        "min": 4.98,
+        "max": 4.99
+      },
+      "p50_latency_ms": {
+        "mean": 51.32,
+        "median": 52.18,
+        "std": 2.35,
+        "min": 48.66,
+        "max": 53.13
+      },
+      "p95_latency_ms": {
+        "mean": 68.32,
+        "median": 65.37,
+        "std": 7.23,
+        "min": 63.03,
+        "max": 76.55
+      },
+      "p99_latency_ms": {
+        "mean": 78.61,
+        "median": 67.65,
+        "std": 22.64,
+        "min": 63.53,
+        "max": 104.64
+      },
+      "workload_cpu_percent": {
+        "mean": 1.44,
+        "median": 1.59,
+        "std": 0.28,
+        "min": 1.11,
+        "max": 1.61
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "medium_traffic::ip_hash": {
+      "scenario": "medium_traffic",
+      "algorithm": "ip_hash",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 14.88,
+        "median": 14.88,
+        "std": 0.01,
+        "min": 14.87,
+        "max": 14.88
+      },
+      "p50_latency_ms": {
+        "mean": 54.81,
+        "median": 53.03,
+        "std": 3.86,
+        "min": 52.15,
+        "max": 59.24
+      },
+      "p95_latency_ms": {
+        "mean": 73.63,
+        "median": 73.31,
+        "std": 1.13,
+        "min": 72.69,
+        "max": 74.89
+      },
+      "p99_latency_ms": {
+        "mean": 77.08,
+        "median": 78.45,
+        "std": 2.43,
+        "min": 74.28,
+        "max": 78.52
+      },
+      "workload_cpu_percent": {
+        "mean": 2.0,
+        "median": 1.94,
+        "std": 0.3,
+        "min": 1.73,
+        "max": 2.32
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "medium_traffic::least_connections": {
+      "scenario": "medium_traffic",
+      "algorithm": "least_connections",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 14.86,
+        "median": 14.85,
+        "std": 0.01,
+        "min": 14.85,
+        "max": 14.87
+      },
+      "p50_latency_ms": {
+        "mean": 53.96,
+        "median": 58.41,
+        "std": 8.14,
+        "min": 44.56,
+        "max": 58.9
+      },
+      "p95_latency_ms": {
+        "mean": 73.11,
+        "median": 73.02,
+        "std": 0.88,
+        "min": 72.28,
+        "max": 74.03
+      },
+      "p99_latency_ms": {
+        "mean": 82.18,
+        "median": 81.76,
+        "std": 2.37,
+        "min": 80.05,
+        "max": 84.74
+      },
+      "workload_cpu_percent": {
+        "mean": 1.64,
+        "median": 1.66,
+        "std": 0.28,
+        "min": 1.36,
+        "max": 1.91
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "medium_traffic::ml": {
+      "scenario": "medium_traffic",
+      "algorithm": "ml",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 14.85,
+        "median": 14.86,
+        "std": 0.03,
+        "min": 14.81,
+        "max": 14.87
+      },
+      "p50_latency_ms": {
+        "mean": 79.51,
+        "median": 78.92,
+        "std": 8.67,
+        "min": 71.15,
+        "max": 88.46
+      },
+      "p95_latency_ms": {
+        "mean": 116.34,
+        "median": 115.92,
+        "std": 2.26,
+        "min": 114.31,
+        "max": 118.78
+      },
+      "p99_latency_ms": {
+        "mean": 127.3,
+        "median": 126.23,
+        "std": 2.15,
+        "min": 125.89,
+        "max": 129.78
+      },
+      "workload_cpu_percent": {
+        "mean": 3.06,
+        "median": 2.88,
+        "std": 0.66,
+        "min": 2.51,
+        "max": 3.79
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "medium_traffic::round_robin": {
+      "scenario": "medium_traffic",
+      "algorithm": "round_robin",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 14.89,
+        "median": 14.89,
+        "std": 0.01,
+        "min": 14.88,
+        "max": 14.89
+      },
+      "p50_latency_ms": {
+        "mean": 48.13,
+        "median": 52.44,
+        "std": 8.16,
+        "min": 38.72,
+        "max": 53.23
+      },
+      "p95_latency_ms": {
+        "mean": 69.16,
+        "median": 72.25,
+        "std": 7.12,
+        "min": 61.01,
+        "max": 74.21
+      },
+      "p99_latency_ms": {
+        "mean": 78.09,
+        "median": 77.52,
+        "std": 3.72,
+        "min": 74.69,
+        "max": 82.06
+      },
+      "workload_cpu_percent": {
+        "mean": 1.83,
+        "median": 1.66,
+        "std": 0.45,
+        "min": 1.5,
+        "max": 2.34
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "mixed::ip_hash": {
+      "scenario": "mixed",
+      "algorithm": "ip_hash",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 19.56,
+        "median": 19.55,
+        "std": 0.17,
+        "min": 19.4,
+        "max": 19.73
+      },
+      "p50_latency_ms": {
+        "mean": 41.31,
+        "median": 41.39,
+        "std": 1.69,
+        "min": 39.59,
+        "max": 42.96
+      },
+      "p95_latency_ms": {
+        "mean": 114.71,
+        "median": 112.88,
+        "std": 3.84,
+        "min": 112.13,
+        "max": 119.13
+      },
+      "p99_latency_ms": {
+        "mean": 121.41,
+        "median": 122.47,
+        "std": 2.87,
+        "min": 118.16,
+        "max": 123.61
+      },
+      "workload_cpu_percent": {
+        "mean": 2.22,
+        "median": 2.28,
+        "std": 0.19,
+        "min": 2.0,
+        "max": 2.37
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "mixed::least_connections": {
+      "scenario": "mixed",
+      "algorithm": "least_connections",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 19.49,
+        "median": 19.45,
+        "std": 0.14,
+        "min": 19.37,
+        "max": 19.64
+      },
+      "p50_latency_ms": {
+        "mean": 44.34,
+        "median": 46.06,
+        "std": 3.04,
+        "min": 40.83,
+        "max": 46.14
+      },
+      "p95_latency_ms": {
+        "mean": 115.13,
+        "median": 112.55,
+        "std": 4.89,
+        "min": 112.07,
+        "max": 120.77
+      },
+      "p99_latency_ms": {
+        "mean": 121.24,
+        "median": 122.33,
+        "std": 2.27,
+        "min": 118.63,
+        "max": 122.75
+      },
+      "workload_cpu_percent": {
+        "mean": 2.05,
+        "median": 2.19,
+        "std": 0.38,
+        "min": 1.62,
+        "max": 2.35
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "mixed::ml": {
+      "scenario": "mixed",
+      "algorithm": "ml",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 19.34,
+        "median": 19.24,
+        "std": 0.18,
+        "min": 19.23,
+        "max": 19.55
+      },
+      "p50_latency_ms": {
+        "mean": 66.02,
+        "median": 63.97,
+        "std": 4.6,
+        "min": 62.8,
+        "max": 71.29
+      },
+      "p95_latency_ms": {
+        "mean": 138.92,
+        "median": 139.87,
+        "std": 5.96,
+        "min": 132.54,
+        "max": 144.35
+      },
+      "p99_latency_ms": {
+        "mean": 160.33,
+        "median": 152.36,
+        "std": 14.17,
+        "min": 151.93,
+        "max": 176.69
+      },
+      "workload_cpu_percent": {
+        "mean": 4.21,
+        "median": 4.24,
+        "std": 0.09,
+        "min": 4.11,
+        "max": 4.27
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "mixed::round_robin": {
+      "scenario": "mixed",
+      "algorithm": "round_robin",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 19.51,
+        "median": 19.41,
+        "std": 0.23,
+        "min": 19.34,
+        "max": 19.77
+      },
+      "p50_latency_ms": {
+        "mean": 36.5,
+        "median": 37.73,
+        "std": 4.47,
+        "min": 31.54,
+        "max": 40.22
+      },
+      "p95_latency_ms": {
+        "mean": 112.55,
+        "median": 113.05,
+        "std": 0.93,
+        "min": 111.48,
+        "max": 113.12
+      },
+      "p99_latency_ms": {
+        "mean": 120.76,
+        "median": 121.6,
+        "std": 3.55,
+        "min": 116.86,
+        "max": 123.81
+      },
+      "workload_cpu_percent": {
+        "mean": 2.05,
+        "median": 2.02,
+        "std": 0.3,
+        "min": 1.76,
+        "max": 2.36
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    }
+  },
+  "significance": {
+    "repetitions_per_group": 3,
+    "note": "Sample size (n=3) provides initial empirical directional indicators; repetitions are sufficient for exploratory hypothesis testing but limited for high-power asymptotic claims.",
+    "scenario_comparisons": {
+      "low_traffic": {
+        "p50_latency_diff_mean": 28.25,
+        "p50_latency_p_val": 0.0237,
+        "p50_latency_significant_05": true,
+        "throughput_diff_mean": 0.0,
+        "throughput_p_val": 0.4226,
+        "throughput_significant_05": false
+      },
+      "medium_traffic": {
+        "p50_latency_diff_mean": 31.38,
+        "p50_latency_p_val": 0.0104,
+        "p50_latency_significant_05": true,
+        "throughput_diff_mean": -0.04,
+        "throughput_p_val": 0.1602,
+        "throughput_significant_05": false
+      },
+      "high_traffic": {
+        "p50_latency_diff_mean": 245.92,
+        "p50_latency_p_val": 0.0181,
+        "p50_latency_significant_05": true,
+        "throughput_diff_mean": -156.66,
+        "throughput_p_val": 0.0428,
+        "throughput_significant_05": true
+      },
+      "burst_traffic": {
+        "p50_latency_diff_mean": 162.68,
+        "p50_latency_p_val": 0.0879,
+        "p50_latency_significant_05": false,
+        "throughput_diff_mean": -4.8,
+        "throughput_p_val": 0.1538,
+        "throughput_significant_05": false
+      },
+      "cpu_heavy": {
+        "p50_latency_diff_mean": 30.67,
+        "p50_latency_p_val": 0.0544,
+        "p50_latency_significant_05": false,
+        "throughput_diff_mean": -7.93,
+        "throughput_p_val": 0.0003,
+        "throughput_significant_05": true
+      },
+      "mixed": {
+        "p50_latency_diff_mean": 29.52,
+        "p50_latency_p_val": 0.0013,
+        "p50_latency_significant_05": true,
+        "throughput_diff_mean": -0.17,
+        "throughput_p_val": 0.3843,
+        "throughput_significant_05": false
+      },
+      "dynamic": {
+        "p50_latency_diff_mean": 149.35,
+        "p50_latency_p_val": 0.0038,
+        "p50_latency_significant_05": true,
+        "throughput_diff_mean": -164.13,
+        "throughput_p_val": 0.0,
+        "throughput_significant_05": true
+      }
+    }
+  }
+}

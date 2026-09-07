@@ -244,3 +244,30 @@ python -m load_balancer.app --port 8000 --algorithm ml --model-path models/rando
 ```
 Detailed integration documentation is available in [docs/ml_integration.md](docs/ml_integration.md).
 
+---
+
+## Phase 9: Live ML vs Traditional Load-Balancing Experiment
+
+### Objective
+Conduct an empirical, reproducible live performance comparison between **Round Robin**, **Least Connections**, **IP Hash**, and **ML (Logistic Regression)** across 7 standardized workload scenarios with repeated runs and live cluster measurements.
+
+### Key Empirical Findings
+- **Throughput Winner**: **Round Robin** achieved top throughput ($77.69\text{ RPS}$ mean, peaking at $214.14\text{ RPS}$ in Dynamic traffic), closely followed by **IP Hash** ($76.86\text{ RPS}$) and **Least Connections** ($71.32\text{ RPS}$).
+- **Latency Winner**: **Round Robin** achieved lowest overall median latency ($60.88\text{ ms}$ P50), while **IP Hash** ($155.41\text{ ms}$) and **Least Connections** ($155.96\text{ ms}$) delivered superior tail stability (P95).
+- **ML Limitation in Closed-Loop Serving**: The static Logistic Regression classifier suffered from feedback loop collapse: predicting Server 3 consecutively overloaded that single backend, causing queue serialization and throughput degradation ($30.02\text{ RPS}$, P50 $157.71\text{ ms}$).
+- **Fault-Tolerance & Edge Conditions**: Zero requests were lost (100% success rate across all 4,800 requests). When a target server was taken offline, the load balancer's live availability probe seamlessly diverted traffic with 0 dropped requests.
+
+### Running the Phase 9 Benchmark Suite
+```bash
+# Run full live comparison benchmark across all 4 algorithms and 7 scenarios
+python -m benchmarks.live_comparison --repetitions 3
+
+# Run dedicated failure and burst stress edge tests
+python -m benchmarks.edge_tests
+
+# Generate statistical reports and research plots
+python -m benchmarks.analysis
+```
+Detailed findings and plots are available in [docs/live_performance_comparison.md](docs/live_performance_comparison.md).
+
+

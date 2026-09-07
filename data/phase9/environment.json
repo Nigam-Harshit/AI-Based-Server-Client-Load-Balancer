@@ -1,0 +1,37 @@
+{
+  "os_name": "Windows",
+  "os_release": "11",
+  "os_version": "10.0.26200",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.12.4",
+  "python_compiler": "MSC v.1940 64 bit (AMD64)",
+  "cpu_count_logical": 16,
+  "cpu_count_physical": 12,
+  "ram_total_gb": 15.63,
+  "backend_ports": [
+    8001,
+    8002,
+    8003
+  ],
+  "backend_count": 3,
+  "load_balancer_port": 8000,
+  "algorithms": [
+    "round_robin",
+    "least_connections",
+    "ip_hash",
+    "ml"
+  ],
+  "scenarios": [
+    "low_traffic",
+    "medium_traffic",
+    "high_traffic",
+    "burst_traffic",
+    "cpu_heavy",
+    "mixed",
+    "dynamic"
+  ],
+  "repetitions": 3,
+  "base_seed": 42,
+  "model_path": "models/logistic_regression.joblib",
+  "timestamp": "2026-09-07T16:18:52Z"
+}
