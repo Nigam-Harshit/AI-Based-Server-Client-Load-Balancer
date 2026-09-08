@@ -86,12 +86,14 @@ class LiveBenchmarkCluster:
         server_ports: Optional[List[int]] = None,
         algorithm: str = "round_robin",
         model_path: str = "models/logistic_regression.joblib",
+        backend_timeout: float = 2.0,
     ):
         self.lb_port = lb_port
         self.server_ports = server_ports or [8001, 8002, 8003]
         self.backends = [f"http://127.0.0.1:{p}" for p in self.server_ports]
         self.algorithm = algorithm
         self.model_path = model_path
+        self.backend_timeout = backend_timeout
         self.servers = []
         self.server_threads = []
         self.lb = None
@@ -117,6 +119,7 @@ class LiveBenchmarkCluster:
             algorithm=self.algorithm,
             backends=self.backends,
             model_path=self.model_path,
+            backend_timeout=self.backend_timeout,
         )
         self.lb_thread = threading.Thread(target=self.lb.serve_forever, daemon=True)
         self.lb_thread.start()

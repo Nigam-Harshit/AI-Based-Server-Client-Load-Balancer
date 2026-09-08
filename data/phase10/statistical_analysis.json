@@ -1,0 +1,1226 @@
+{
+  "statistics": {
+    "scenario_a_equal_priority::ml": {
+      "scenario": "scenario_a_equal_priority",
+      "algorithm": "ml",
+      "label": "A: Equal Priority",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 9.85,
+        "median": 9.82,
+        "std": 0.09,
+        "min": 9.79,
+        "max": 9.95
+      },
+      "p50_latency_ms": {
+        "mean": 99.48,
+        "median": 108.77,
+        "std": 17.22,
+        "min": 79.61,
+        "max": 110.07
+      },
+      "p95_latency_ms": {
+        "mean": 138.76,
+        "median": 142.1,
+        "std": 11.43,
+        "min": 126.04,
+        "max": 148.15
+      },
+      "p99_latency_ms": {
+        "mean": 155.53,
+        "median": 157.05,
+        "std": 4.53,
+        "min": 150.43,
+        "max": 159.1
+      },
+      "avg_latency_ms": {
+        "mean": 101.6,
+        "median": 107.28,
+        "std": 13.02,
+        "min": 86.71,
+        "max": 110.82
+      },
+      "deadline_violation_rate": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "avg_lateness_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "priority_overrides": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "high_critical_avg_latency_ms": null,
+      "low_normal_avg_latency_ms": {
+        "mean": 101.6,
+        "median": 107.28,
+        "std": 13.02,
+        "min": 86.71,
+        "max": 110.82
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_a_equal_priority::priority_ml": {
+      "scenario": "scenario_a_equal_priority",
+      "algorithm": "priority_ml",
+      "label": "A: Equal Priority",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 9.93,
+        "median": 9.95,
+        "std": 0.03,
+        "min": 9.89,
+        "max": 9.95
+      },
+      "p50_latency_ms": {
+        "mean": 121.27,
+        "median": 118.34,
+        "std": 5.77,
+        "min": 117.56,
+        "max": 127.92
+      },
+      "p95_latency_ms": {
+        "mean": 162.62,
+        "median": 160.67,
+        "std": 4.37,
+        "min": 159.57,
+        "max": 167.63
+      },
+      "p99_latency_ms": {
+        "mean": 171.22,
+        "median": 161.71,
+        "std": 16.71,
+        "min": 161.44,
+        "max": 190.51
+      },
+      "avg_latency_ms": {
+        "mean": 117.17,
+        "median": 118.53,
+        "std": 2.96,
+        "min": 113.77,
+        "max": 119.2
+      },
+      "deadline_violation_rate": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "avg_lateness_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "priority_overrides": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "high_critical_avg_latency_ms": null,
+      "low_normal_avg_latency_ms": {
+        "mean": 117.17,
+        "median": 118.53,
+        "std": 2.96,
+        "min": 113.77,
+        "max": 119.2
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_b_mixed_priority::ml": {
+      "scenario": "scenario_b_mixed_priority",
+      "algorithm": "ml",
+      "label": "B: Mixed Priority",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 14.69,
+        "median": 14.79,
+        "std": 0.24,
+        "min": 14.41,
+        "max": 14.86
+      },
+      "p50_latency_ms": {
+        "mean": 91.28,
+        "median": 96.65,
+        "std": 13.44,
+        "min": 75.98,
+        "max": 101.2
+      },
+      "p95_latency_ms": {
+        "mean": 126.86,
+        "median": 128.65,
+        "std": 9.55,
+        "min": 116.55,
+        "max": 135.39
+      },
+      "p99_latency_ms": {
+        "mean": 132.86,
+        "median": 131.24,
+        "std": 12.14,
+        "min": 121.61,
+        "max": 145.72
+      },
+      "avg_latency_ms": {
+        "mean": 90.62,
+        "median": 94.05,
+        "std": 11.17,
+        "min": 78.14,
+        "max": 99.68
+      },
+      "deadline_violation_rate": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "avg_lateness_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "priority_overrides": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 90.22,
+        "median": 91.48,
+        "std": 11.74,
+        "min": 77.9,
+        "max": 101.27
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 90.83,
+        "median": 95.94,
+        "std": 10.89,
+        "min": 78.33,
+        "max": 98.23
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_b_mixed_priority::priority_ml": {
+      "scenario": "scenario_b_mixed_priority",
+      "algorithm": "priority_ml",
+      "label": "B: Mixed Priority",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 14.49,
+        "median": 14.46,
+        "std": 0.1,
+        "min": 14.41,
+        "max": 14.6
+      },
+      "p50_latency_ms": {
+        "mean": 98.02,
+        "median": 92.85,
+        "std": 18.19,
+        "min": 82.98,
+        "max": 118.24
+      },
+      "p95_latency_ms": {
+        "mean": 160.33,
+        "median": 150.59,
+        "std": 29.53,
+        "min": 136.9,
+        "max": 193.5
+      },
+      "p99_latency_ms": {
+        "mean": 181.02,
+        "median": 186.22,
+        "std": 37.25,
+        "min": 141.45,
+        "max": 215.4
+      },
+      "avg_latency_ms": {
+        "mean": 103.71,
+        "median": 96.31,
+        "std": 15.52,
+        "min": 93.28,
+        "max": 121.54
+      },
+      "deadline_violation_rate": {
+        "mean": 1.96,
+        "median": 0.0,
+        "std": 3.39,
+        "min": 0.0,
+        "max": 5.88
+      },
+      "avg_lateness_ms": {
+        "mean": 0.13,
+        "median": 0.0,
+        "std": 0.23,
+        "min": 0.0,
+        "max": 0.4
+      },
+      "priority_overrides": {
+        "mean": 2.33,
+        "median": 2.0,
+        "std": 1.53,
+        "min": 1.0,
+        "max": 4.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 105.1,
+        "median": 98.9,
+        "std": 12.9,
+        "min": 96.48,
+        "max": 119.93
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 102.37,
+        "median": 96.18,
+        "std": 18.09,
+        "min": 88.19,
+        "max": 122.74
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_c_tight_deadlines::ml": {
+      "scenario": "scenario_c_tight_deadlines",
+      "algorithm": "ml",
+      "label": "C: Tight Deadlines",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 40.53,
+        "median": 39.91,
+        "std": 2.41,
+        "min": 38.5,
+        "max": 43.19
+      },
+      "p50_latency_ms": {
+        "mean": 175.65,
+        "median": 169.29,
+        "std": 12.16,
+        "min": 168.0,
+        "max": 189.67
+      },
+      "p95_latency_ms": {
+        "mean": 243.19,
+        "median": 254.05,
+        "std": 29.34,
+        "min": 209.97,
+        "max": 265.55
+      },
+      "p99_latency_ms": {
+        "mean": 267.76,
+        "median": 270.95,
+        "std": 41.14,
+        "min": 225.12,
+        "max": 307.22
+      },
+      "avg_latency_ms": {
+        "mean": 181.34,
+        "median": 184.15,
+        "std": 12.57,
+        "min": 167.61,
+        "max": 192.27
+      },
+      "deadline_violation_rate": {
+        "mean": 99.17,
+        "median": 100.0,
+        "std": 1.44,
+        "min": 97.5,
+        "max": 100.0
+      },
+      "avg_lateness_ms": {
+        "mean": 114.83,
+        "median": 116.75,
+        "std": 7.69,
+        "min": 106.36,
+        "max": 121.37
+      },
+      "priority_overrides": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 181.18,
+        "median": 185.73,
+        "std": 12.58,
+        "min": 166.96,
+        "max": 190.85
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 181.34,
+        "median": 180.01,
+        "std": 12.23,
+        "min": 169.83,
+        "max": 194.19
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_c_tight_deadlines::priority_ml": {
+      "scenario": "scenario_c_tight_deadlines",
+      "algorithm": "priority_ml",
+      "label": "C: Tight Deadlines",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 37.32,
+        "median": 37.63,
+        "std": 0.58,
+        "min": 36.65,
+        "max": 37.68
+      },
+      "p50_latency_ms": {
+        "mean": 195.42,
+        "median": 194.72,
+        "std": 4.94,
+        "min": 190.86,
+        "max": 200.67
+      },
+      "p95_latency_ms": {
+        "mean": 256.94,
+        "median": 250.47,
+        "std": 12.04,
+        "min": 249.52,
+        "max": 270.83
+      },
+      "p99_latency_ms": {
+        "mean": 284.18,
+        "median": 278.7,
+        "std": 13.42,
+        "min": 274.37,
+        "max": 299.47
+      },
+      "avg_latency_ms": {
+        "mean": 199.18,
+        "median": 199.81,
+        "std": 3.19,
+        "min": 195.73,
+        "max": 202.01
+      },
+      "deadline_violation_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      },
+      "avg_lateness_ms": {
+        "mean": 132.03,
+        "median": 133.86,
+        "std": 5.8,
+        "min": 125.54,
+        "max": 136.7
+      },
+      "priority_overrides": {
+        "mean": 18.33,
+        "median": 19.0,
+        "std": 2.08,
+        "min": 16.0,
+        "max": 20.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 199.98,
+        "median": 198.71,
+        "std": 5.65,
+        "min": 195.07,
+        "max": 206.15
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 199.03,
+        "median": 197.99,
+        "std": 3.27,
+        "min": 196.41,
+        "max": 202.7
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_d_priority_deadline_conflict::ml": {
+      "scenario": "scenario_d_priority_deadline_conflict",
+      "algorithm": "ml",
+      "label": "D: Priority-Deadline Conflict",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 34.8,
+        "median": 36.59,
+        "std": 3.53,
+        "min": 30.73,
+        "max": 37.07
+      },
+      "p50_latency_ms": {
+        "mean": 142.37,
+        "median": 133.4,
+        "std": 19.93,
+        "min": 128.5,
+        "max": 165.2
+      },
+      "p95_latency_ms": {
+        "mean": 247.82,
+        "median": 244.02,
+        "std": 7.84,
+        "min": 242.6,
+        "max": 256.83
+      },
+      "p99_latency_ms": {
+        "mean": 272.5,
+        "median": 273.86,
+        "std": 5.06,
+        "min": 266.9,
+        "max": 276.75
+      },
+      "avg_latency_ms": {
+        "mean": 156.82,
+        "median": 150.3,
+        "std": 14.0,
+        "min": 147.27,
+        "max": 172.9
+      },
+      "deadline_violation_rate": {
+        "mean": 50.0,
+        "median": 50.0,
+        "std": 0.0,
+        "min": 50.0,
+        "max": 50.0
+      },
+      "avg_lateness_ms": {
+        "mean": 63.23,
+        "median": 59.53,
+        "std": 7.73,
+        "min": 58.04,
+        "max": 72.12
+      },
+      "priority_overrides": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 153.7,
+        "median": 148.03,
+        "std": 12.75,
+        "min": 144.76,
+        "max": 168.3
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 159.96,
+        "median": 152.57,
+        "std": 15.27,
+        "min": 149.79,
+        "max": 177.51
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_d_priority_deadline_conflict::priority_ml": {
+      "scenario": "scenario_d_priority_deadline_conflict",
+      "algorithm": "priority_ml",
+      "label": "D: Priority-Deadline Conflict",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 34.34,
+        "median": 35.05,
+        "std": 1.33,
+        "min": 32.8,
+        "max": 35.16
+      },
+      "p50_latency_ms": {
+        "mean": 154.99,
+        "median": 155.62,
+        "std": 5.2,
+        "min": 149.5,
+        "max": 159.84
+      },
+      "p95_latency_ms": {
+        "mean": 215.61,
+        "median": 226.54,
+        "std": 21.89,
+        "min": 190.41,
+        "max": 229.89
+      },
+      "p99_latency_ms": {
+        "mean": 243.85,
+        "median": 251.67,
+        "std": 23.18,
+        "min": 217.77,
+        "max": 262.11
+      },
+      "avg_latency_ms": {
+        "mean": 162.77,
+        "median": 159.97,
+        "std": 7.16,
+        "min": 157.43,
+        "max": 170.9
+      },
+      "deadline_violation_rate": {
+        "mean": 50.0,
+        "median": 50.0,
+        "std": 0.0,
+        "min": 50.0,
+        "max": 50.0
+      },
+      "avg_lateness_ms": {
+        "mean": 65.9,
+        "median": 65.61,
+        "std": 3.64,
+        "min": 62.41,
+        "max": 69.67
+      },
+      "priority_overrides": {
+        "mean": 20.67,
+        "median": 21.0,
+        "std": 0.58,
+        "min": 20.0,
+        "max": 21.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 160.99,
+        "median": 162.07,
+        "std": 8.75,
+        "min": 151.75,
+        "max": 169.16
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 164.54,
+        "median": 163.11,
+        "std": 7.49,
+        "min": 157.87,
+        "max": 172.64
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_e_backend_stress::ml": {
+      "scenario": "scenario_e_backend_stress",
+      "algorithm": "ml",
+      "label": "E: Backend Stress",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 39.47,
+        "median": 38.71,
+        "std": 1.88,
+        "min": 38.08,
+        "max": 41.61
+      },
+      "p50_latency_ms": {
+        "mean": 215.75,
+        "median": 223.69,
+        "std": 21.26,
+        "min": 191.66,
+        "max": 231.9
+      },
+      "p95_latency_ms": {
+        "mean": 335.84,
+        "median": 338.36,
+        "std": 41.84,
+        "min": 292.8,
+        "max": 376.37
+      },
+      "p99_latency_ms": {
+        "mean": 368.65,
+        "median": 371.67,
+        "std": 33.79,
+        "min": 333.45,
+        "max": 400.83
+      },
+      "avg_latency_ms": {
+        "mean": 232.97,
+        "median": 234.59,
+        "std": 6.65,
+        "min": 225.66,
+        "max": 238.67
+      },
+      "deadline_violation_rate": {
+        "mean": 65.61,
+        "median": 65.0,
+        "std": 15.92,
+        "min": 50.0,
+        "max": 81.82
+      },
+      "avg_lateness_ms": {
+        "mean": 58.94,
+        "median": 59.49,
+        "std": 8.81,
+        "min": 49.87,
+        "max": 67.47
+      },
+      "priority_overrides": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 228.42,
+        "median": 231.19,
+        "std": 12.99,
+        "min": 214.26,
+        "max": 239.8
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 236.78,
+        "median": 236.18,
+        "std": 6.61,
+        "min": 230.49,
+        "max": 243.66
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_e_backend_stress::priority_ml": {
+      "scenario": "scenario_e_backend_stress",
+      "algorithm": "priority_ml",
+      "label": "E: Backend Stress",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 45.2,
+        "median": 40.02,
+        "std": 12.46,
+        "min": 36.17,
+        "max": 59.42
+      },
+      "p50_latency_ms": {
+        "mean": 205.66,
+        "median": 217.63,
+        "std": 47.43,
+        "min": 153.39,
+        "max": 245.95
+      },
+      "p95_latency_ms": {
+        "mean": 274.22,
+        "median": 292.98,
+        "std": 82.03,
+        "min": 184.43,
+        "max": 345.25
+      },
+      "p99_latency_ms": {
+        "mean": 305.81,
+        "median": 316.03,
+        "std": 96.33,
+        "min": 204.78,
+        "max": 396.62
+      },
+      "avg_latency_ms": {
+        "mean": 211.15,
+        "median": 225.85,
+        "std": 51.37,
+        "min": 154.04,
+        "max": 253.57
+      },
+      "deadline_violation_rate": {
+        "mean": 54.39,
+        "median": 68.18,
+        "std": 25.47,
+        "min": 25.0,
+        "max": 70.0
+      },
+      "avg_lateness_ms": {
+        "mean": 47.56,
+        "median": 58.4,
+        "std": 34.81,
+        "min": 8.62,
+        "max": 75.66
+      },
+      "priority_overrides": {
+        "mean": 17.67,
+        "median": 17.0,
+        "std": 2.08,
+        "min": 16.0,
+        "max": 20.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 208.7,
+        "median": 224.85,
+        "std": 52.85,
+        "min": 149.66,
+        "max": 251.6
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 213.21,
+        "median": 226.64,
+        "std": 49.78,
+        "min": 158.09,
+        "max": 254.89
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_f_backend_failure::ml": {
+      "scenario": "scenario_f_backend_failure",
+      "algorithm": "ml",
+      "label": "F: Backend Failure",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 2.89,
+        "median": 2.88,
+        "std": 0.02,
+        "min": 2.88,
+        "max": 2.91
+      },
+      "p50_latency_ms": {
+        "mean": 1703.65,
+        "median": 1695.24,
+        "std": 17.96,
+        "min": 1691.44,
+        "max": 1724.27
+      },
+      "p95_latency_ms": {
+        "mean": 1767.3,
+        "median": 1762.04,
+        "std": 12.93,
+        "min": 1757.83,
+        "max": 1782.04
+      },
+      "p99_latency_ms": {
+        "mean": 1773.6,
+        "median": 1772.92,
+        "std": 12.18,
+        "min": 1761.77,
+        "max": 1786.11
+      },
+      "avg_latency_ms": {
+        "mean": 1575.26,
+        "median": 1581.56,
+        "std": 12.92,
+        "min": 1560.39,
+        "max": 1583.82
+      },
+      "deadline_violation_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      },
+      "avg_lateness_ms": {
+        "mean": 1377.48,
+        "median": 1384.64,
+        "std": 60.29,
+        "min": 1313.93,
+        "max": 1433.87
+      },
+      "priority_overrides": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 1595.86,
+        "median": 1593.87,
+        "std": 38.21,
+        "min": 1558.68,
+        "max": 1635.02
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 1560.88,
+        "median": 1561.71,
+        "std": 14.57,
+        "min": 1545.91,
+        "max": 1575.02
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_f_backend_failure::priority_ml": {
+      "scenario": "scenario_f_backend_failure",
+      "algorithm": "priority_ml",
+      "label": "F: Backend Failure",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 2.82,
+        "median": 2.82,
+        "std": 0.03,
+        "min": 2.79,
+        "max": 2.84
+      },
+      "p50_latency_ms": {
+        "mean": 1700.1,
+        "median": 1695.58,
+        "std": 7.96,
+        "min": 1695.43,
+        "max": 1709.3
+      },
+      "p95_latency_ms": {
+        "mean": 1739.19,
+        "median": 1735.48,
+        "std": 15.23,
+        "min": 1726.16,
+        "max": 1755.94
+      },
+      "p99_latency_ms": {
+        "mean": 1753.5,
+        "median": 1748.37,
+        "std": 14.83,
+        "min": 1741.91,
+        "max": 1770.21
+      },
+      "avg_latency_ms": {
+        "mean": 1627.68,
+        "median": 1626.02,
+        "std": 10.81,
+        "min": 1617.8,
+        "max": 1639.23
+      },
+      "deadline_violation_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      },
+      "avg_lateness_ms": {
+        "mean": 1418.89,
+        "median": 1437.0,
+        "std": 50.15,
+        "min": 1362.2,
+        "max": 1457.48
+      },
+      "priority_overrides": {
+        "mean": 6.33,
+        "median": 6.0,
+        "std": 1.53,
+        "min": 5.0,
+        "max": 8.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 1638.27,
+        "median": 1650.1,
+        "std": 28.28,
+        "min": 1606.0,
+        "max": 1658.71
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 1620.25,
+        "median": 1626.82,
+        "std": 13.96,
+        "min": 1604.22,
+        "max": 1629.72
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_g_queue_contention::ml": {
+      "scenario": "scenario_g_queue_contention",
+      "algorithm": "ml",
+      "label": "G: Queue Contention",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 55.73,
+        "median": 57.02,
+        "std": 3.37,
+        "min": 51.91,
+        "max": 58.26
+      },
+      "p50_latency_ms": {
+        "mean": 300.76,
+        "median": 304.28,
+        "std": 30.81,
+        "min": 268.34,
+        "max": 329.65
+      },
+      "p95_latency_ms": {
+        "mean": 510.81,
+        "median": 418.38,
+        "std": 224.95,
+        "min": 346.79,
+        "max": 767.25
+      },
+      "p99_latency_ms": {
+        "mean": 648.8,
+        "median": 593.67,
+        "std": 131.1,
+        "min": 554.27,
+        "max": 798.47
+      },
+      "avg_latency_ms": {
+        "mean": 306.56,
+        "median": 297.89,
+        "std": 18.1,
+        "min": 294.43,
+        "max": 327.36
+      },
+      "deadline_violation_rate": {
+        "mean": 79.18,
+        "median": 84.62,
+        "std": 9.91,
+        "min": 67.74,
+        "max": 85.19
+      },
+      "avg_lateness_ms": {
+        "mean": 156.66,
+        "median": 159.98,
+        "std": 15.47,
+        "min": 139.8,
+        "max": 170.2
+      },
+      "priority_overrides": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 319.61,
+        "median": 314.61,
+        "std": 9.66,
+        "min": 313.48,
+        "max": 330.74
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 294.55,
+        "median": 280.02,
+        "std": 26.19,
+        "min": 278.85,
+        "max": 324.78
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    },
+    "scenario_g_queue_contention::priority_ml": {
+      "scenario": "scenario_g_queue_contention",
+      "algorithm": "priority_ml",
+      "label": "G: Queue Contention",
+      "repetitions": 3,
+      "throughput_rps": {
+        "mean": 47.81,
+        "median": 47.42,
+        "std": 2.34,
+        "min": 45.69,
+        "max": 50.32
+      },
+      "p50_latency_ms": {
+        "mean": 332.71,
+        "median": 329.29,
+        "std": 12.3,
+        "min": 322.48,
+        "max": 346.35
+      },
+      "p95_latency_ms": {
+        "mean": 691.45,
+        "median": 825.94,
+        "std": 249.45,
+        "min": 403.61,
+        "max": 844.79
+      },
+      "p99_latency_ms": {
+        "mean": 865.35,
+        "median": 873.27,
+        "std": 26.58,
+        "min": 835.71,
+        "max": 887.06
+      },
+      "avg_latency_ms": {
+        "mean": 355.18,
+        "median": 358.95,
+        "std": 17.72,
+        "min": 335.88,
+        "max": 370.71
+      },
+      "deadline_violation_rate": {
+        "mean": 94.26,
+        "median": 96.15,
+        "std": 3.41,
+        "min": 90.32,
+        "max": 96.3
+      },
+      "avg_lateness_ms": {
+        "mean": 174.43,
+        "median": 179.44,
+        "std": 58.24,
+        "min": 113.85,
+        "max": 230.0
+      },
+      "priority_overrides": {
+        "mean": 20.67,
+        "median": 20.0,
+        "std": 2.08,
+        "min": 19.0,
+        "max": 23.0
+      },
+      "high_critical_avg_latency_ms": {
+        "mean": 351.85,
+        "median": 355.65,
+        "std": 23.03,
+        "min": 327.15,
+        "max": 372.74
+      },
+      "low_normal_avg_latency_ms": {
+        "mean": 358.67,
+        "median": 361.65,
+        "std": 12.25,
+        "min": 345.21,
+        "max": 369.16
+      },
+      "success_rate": {
+        "mean": 100.0,
+        "median": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0
+      }
+    }
+  },
+  "significance": {
+    "scenario_a_equal_priority": {
+      "label": "A: Equal Priority",
+      "p50_latency_diff_mean": 21.79,
+      "p50_welch_t": 2.078,
+      "p50_p_value": 0.1497,
+      "violation_rate_diff_mean": 0.0,
+      "violation_welch_t": null,
+      "violation_p_value": null,
+      "high_critical_latency_diff_mean": null
+    },
+    "scenario_b_mixed_priority": {
+      "label": "B: Mixed Priority",
+      "p50_latency_diff_mean": 6.75,
+      "p50_welch_t": 0.517,
+      "p50_p_value": 0.6349,
+      "violation_rate_diff_mean": 1.96,
+      "violation_welch_t": 1.0,
+      "violation_p_value": 0.4226,
+      "high_critical_latency_diff_mean": 14.89
+    },
+    "scenario_c_tight_deadlines": {
+      "label": "C: Tight Deadlines",
+      "p50_latency_diff_mean": 19.76,
+      "p50_welch_t": 2.609,
+      "p50_p_value": 0.0909,
+      "violation_rate_diff_mean": 0.83,
+      "violation_welch_t": 1.0,
+      "violation_p_value": 0.4226,
+      "high_critical_latency_diff_mean": 18.8
+    },
+    "scenario_d_priority_deadline_conflict": {
+      "label": "D: Priority-Deadline Conflict",
+      "p50_latency_diff_mean": 12.62,
+      "p50_welch_t": 1.061,
+      "p50_p_value": 0.3882,
+      "violation_rate_diff_mean": 0.0,
+      "violation_welch_t": null,
+      "violation_p_value": null,
+      "high_critical_latency_diff_mean": 7.3
+    },
+    "scenario_e_backend_stress": {
+      "label": "E: Backend Stress",
+      "p50_latency_diff_mean": -10.09,
+      "p50_welch_t": -0.336,
+      "p50_p_value": 0.7604,
+      "violation_rate_diff_mean": -11.21,
+      "violation_welch_t": -0.647,
+      "violation_p_value": 0.5594,
+      "high_critical_latency_diff_mean": -19.71
+    },
+    "scenario_f_backend_failure": {
+      "label": "F: Backend Failure",
+      "p50_latency_diff_mean": -3.55,
+      "p50_welch_t": -0.313,
+      "p50_p_value": 0.7766,
+      "violation_rate_diff_mean": 0.0,
+      "violation_welch_t": null,
+      "violation_p_value": null,
+      "high_critical_latency_diff_mean": 42.41
+    },
+    "scenario_g_queue_contention": {
+      "label": "G: Queue Contention",
+      "p50_latency_diff_mean": 31.95,
+      "p50_welch_t": 1.668,
+      "p50_p_value": 0.2068,
+      "violation_rate_diff_mean": 15.07,
+      "violation_welch_t": 2.49,
+      "violation_p_value": 0.1067,
+      "high_critical_latency_diff_mean": 32.24
+    }
+  }
+}

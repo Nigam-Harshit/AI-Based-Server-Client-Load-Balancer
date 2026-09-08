@@ -315,12 +315,19 @@ def get_router(
 ) -> BaseRouter:
     """Factory to instantiate a router by name."""
     normalized = algorithm.lower().replace("-", "_").strip()
+    if normalized == "priority_ml" or normalized == "ml_priority":
+        ml_base = MLRouter(backends=backends, collector=collector, model_path=model_path)
+        from load_balancer.priority import PriorityDeadlineRouter
+        return PriorityDeadlineRouter(base_router=ml_base, collector=collector, backends=backends)
+
     if normalized not in ROUTER_REGISTRY:
         supported = list(ROUTER_REGISTRY.keys())
+        supported = list(ROUTER_REGISTRY.keys()) + ["priority_ml"]
         raise ValueError(f"Unknown algorithm '{algorithm}'. Supported: {supported}")
     router_cls = ROUTER_REGISTRY[normalized]
     if normalized == "ml":
         return router_cls(backends=backends, collector=collector, model_path=model_path)
     return router_cls(backends=backends)
+
 
 

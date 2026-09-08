@@ -75,6 +75,10 @@ class WorkloadConfig:
     seed: Optional[int] = 42                   # Random seed for reproducible runs
     scenario_name: str = "custom"
     experiment_id: Optional[str] = None        # Associated experiment identifier
+    priority_profile: Optional[str] = None     # E.g. 'equal', 'mixed', 'tight_deadlines', 'conflict'
+    default_priority: Optional[str] = None     # E.g. 'HIGH', 'CRITICAL'
+    default_deadline_offset: Optional[float] = None  # E.g. 0.2 seconds relative to dispatch
+
 
     def validate(self) -> None:
         """Validate configuration values."""
@@ -218,17 +222,53 @@ class WorkloadGenerator:
                 "X-Request-ID": str(request_id),
                 "X-Workload-Scenario": str(self.config.scenario_name),
                 "X-Concurrency": str(self.config.concurrency),
+                "X-Arrival-Time": str(timestamp),
+                "X-Estimated-Duration": str(req_duration),
             }
             if self.config.experiment_id:
                 req_headers["X-Experiment-ID"] = str(self.config.experiment_id)
             if self.config.request_rate:
                 req_headers["X-Request-Rate"] = str(self.config.request_rate)
 
+            # Priority & Deadline generation based on priority profile
+            prof = self.config.priority_profile
+            p_val = self.config.default_priority or "NORMAL"
+            d_val = None
+
+            if prof == "equal":
+                p_val = "NORMAL"
+                d_val = None
+            elif prof == "mixed":
+                # Stochastically distribute across LOW, NORMAL, HIGH, CRITICAL
+                p_val = self._rng.choice(["LOW", "NORMAL", "HIGH", "CRITICAL"])
+                if p_val in ("HIGH", "CRITICAL"):
+                    d_val = f"+{round(self._rng.uniform(0.15, 0.4), 2)}"
+            elif prof == "tight_deadlines":
+                p_val = self._rng.choice(["NORMAL", "HIGH", "CRITICAL"])
+                d_val = f"+{round(self._rng.uniform(0.06, 0.15), 2)}"
+            elif prof == "conflict":
+                # Interleaved conflict pattern:
+                # Odd requests: HIGH priority but relaxed deadline (+0.6s)
+                # Even requests: LOW priority but urgent deadline (+0.08s)
+                if request_id % 2 == 1:
+                    p_val = "HIGH"
+                    d_val = "+0.60"
+                else:
+                    p_val = "LOW"
+                    d_val = "+0.08"
+            elif self.config.default_deadline_offset is not None:
+                d_val = f"+{self.config.default_deadline_offset:.2f}"
+
+            req_headers["X-Request-Priority"] = p_val
+            if d_val:
+                req_headers["X-Request-Deadline"] = d_val
+
             req = urllib.request.Request(
                 url=url,
                 headers=req_headers,
                 method="GET",
             )
+
             with urllib.request.urlopen(req, timeout=10.0) as resp:
                 status_code = resp.status
                 success = (200 <= status_code < 400)

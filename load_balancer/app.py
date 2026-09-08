@@ -73,11 +73,27 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
             if collector:
                 pre_snapshot = recorder.capture_pre_snapshot(collector, timestamp=start_time)
 
-        with router.route(client_ip=client_ip) as backend:
+        # Extract priority and deadline metadata if present
+        from load_balancer.priority import PriorityRequestMetadata
+        req_id_hdr = self.headers.get("X-Request-ID") or f"req_{int(start_time*1000)}"
+        priority_meta = PriorityRequestMetadata.from_headers(self.headers, request_id=req_id_hdr)
+
+        # Route request through router (supporting priority_meta if router accepts it)
+        from load_balancer.priority import PriorityDeadlineRouter
+        if isinstance(router, PriorityDeadlineRouter):
+            route_ctx = router.route(client_ip=client_ip, priority_meta=priority_meta)
+        else:
+            try:
+                route_ctx = router.route(client_ip=client_ip, priority_meta=priority_meta)
+            except TypeError:
+                route_ctx = router.route(client_ip=client_ip)
+
+        with route_ctx as backend:
             target_url = f"{backend.rstrip('/')}{self.path}"
             status_code = 502
 
             # Extract ML observability headers if ML router was used
+            # Extract ML and Priority observability headers
             extra_response_headers = {"X-Backend-Server": backend}
             if hasattr(router, "last_prediction") and router.last_prediction:
                 pred_meta = router.last_prediction
@@ -86,6 +102,30 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                 if pred_meta.get("confidence") is not None:
                     extra_response_headers["X-ML-Confidence"] = f"{pred_meta['confidence']:.4f}"
                 extra_response_headers["X-ML-Fallback"] = "true" if pred_meta.get("is_fallback") else "false"
+
+            # Populate default priority and deadline observability headers
+            extra_response_headers["X-Request-Priority"] = priority_meta.priority.name
+            req_slack = priority_meta.calculate_slack_ms(start_time)
+            if req_slack is not None:
+                extra_response_headers["X-Deadline-Slack"] = f"{req_slack:.2f}"
+            extra_response_headers["X-Final-Backend"] = backend
+            extra_response_headers["X-Priority-Override"] = "false"
+            extra_response_headers["X-Deadline-Override"] = "false"
+            extra_response_headers["X-Routing-Reason"] = "standard_routing"
+
+            # Check if PriorityDeadlineRouter was used
+            if hasattr(router, "last_decision") and router.last_decision:
+                p_dec = router.last_decision
+                extra_response_headers["X-Request-Priority"] = str(p_dec.get("priority", priority_meta.priority.name))
+                if p_dec.get("slack_ms") is not None:
+                    extra_response_headers["X-Deadline-Slack"] = f"{p_dec['slack_ms']:.2f}"
+                if p_dec.get("ml_predicted_server"):
+                    extra_response_headers["X-ML-Predicted-Server"] = str(p_dec["ml_predicted_server"])
+                extra_response_headers["X-Final-Backend"] = str(p_dec.get("final_backend", backend))
+                extra_response_headers["X-Priority-Override"] = "true" if p_dec.get("priority_override") else "false"
+                extra_response_headers["X-Deadline-Override"] = "true" if p_dec.get("deadline_override") else "false"
+                extra_response_headers["X-Routing-Reason"] = str(p_dec.get("routing_reason", "normal"))
+
 
             try:
                 req = urllib.request.Request(
@@ -215,7 +255,6 @@ def create_load_balancer(
 ) -> ThreadingHTTPServer:
     """Create and configure a ThreadingHTTPServer instance for the load balancer."""
     backends_list = list(backends) if backends else list(DEFAULT_BACKENDS)
-    router = get_router(algorithm, backends_list)
     collector = MetricsCollector(backends=backends_list, timeout=backend_timeout)
     router = get_router(algorithm, backends_list, collector=collector, model_path=model_path)
 
@@ -224,7 +263,6 @@ def create_load_balancer(
     server.algorithm = algorithm
     server.backends = backends_list
     server.backend_timeout = backend_timeout
-    server.collector = MetricsCollector(backends=backends_list, timeout=backend_timeout)
     server.collector = collector
     server.recorder = None
     return server
@@ -242,7 +280,6 @@ def run_load_balancer(
         level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     )
-    httpd = create_load_balancer(host, port, algorithm, backends)
     httpd = create_load_balancer(
         host=host,
         port=port,
@@ -272,9 +309,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--algorithm",
         default="round_robin",
-        choices=["round_robin", "least_connections", "ip_hash", "ml"],
+        choices=["round_robin", "least_connections", "ip_hash", "ml", "priority_ml"],
         help="Routing algorithm to use (default: round_robin)",
     )
+
     parser.add_argument(
         "--backends",
         default=None,

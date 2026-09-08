@@ -270,4 +270,34 @@ python -m benchmarks.analysis
 ```
 Detailed findings and plots are available in [docs/live_performance_comparison.md](docs/live_performance_comparison.md).
 
+---
+
+## Phase 10: Priority & Deadline-Aware Routing
+
+### Objective
+Extend the load-balancing system with request-level **priority tiers** (`LOW`, `NORMAL`, `HIGH`, `CRITICAL`) and **deadline slack awareness** ($S = T_{\text{deadline}} - T_{\text{now}} - \hat{D}_{\text{proc}}$) via a non-invasive arbitration layer (`PriorityDeadlineRouter`) wrapping the underlying ML model.
+
+### Key Architectural Capabilities
+1. **Multi-Factor Arbitration Layer (`load_balancer/priority.py`)**:
+   - Classifies requests into 4 urgency states (`SAFE`, `APPROACHING_DEADLINE`, `URGENT`, `DEADLINE_RISK`).
+   - Dynamically evaluates real-time backend turnaround: $\hat{T}_{\text{comp}} = \text{latency} + \text{response\_time} \times (1 + \text{connections})$.
+   - Proactively overrides ML predictions to the lowest-delay backend when deadlines are at imminent risk or when high-priority traffic contends with congested servers.
+2. **Preserved Research Contract**:
+   - Zero retraining required for the Phase 8 Logistic Regression model artifact.
+   - 100% preservation of the 15-feature contract with zero data leakage.
+   - Complete backward compatibility with standard HTTP clients (defaults safely to `NORMAL` priority and `SAFE` urgency).
+3. **Observability & Header Propagation**:
+   - Attaches `X-Request-Priority`, `X-Deadline-Slack`, `X-ML-Predicted-Server`, `X-Final-Backend`, `X-Priority-Override`, `X-Deadline-Override`, and `X-Routing-Reason` headers.
+
+### Running Phase 10 Benchmarks and Analysis
+```bash
+# Execute Phase 10 benchmark suite across 7 scenarios x 2 algorithms x 3 repetitions
+python -m benchmarks.phase10_benchmarks --repetitions 3
+
+# Generate Phase 10 statistical analysis and research plots
+python -m benchmarks.phase10_analysis
+```
+Comprehensive experimental report and publication-grade plots are available in [docs/priority_deadline_routing.md](docs/priority_deadline_routing.md).
+
+
 
