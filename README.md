@@ -354,3 +354,32 @@ python -m unittest tests.test_adaptive_routing
 ```
 Comprehensive experimental report and publication-grade plots are available in [docs/phase13_adaptive_routing.md](docs/phase13_adaptive_routing.md).
 
+---
+
+## Phase 14: End-to-End System Benchmarking & Final Performance Validation
+
+### Objective
+Execute a rigorous, controlled, and statistically sound end-to-end empirical benchmark comparing 10 routing strategies (Round Robin, Least Connections, IP Hash, Logistic Regression, Random Forest, Decision Tree, SVM, XGBoost, Adaptive Policy Selector, and Adaptive Meta-Selector) across 9 operational regimes with matched seeds and isolated Priority/Deadline evaluation.
+
+### Key Empirical Findings
+- **Definitive Finding (Outcome C - Heuristic Dominance):** Conventional algorithms (**Round Robin, Least Connections, IP Hash**) decisively outperform all evaluated fixed and adaptive Machine Learning routing strategies in end-to-end system latency, throughput, and operational reliability.
+- **End-to-End Latency:** Traditional algorithms achieved mean response times of **28.29 ms – 29.50 ms** (P95: **47.15 ms – 48.56 ms**). The best ML strategy (`adaptive_meta`) averaged **99.92 ms** (P95: **174.32 ms**), representing a **3.5× latency penalty**, while Random Forest reached **181.09 ms** (**6.4× slower**).
+- **The Metric Collection Bottleneck:** Synchronously querying `/metrics` across 3 backends to extract the 15 pre-routing features added **52.9 ms to 138.4 ms** of overhead per request, completely negating any 10–20 ms server processing optimization.
+- **Throughput & Reliability:** Traditional algorithms sustained **~65.0 req/s** with **0.00% error rate**. Heavy ML ensembles experienced 6.5%–8.3% HTTP 502 errors under extreme concurrency due to ephemeral socket exhaustion during metric polling.
+- **Statistical Significance:** Paired $t$-tests and Wilcoxon tests confirm that Round Robin and Least Connections are statistically indistinguishable ($p = 0.728$), and both are statistically superior to all ML models ($p < 0.0001$, Cohen's $d > 1.5$).
+- **Priority & Deadline Extension:** Priority awareness is highly effective (achieving >95% deadline compliance for `CRITICAL` requests), but performs best when layered over zero-overhead heuristic dispatchers like Least Connections.
+
+### Running Phase 14
+```bash
+# Run complete Phase 14 matched benchmark (450 core runs + 24 priority runs)
+python experiments/phase14_benchmark.py --repetitions 5
+
+# Run statistical analysis, summary generation, and create 15 publication plots
+python ml/phase14_analysis.py
+
+# Run Phase 14 automated validation suite (26 checks)
+python -m unittest tests/test_phase14_benchmark.py
+```
+Comprehensive experimental report and publication-grade plots are available in [docs/phase14_system_benchmark.md](docs/phase14_system_benchmark.md).
+
+

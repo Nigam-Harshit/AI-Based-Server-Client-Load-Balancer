@@ -80,6 +80,7 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
 
         # Route request through router (supporting priority_meta if router accepts it)
         from load_balancer.priority import PriorityDeadlineRouter
+        t_route_start = time.perf_counter()
         if isinstance(router, PriorityDeadlineRouter):
             route_ctx = router.route(client_ip=client_ip, priority_meta=priority_meta)
         else:
@@ -89,12 +90,17 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                 route_ctx = router.route(client_ip=client_ip)
 
         with route_ctx as backend:
+            routing_overhead_ms = max(0.0, round((time.perf_counter() - t_route_start) * 1000.0, 3))
             target_url = f"{backend.rstrip('/')}{self.path}"
             status_code = 502
 
             # Extract ML observability headers if ML router was used
             # Extract ML and Priority observability headers
             extra_response_headers = {"X-Backend-Server": backend}
+            extra_response_headers = {
+                "X-Backend-Server": backend,
+                "X-Routing-Overhead-Ms": f"{routing_overhead_ms:.3f}",
+            }
             if hasattr(router, "last_prediction") and router.last_prediction:
                 pred_meta = router.last_prediction
                 if pred_meta.get("predicted_server"):

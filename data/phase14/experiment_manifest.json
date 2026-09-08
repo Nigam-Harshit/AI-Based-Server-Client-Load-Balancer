@@ -1,0 +1,3642 @@
+{
+  "phase": 14,
+  "total_records": 12230,
+  "core_benchmark_records": 11750,
+  "priority_records": 480,
+  "total_benchmark_runs": 450,
+  "algorithms": [
+    "round_robin",
+    "least_connections",
+    "ip_hash",
+    "logistic_regression",
+    "random_forest",
+    "decision_tree",
+    "svm",
+    "xgboost",
+    "adaptive_policy",
+    "adaptive_meta"
+  ],
+  "regimes": [
+    "low_load",
+    "medium_load",
+    "high_load",
+    "burst_load",
+    "cpu_heavy",
+    "mixed_workload",
+    "dynamic_workload",
+    "queue_contention",
+    "backend_imbalance"
+  ],
+  "repetitions": 5,
+  "base_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "runs": [
+    {
+      "experiment_id": "exp_p14_low_load_round_robin_r1",
+      "algorithm": "round_robin",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_round_robin_r2",
+      "algorithm": "round_robin",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_round_robin_r3",
+      "algorithm": "round_robin",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_round_robin_r4",
+      "algorithm": "round_robin",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_round_robin_r5",
+      "algorithm": "round_robin",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_round_robin_r1",
+      "algorithm": "round_robin",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_round_robin_r2",
+      "algorithm": "round_robin",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_round_robin_r3",
+      "algorithm": "round_robin",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_round_robin_r4",
+      "algorithm": "round_robin",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_round_robin_r5",
+      "algorithm": "round_robin",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_round_robin_r1",
+      "algorithm": "round_robin",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_round_robin_r2",
+      "algorithm": "round_robin",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_round_robin_r3",
+      "algorithm": "round_robin",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_round_robin_r4",
+      "algorithm": "round_robin",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_round_robin_r5",
+      "algorithm": "round_robin",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_round_robin_r1",
+      "algorithm": "round_robin",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_round_robin_r2",
+      "algorithm": "round_robin",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_round_robin_r3",
+      "algorithm": "round_robin",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_round_robin_r4",
+      "algorithm": "round_robin",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_round_robin_r5",
+      "algorithm": "round_robin",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_round_robin_r1",
+      "algorithm": "round_robin",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_round_robin_r2",
+      "algorithm": "round_robin",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_round_robin_r3",
+      "algorithm": "round_robin",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_round_robin_r4",
+      "algorithm": "round_robin",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_round_robin_r5",
+      "algorithm": "round_robin",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_round_robin_r1",
+      "algorithm": "round_robin",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_round_robin_r2",
+      "algorithm": "round_robin",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_round_robin_r3",
+      "algorithm": "round_robin",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_round_robin_r4",
+      "algorithm": "round_robin",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_round_robin_r5",
+      "algorithm": "round_robin",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_round_robin_r1",
+      "algorithm": "round_robin",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_round_robin_r2",
+      "algorithm": "round_robin",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_round_robin_r3",
+      "algorithm": "round_robin",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_round_robin_r4",
+      "algorithm": "round_robin",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_round_robin_r5",
+      "algorithm": "round_robin",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_round_robin_r1",
+      "algorithm": "round_robin",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_round_robin_r2",
+      "algorithm": "round_robin",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_round_robin_r3",
+      "algorithm": "round_robin",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_round_robin_r4",
+      "algorithm": "round_robin",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_round_robin_r5",
+      "algorithm": "round_robin",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_round_robin_r1",
+      "algorithm": "round_robin",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_round_robin_r2",
+      "algorithm": "round_robin",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_round_robin_r3",
+      "algorithm": "round_robin",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_round_robin_r4",
+      "algorithm": "round_robin",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_round_robin_r5",
+      "algorithm": "round_robin",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_low_load_least_connections_r1",
+      "algorithm": "least_connections",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_least_connections_r2",
+      "algorithm": "least_connections",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_least_connections_r3",
+      "algorithm": "least_connections",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_least_connections_r4",
+      "algorithm": "least_connections",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_least_connections_r5",
+      "algorithm": "least_connections",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_least_connections_r1",
+      "algorithm": "least_connections",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_least_connections_r2",
+      "algorithm": "least_connections",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_least_connections_r3",
+      "algorithm": "least_connections",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_least_connections_r4",
+      "algorithm": "least_connections",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_least_connections_r5",
+      "algorithm": "least_connections",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_least_connections_r1",
+      "algorithm": "least_connections",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_least_connections_r2",
+      "algorithm": "least_connections",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_least_connections_r3",
+      "algorithm": "least_connections",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_least_connections_r4",
+      "algorithm": "least_connections",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_least_connections_r5",
+      "algorithm": "least_connections",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_least_connections_r1",
+      "algorithm": "least_connections",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_least_connections_r2",
+      "algorithm": "least_connections",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_least_connections_r3",
+      "algorithm": "least_connections",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_least_connections_r4",
+      "algorithm": "least_connections",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_least_connections_r5",
+      "algorithm": "least_connections",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_least_connections_r1",
+      "algorithm": "least_connections",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_least_connections_r2",
+      "algorithm": "least_connections",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_least_connections_r3",
+      "algorithm": "least_connections",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_least_connections_r4",
+      "algorithm": "least_connections",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_least_connections_r5",
+      "algorithm": "least_connections",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_least_connections_r1",
+      "algorithm": "least_connections",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_least_connections_r2",
+      "algorithm": "least_connections",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_least_connections_r3",
+      "algorithm": "least_connections",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_least_connections_r4",
+      "algorithm": "least_connections",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_least_connections_r5",
+      "algorithm": "least_connections",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_least_connections_r1",
+      "algorithm": "least_connections",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_least_connections_r2",
+      "algorithm": "least_connections",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_least_connections_r3",
+      "algorithm": "least_connections",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_least_connections_r4",
+      "algorithm": "least_connections",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_least_connections_r5",
+      "algorithm": "least_connections",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_least_connections_r1",
+      "algorithm": "least_connections",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_least_connections_r2",
+      "algorithm": "least_connections",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_least_connections_r3",
+      "algorithm": "least_connections",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_least_connections_r4",
+      "algorithm": "least_connections",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_least_connections_r5",
+      "algorithm": "least_connections",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_least_connections_r1",
+      "algorithm": "least_connections",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_least_connections_r2",
+      "algorithm": "least_connections",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_least_connections_r3",
+      "algorithm": "least_connections",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_least_connections_r4",
+      "algorithm": "least_connections",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_least_connections_r5",
+      "algorithm": "least_connections",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_low_load_ip_hash_r1",
+      "algorithm": "ip_hash",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_ip_hash_r2",
+      "algorithm": "ip_hash",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_ip_hash_r3",
+      "algorithm": "ip_hash",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_ip_hash_r4",
+      "algorithm": "ip_hash",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_ip_hash_r5",
+      "algorithm": "ip_hash",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_ip_hash_r1",
+      "algorithm": "ip_hash",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_ip_hash_r2",
+      "algorithm": "ip_hash",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_ip_hash_r3",
+      "algorithm": "ip_hash",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_ip_hash_r4",
+      "algorithm": "ip_hash",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_ip_hash_r5",
+      "algorithm": "ip_hash",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_ip_hash_r1",
+      "algorithm": "ip_hash",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_ip_hash_r2",
+      "algorithm": "ip_hash",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_ip_hash_r3",
+      "algorithm": "ip_hash",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_ip_hash_r4",
+      "algorithm": "ip_hash",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_ip_hash_r5",
+      "algorithm": "ip_hash",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_ip_hash_r1",
+      "algorithm": "ip_hash",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_ip_hash_r2",
+      "algorithm": "ip_hash",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_ip_hash_r3",
+      "algorithm": "ip_hash",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_ip_hash_r4",
+      "algorithm": "ip_hash",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_ip_hash_r5",
+      "algorithm": "ip_hash",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_ip_hash_r1",
+      "algorithm": "ip_hash",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_ip_hash_r2",
+      "algorithm": "ip_hash",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_ip_hash_r3",
+      "algorithm": "ip_hash",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_ip_hash_r4",
+      "algorithm": "ip_hash",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_ip_hash_r5",
+      "algorithm": "ip_hash",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_ip_hash_r1",
+      "algorithm": "ip_hash",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_ip_hash_r2",
+      "algorithm": "ip_hash",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_ip_hash_r3",
+      "algorithm": "ip_hash",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_ip_hash_r4",
+      "algorithm": "ip_hash",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_ip_hash_r5",
+      "algorithm": "ip_hash",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_ip_hash_r1",
+      "algorithm": "ip_hash",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_ip_hash_r2",
+      "algorithm": "ip_hash",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_ip_hash_r3",
+      "algorithm": "ip_hash",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_ip_hash_r4",
+      "algorithm": "ip_hash",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_ip_hash_r5",
+      "algorithm": "ip_hash",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_ip_hash_r1",
+      "algorithm": "ip_hash",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_ip_hash_r2",
+      "algorithm": "ip_hash",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_ip_hash_r3",
+      "algorithm": "ip_hash",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_ip_hash_r4",
+      "algorithm": "ip_hash",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_ip_hash_r5",
+      "algorithm": "ip_hash",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_ip_hash_r1",
+      "algorithm": "ip_hash",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_ip_hash_r2",
+      "algorithm": "ip_hash",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_ip_hash_r3",
+      "algorithm": "ip_hash",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_ip_hash_r4",
+      "algorithm": "ip_hash",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_ip_hash_r5",
+      "algorithm": "ip_hash",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_low_load_logistic_regression_r1",
+      "algorithm": "logistic_regression",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_logistic_regression_r2",
+      "algorithm": "logistic_regression",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_logistic_regression_r3",
+      "algorithm": "logistic_regression",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_logistic_regression_r4",
+      "algorithm": "logistic_regression",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_logistic_regression_r5",
+      "algorithm": "logistic_regression",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_logistic_regression_r1",
+      "algorithm": "logistic_regression",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_logistic_regression_r2",
+      "algorithm": "logistic_regression",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_logistic_regression_r3",
+      "algorithm": "logistic_regression",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_logistic_regression_r4",
+      "algorithm": "logistic_regression",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_logistic_regression_r5",
+      "algorithm": "logistic_regression",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_logistic_regression_r1",
+      "algorithm": "logistic_regression",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_logistic_regression_r2",
+      "algorithm": "logistic_regression",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_logistic_regression_r3",
+      "algorithm": "logistic_regression",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_logistic_regression_r4",
+      "algorithm": "logistic_regression",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_logistic_regression_r5",
+      "algorithm": "logistic_regression",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_logistic_regression_r1",
+      "algorithm": "logistic_regression",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_logistic_regression_r2",
+      "algorithm": "logistic_regression",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_logistic_regression_r3",
+      "algorithm": "logistic_regression",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_logistic_regression_r4",
+      "algorithm": "logistic_regression",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_logistic_regression_r5",
+      "algorithm": "logistic_regression",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_logistic_regression_r1",
+      "algorithm": "logistic_regression",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_logistic_regression_r2",
+      "algorithm": "logistic_regression",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_logistic_regression_r3",
+      "algorithm": "logistic_regression",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_logistic_regression_r4",
+      "algorithm": "logistic_regression",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_logistic_regression_r5",
+      "algorithm": "logistic_regression",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_logistic_regression_r1",
+      "algorithm": "logistic_regression",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_logistic_regression_r2",
+      "algorithm": "logistic_regression",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_logistic_regression_r3",
+      "algorithm": "logistic_regression",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_logistic_regression_r4",
+      "algorithm": "logistic_regression",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_logistic_regression_r5",
+      "algorithm": "logistic_regression",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_logistic_regression_r1",
+      "algorithm": "logistic_regression",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_logistic_regression_r2",
+      "algorithm": "logistic_regression",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_logistic_regression_r3",
+      "algorithm": "logistic_regression",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_logistic_regression_r4",
+      "algorithm": "logistic_regression",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_logistic_regression_r5",
+      "algorithm": "logistic_regression",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_logistic_regression_r1",
+      "algorithm": "logistic_regression",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_logistic_regression_r2",
+      "algorithm": "logistic_regression",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_logistic_regression_r3",
+      "algorithm": "logistic_regression",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_logistic_regression_r4",
+      "algorithm": "logistic_regression",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_logistic_regression_r5",
+      "algorithm": "logistic_regression",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_logistic_regression_r1",
+      "algorithm": "logistic_regression",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_logistic_regression_r2",
+      "algorithm": "logistic_regression",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_logistic_regression_r3",
+      "algorithm": "logistic_regression",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_logistic_regression_r4",
+      "algorithm": "logistic_regression",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_logistic_regression_r5",
+      "algorithm": "logistic_regression",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_low_load_random_forest_r1",
+      "algorithm": "random_forest",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_random_forest_r2",
+      "algorithm": "random_forest",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_random_forest_r3",
+      "algorithm": "random_forest",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_random_forest_r4",
+      "algorithm": "random_forest",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_random_forest_r5",
+      "algorithm": "random_forest",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_random_forest_r1",
+      "algorithm": "random_forest",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_random_forest_r2",
+      "algorithm": "random_forest",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_random_forest_r3",
+      "algorithm": "random_forest",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_random_forest_r4",
+      "algorithm": "random_forest",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_random_forest_r5",
+      "algorithm": "random_forest",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_random_forest_r1",
+      "algorithm": "random_forest",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_random_forest_r2",
+      "algorithm": "random_forest",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_random_forest_r3",
+      "algorithm": "random_forest",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_random_forest_r4",
+      "algorithm": "random_forest",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_random_forest_r5",
+      "algorithm": "random_forest",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_random_forest_r1",
+      "algorithm": "random_forest",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_random_forest_r2",
+      "algorithm": "random_forest",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_random_forest_r3",
+      "algorithm": "random_forest",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_random_forest_r4",
+      "algorithm": "random_forest",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_random_forest_r5",
+      "algorithm": "random_forest",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_random_forest_r1",
+      "algorithm": "random_forest",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_random_forest_r2",
+      "algorithm": "random_forest",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_random_forest_r3",
+      "algorithm": "random_forest",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_random_forest_r4",
+      "algorithm": "random_forest",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_random_forest_r5",
+      "algorithm": "random_forest",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_random_forest_r1",
+      "algorithm": "random_forest",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_random_forest_r2",
+      "algorithm": "random_forest",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_random_forest_r3",
+      "algorithm": "random_forest",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_random_forest_r4",
+      "algorithm": "random_forest",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_random_forest_r5",
+      "algorithm": "random_forest",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_random_forest_r1",
+      "algorithm": "random_forest",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_random_forest_r2",
+      "algorithm": "random_forest",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_random_forest_r3",
+      "algorithm": "random_forest",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_random_forest_r4",
+      "algorithm": "random_forest",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_random_forest_r5",
+      "algorithm": "random_forest",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_random_forest_r1",
+      "algorithm": "random_forest",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_random_forest_r2",
+      "algorithm": "random_forest",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_random_forest_r3",
+      "algorithm": "random_forest",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_random_forest_r4",
+      "algorithm": "random_forest",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_random_forest_r5",
+      "algorithm": "random_forest",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_random_forest_r1",
+      "algorithm": "random_forest",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_random_forest_r2",
+      "algorithm": "random_forest",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_random_forest_r3",
+      "algorithm": "random_forest",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_random_forest_r4",
+      "algorithm": "random_forest",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_random_forest_r5",
+      "algorithm": "random_forest",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_low_load_decision_tree_r1",
+      "algorithm": "decision_tree",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_decision_tree_r2",
+      "algorithm": "decision_tree",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_decision_tree_r3",
+      "algorithm": "decision_tree",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_decision_tree_r4",
+      "algorithm": "decision_tree",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_decision_tree_r5",
+      "algorithm": "decision_tree",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_decision_tree_r1",
+      "algorithm": "decision_tree",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_decision_tree_r2",
+      "algorithm": "decision_tree",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_decision_tree_r3",
+      "algorithm": "decision_tree",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_decision_tree_r4",
+      "algorithm": "decision_tree",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_decision_tree_r5",
+      "algorithm": "decision_tree",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_decision_tree_r1",
+      "algorithm": "decision_tree",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_decision_tree_r2",
+      "algorithm": "decision_tree",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_decision_tree_r3",
+      "algorithm": "decision_tree",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_decision_tree_r4",
+      "algorithm": "decision_tree",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_decision_tree_r5",
+      "algorithm": "decision_tree",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_decision_tree_r1",
+      "algorithm": "decision_tree",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_decision_tree_r2",
+      "algorithm": "decision_tree",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_decision_tree_r3",
+      "algorithm": "decision_tree",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_decision_tree_r4",
+      "algorithm": "decision_tree",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_decision_tree_r5",
+      "algorithm": "decision_tree",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_decision_tree_r1",
+      "algorithm": "decision_tree",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_decision_tree_r2",
+      "algorithm": "decision_tree",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_decision_tree_r3",
+      "algorithm": "decision_tree",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_decision_tree_r4",
+      "algorithm": "decision_tree",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_decision_tree_r5",
+      "algorithm": "decision_tree",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_decision_tree_r1",
+      "algorithm": "decision_tree",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_decision_tree_r2",
+      "algorithm": "decision_tree",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_decision_tree_r3",
+      "algorithm": "decision_tree",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_decision_tree_r4",
+      "algorithm": "decision_tree",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_decision_tree_r5",
+      "algorithm": "decision_tree",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_decision_tree_r1",
+      "algorithm": "decision_tree",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_decision_tree_r2",
+      "algorithm": "decision_tree",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_decision_tree_r3",
+      "algorithm": "decision_tree",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_decision_tree_r4",
+      "algorithm": "decision_tree",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_decision_tree_r5",
+      "algorithm": "decision_tree",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_decision_tree_r1",
+      "algorithm": "decision_tree",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_decision_tree_r2",
+      "algorithm": "decision_tree",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_decision_tree_r3",
+      "algorithm": "decision_tree",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_decision_tree_r4",
+      "algorithm": "decision_tree",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_decision_tree_r5",
+      "algorithm": "decision_tree",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_decision_tree_r1",
+      "algorithm": "decision_tree",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_decision_tree_r2",
+      "algorithm": "decision_tree",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_decision_tree_r3",
+      "algorithm": "decision_tree",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_decision_tree_r4",
+      "algorithm": "decision_tree",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_decision_tree_r5",
+      "algorithm": "decision_tree",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_low_load_svm_r1",
+      "algorithm": "svm",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_svm_r2",
+      "algorithm": "svm",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_svm_r3",
+      "algorithm": "svm",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_svm_r4",
+      "algorithm": "svm",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_svm_r5",
+      "algorithm": "svm",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_svm_r1",
+      "algorithm": "svm",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_svm_r2",
+      "algorithm": "svm",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_svm_r3",
+      "algorithm": "svm",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_svm_r4",
+      "algorithm": "svm",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_svm_r5",
+      "algorithm": "svm",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_svm_r1",
+      "algorithm": "svm",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_svm_r2",
+      "algorithm": "svm",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_svm_r3",
+      "algorithm": "svm",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_svm_r4",
+      "algorithm": "svm",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_svm_r5",
+      "algorithm": "svm",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_svm_r1",
+      "algorithm": "svm",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_svm_r2",
+      "algorithm": "svm",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_svm_r3",
+      "algorithm": "svm",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_svm_r4",
+      "algorithm": "svm",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_svm_r5",
+      "algorithm": "svm",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_svm_r1",
+      "algorithm": "svm",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_svm_r2",
+      "algorithm": "svm",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_svm_r3",
+      "algorithm": "svm",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_svm_r4",
+      "algorithm": "svm",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_svm_r5",
+      "algorithm": "svm",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_svm_r1",
+      "algorithm": "svm",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_svm_r2",
+      "algorithm": "svm",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_svm_r3",
+      "algorithm": "svm",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_svm_r4",
+      "algorithm": "svm",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_svm_r5",
+      "algorithm": "svm",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_svm_r1",
+      "algorithm": "svm",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_svm_r2",
+      "algorithm": "svm",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_svm_r3",
+      "algorithm": "svm",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_svm_r4",
+      "algorithm": "svm",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_svm_r5",
+      "algorithm": "svm",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_svm_r1",
+      "algorithm": "svm",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_svm_r2",
+      "algorithm": "svm",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_svm_r3",
+      "algorithm": "svm",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_svm_r4",
+      "algorithm": "svm",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_svm_r5",
+      "algorithm": "svm",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_svm_r1",
+      "algorithm": "svm",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_svm_r2",
+      "algorithm": "svm",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_svm_r3",
+      "algorithm": "svm",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_svm_r4",
+      "algorithm": "svm",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_svm_r5",
+      "algorithm": "svm",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_low_load_xgboost_r1",
+      "algorithm": "xgboost",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_xgboost_r2",
+      "algorithm": "xgboost",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_xgboost_r3",
+      "algorithm": "xgboost",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_xgboost_r4",
+      "algorithm": "xgboost",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_xgboost_r5",
+      "algorithm": "xgboost",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_xgboost_r1",
+      "algorithm": "xgboost",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_xgboost_r2",
+      "algorithm": "xgboost",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_xgboost_r3",
+      "algorithm": "xgboost",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_xgboost_r4",
+      "algorithm": "xgboost",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_xgboost_r5",
+      "algorithm": "xgboost",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_xgboost_r1",
+      "algorithm": "xgboost",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_xgboost_r2",
+      "algorithm": "xgboost",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_xgboost_r3",
+      "algorithm": "xgboost",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_xgboost_r4",
+      "algorithm": "xgboost",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_xgboost_r5",
+      "algorithm": "xgboost",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_xgboost_r1",
+      "algorithm": "xgboost",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_xgboost_r2",
+      "algorithm": "xgboost",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_xgboost_r3",
+      "algorithm": "xgboost",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_xgboost_r4",
+      "algorithm": "xgboost",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_xgboost_r5",
+      "algorithm": "xgboost",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_xgboost_r1",
+      "algorithm": "xgboost",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_xgboost_r2",
+      "algorithm": "xgboost",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_xgboost_r3",
+      "algorithm": "xgboost",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_xgboost_r4",
+      "algorithm": "xgboost",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_xgboost_r5",
+      "algorithm": "xgboost",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_xgboost_r1",
+      "algorithm": "xgboost",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_xgboost_r2",
+      "algorithm": "xgboost",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_xgboost_r3",
+      "algorithm": "xgboost",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_xgboost_r4",
+      "algorithm": "xgboost",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_xgboost_r5",
+      "algorithm": "xgboost",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_xgboost_r1",
+      "algorithm": "xgboost",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_xgboost_r2",
+      "algorithm": "xgboost",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_xgboost_r3",
+      "algorithm": "xgboost",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_xgboost_r4",
+      "algorithm": "xgboost",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_xgboost_r5",
+      "algorithm": "xgboost",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_xgboost_r1",
+      "algorithm": "xgboost",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_xgboost_r2",
+      "algorithm": "xgboost",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_xgboost_r3",
+      "algorithm": "xgboost",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_xgboost_r4",
+      "algorithm": "xgboost",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_xgboost_r5",
+      "algorithm": "xgboost",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_xgboost_r1",
+      "algorithm": "xgboost",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_xgboost_r2",
+      "algorithm": "xgboost",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_xgboost_r3",
+      "algorithm": "xgboost",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_xgboost_r4",
+      "algorithm": "xgboost",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_xgboost_r5",
+      "algorithm": "xgboost",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_policy_r1",
+      "algorithm": "adaptive_policy",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_policy_r2",
+      "algorithm": "adaptive_policy",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_policy_r3",
+      "algorithm": "adaptive_policy",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_policy_r4",
+      "algorithm": "adaptive_policy",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_policy_r5",
+      "algorithm": "adaptive_policy",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_policy_r1",
+      "algorithm": "adaptive_policy",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_policy_r2",
+      "algorithm": "adaptive_policy",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_policy_r3",
+      "algorithm": "adaptive_policy",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_policy_r4",
+      "algorithm": "adaptive_policy",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_policy_r5",
+      "algorithm": "adaptive_policy",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_policy_r1",
+      "algorithm": "adaptive_policy",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_policy_r2",
+      "algorithm": "adaptive_policy",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_policy_r3",
+      "algorithm": "adaptive_policy",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_policy_r4",
+      "algorithm": "adaptive_policy",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_policy_r5",
+      "algorithm": "adaptive_policy",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_policy_r1",
+      "algorithm": "adaptive_policy",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_policy_r2",
+      "algorithm": "adaptive_policy",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_policy_r3",
+      "algorithm": "adaptive_policy",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_policy_r4",
+      "algorithm": "adaptive_policy",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_policy_r5",
+      "algorithm": "adaptive_policy",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_policy_r1",
+      "algorithm": "adaptive_policy",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_policy_r2",
+      "algorithm": "adaptive_policy",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_policy_r3",
+      "algorithm": "adaptive_policy",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_policy_r4",
+      "algorithm": "adaptive_policy",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_policy_r5",
+      "algorithm": "adaptive_policy",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_policy_r1",
+      "algorithm": "adaptive_policy",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_policy_r2",
+      "algorithm": "adaptive_policy",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_policy_r3",
+      "algorithm": "adaptive_policy",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_policy_r4",
+      "algorithm": "adaptive_policy",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_policy_r5",
+      "algorithm": "adaptive_policy",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_policy_r1",
+      "algorithm": "adaptive_policy",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_policy_r2",
+      "algorithm": "adaptive_policy",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_policy_r3",
+      "algorithm": "adaptive_policy",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_policy_r4",
+      "algorithm": "adaptive_policy",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_policy_r5",
+      "algorithm": "adaptive_policy",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_policy_r1",
+      "algorithm": "adaptive_policy",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_policy_r2",
+      "algorithm": "adaptive_policy",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_policy_r3",
+      "algorithm": "adaptive_policy",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_policy_r4",
+      "algorithm": "adaptive_policy",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_policy_r5",
+      "algorithm": "adaptive_policy",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_policy_r1",
+      "algorithm": "adaptive_policy",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_policy_r2",
+      "algorithm": "adaptive_policy",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_policy_r3",
+      "algorithm": "adaptive_policy",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_policy_r4",
+      "algorithm": "adaptive_policy",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_policy_r5",
+      "algorithm": "adaptive_policy",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_meta_r1",
+      "algorithm": "adaptive_meta",
+      "regime": "low_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_meta_r2",
+      "algorithm": "adaptive_meta",
+      "regime": "low_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_meta_r3",
+      "algorithm": "adaptive_meta",
+      "regime": "low_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_meta_r4",
+      "algorithm": "adaptive_meta",
+      "regime": "low_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_low_load_adaptive_meta_r5",
+      "algorithm": "adaptive_meta",
+      "regime": "low_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 12
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_meta_r1",
+      "algorithm": "adaptive_meta",
+      "regime": "medium_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_meta_r2",
+      "algorithm": "adaptive_meta",
+      "regime": "medium_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_meta_r3",
+      "algorithm": "adaptive_meta",
+      "regime": "medium_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_meta_r4",
+      "algorithm": "adaptive_meta",
+      "regime": "medium_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_medium_load_adaptive_meta_r5",
+      "algorithm": "adaptive_meta",
+      "regime": "medium_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 22
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_meta_r1",
+      "algorithm": "adaptive_meta",
+      "regime": "high_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_meta_r2",
+      "algorithm": "adaptive_meta",
+      "regime": "high_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_meta_r3",
+      "algorithm": "adaptive_meta",
+      "regime": "high_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_meta_r4",
+      "algorithm": "adaptive_meta",
+      "regime": "high_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_high_load_adaptive_meta_r5",
+      "algorithm": "adaptive_meta",
+      "regime": "high_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 32
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_meta_r1",
+      "algorithm": "adaptive_meta",
+      "regime": "burst_load",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_meta_r2",
+      "algorithm": "adaptive_meta",
+      "regime": "burst_load",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_meta_r3",
+      "algorithm": "adaptive_meta",
+      "regime": "burst_load",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_meta_r4",
+      "algorithm": "adaptive_meta",
+      "regime": "burst_load",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_burst_load_adaptive_meta_r5",
+      "algorithm": "adaptive_meta",
+      "regime": "burst_load",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 36
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_meta_r1",
+      "algorithm": "adaptive_meta",
+      "regime": "cpu_heavy",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_meta_r2",
+      "algorithm": "adaptive_meta",
+      "regime": "cpu_heavy",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_meta_r3",
+      "algorithm": "adaptive_meta",
+      "regime": "cpu_heavy",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_meta_r4",
+      "algorithm": "adaptive_meta",
+      "regime": "cpu_heavy",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_cpu_heavy_adaptive_meta_r5",
+      "algorithm": "adaptive_meta",
+      "regime": "cpu_heavy",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 24
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_meta_r1",
+      "algorithm": "adaptive_meta",
+      "regime": "mixed_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_meta_r2",
+      "algorithm": "adaptive_meta",
+      "regime": "mixed_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_meta_r3",
+      "algorithm": "adaptive_meta",
+      "regime": "mixed_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_meta_r4",
+      "algorithm": "adaptive_meta",
+      "regime": "mixed_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_mixed_workload_adaptive_meta_r5",
+      "algorithm": "adaptive_meta",
+      "regime": "mixed_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 26
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_meta_r1",
+      "algorithm": "adaptive_meta",
+      "regime": "dynamic_workload",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_meta_r2",
+      "algorithm": "adaptive_meta",
+      "regime": "dynamic_workload",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_meta_r3",
+      "algorithm": "adaptive_meta",
+      "regime": "dynamic_workload",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_meta_r4",
+      "algorithm": "adaptive_meta",
+      "regime": "dynamic_workload",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_dynamic_workload_adaptive_meta_r5",
+      "algorithm": "adaptive_meta",
+      "regime": "dynamic_workload",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 28
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_meta_r1",
+      "algorithm": "adaptive_meta",
+      "regime": "queue_contention",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_meta_r2",
+      "algorithm": "adaptive_meta",
+      "regime": "queue_contention",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_meta_r3",
+      "algorithm": "adaptive_meta",
+      "regime": "queue_contention",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_meta_r4",
+      "algorithm": "adaptive_meta",
+      "regime": "queue_contention",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_queue_contention_adaptive_meta_r5",
+      "algorithm": "adaptive_meta",
+      "regime": "queue_contention",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 30
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_meta_r1",
+      "algorithm": "adaptive_meta",
+      "regime": "backend_imbalance",
+      "run_idx": 1,
+      "seed": 42,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_meta_r2",
+      "algorithm": "adaptive_meta",
+      "regime": "backend_imbalance",
+      "run_idx": 2,
+      "seed": 43,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_meta_r3",
+      "algorithm": "adaptive_meta",
+      "regime": "backend_imbalance",
+      "run_idx": 3,
+      "seed": 44,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_meta_r4",
+      "algorithm": "adaptive_meta",
+      "regime": "backend_imbalance",
+      "run_idx": 4,
+      "seed": 45,
+      "request_count": 25
+    },
+    {
+      "experiment_id": "exp_p14_backend_imbalance_adaptive_meta_r5",
+      "algorithm": "adaptive_meta",
+      "regime": "backend_imbalance",
+      "run_idx": 5,
+      "seed": 46,
+      "request_count": 25
+    }
+  ],
+  "duration_seconds": 300.36,
+  "generated_at": "2026-09-08T14:38:28Z"
+}

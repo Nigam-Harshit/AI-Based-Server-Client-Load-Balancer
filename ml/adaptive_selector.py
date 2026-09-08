@@ -258,6 +258,12 @@ class AdaptiveRouter(BaseRouter):
         # Strategy selectors
         self.policy_selector = EvidenceBasedPolicySelector()
         self.meta_selector = LearnedMetaSelector()
+        if os.path.exists("models/meta_selector.joblib"):
+            try:
+                self.meta_selector.meta_model = joblib.load("models/meta_selector.joblib")
+                self.meta_selector.is_fitted = True
+            except Exception:
+                pass
 
         # Load candidate models
         self.model_paths = model_paths or dict(DEFAULT_MODEL_PATHS)
