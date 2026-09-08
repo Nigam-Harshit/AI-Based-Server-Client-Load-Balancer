@@ -312,6 +312,7 @@ def get_router(
     backends: List[str],
     collector: Optional[Any] = None,
     model_path: Optional[str] = None,
+    adaptive_strategy: str = "policy",
 ) -> BaseRouter:
     """Factory to instantiate a router by name."""
     normalized = algorithm.lower().replace("-", "_").strip()
@@ -320,9 +321,26 @@ def get_router(
         from load_balancer.priority import PriorityDeadlineRouter
         return PriorityDeadlineRouter(base_router=ml_base, collector=collector, backends=backends)
 
+    if normalized == "priority_adaptive" or normalized == "adaptive_priority":
+        from ml.adaptive_selector import AdaptiveRouter
+        adaptive_base = AdaptiveRouter(
+            backends=backends,
+            collector=collector,
+            strategy=adaptive_strategy,
+        )
+        from load_balancer.priority import PriorityDeadlineRouter
+        return PriorityDeadlineRouter(base_router=adaptive_base, collector=collector, backends=backends)
+
+    if normalized == "adaptive":
+        from ml.adaptive_selector import AdaptiveRouter
+        return AdaptiveRouter(
+            backends=backends,
+            collector=collector,
+            strategy=adaptive_strategy,
+        )
+
     if normalized not in ROUTER_REGISTRY:
-        supported = list(ROUTER_REGISTRY.keys())
-        supported = list(ROUTER_REGISTRY.keys()) + ["priority_ml"]
+        supported = list(ROUTER_REGISTRY.keys()) + ["adaptive", "priority_ml", "priority_adaptive"]
         raise ValueError(f"Unknown algorithm '{algorithm}'. Supported: {supported}")
     router_cls = ROUTER_REGISTRY[normalized]
     if normalized == "ml":

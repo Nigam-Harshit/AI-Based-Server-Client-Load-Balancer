@@ -326,3 +326,31 @@ python -m ml.phase12_generalization
 python -m unittest tests.test_phase12_generalization
 ```
 Comprehensive experimental report and publication-grade plots are available in [docs/phase12_generalization.md](docs/phase12_generalization.md).
+
+---
+
+## Phase 13: Adaptive / Context-Aware ML Routing
+
+### Objective
+Investigate whether an adaptive model-selection layer dynamically assigning routing models based on pre-routing operational context provides measurable advantages over fixed ML routing models.
+
+### Key Empirical Findings
+- **Fixed Tree Ensembles Outperform Adaptive Selection**: Fixed **Random Forest, Decision Tree, and XGBoost** achieved top cross-validation performance (**93.44% Accuracy, 92.94% Macro F1, 6.56% suboptimal routing rate**), outperforming both **Adaptive Policy Selector** (**92.65% Accuracy, 89.53% Macro F1**) and **Adaptive Meta-Selector** (**92.65% Accuracy, 89.53% Macro F1**).
+- **Selection Accuracy vs Routing Effectiveness**: Adaptive selectors achieved **92.65% model-selection accuracy**, but frequently delegating to SVM in medium and dynamic regimes bounded overall Macro F1 to 89.53%.
+- **Decision Overhead**: Fixed models incurred negligible decision latency (**0.004–0.019 ms**), whereas Adaptive Policy Selector added **0.188 ms** and Adaptive Meta-Selector added **1.916 ms** (~100x overhead amplification).
+- **Dynamic Switching Stability**: Transition testing across Scenarios A–D verified smooth monotonic switching tracking underlying regime shifts with zero high-frequency oscillation.
+- **Fault-Tolerance & Fallback**: Automatic fallback to `LeastConnectionsRouter` guaranteed zero crashed requests upon backend outages or low model confidence.
+
+### Running Phase 13
+```bash
+# Run Phase 13 meta-dataset generation, GroupKFold cross-validation, and 12 research plots
+python -m ml.phase13_benchmarks
+
+# Start live load balancer with adaptive routing
+python -m load_balancer.app --port 8000 --algorithm adaptive --adaptive-strategy policy
+
+# Run Phase 13 automated tests
+python -m unittest tests.test_adaptive_routing
+```
+Comprehensive experimental report and publication-grade plots are available in [docs/phase13_adaptive_routing.md](docs/phase13_adaptive_routing.md).
+

@@ -103,6 +103,17 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                     extra_response_headers["X-ML-Confidence"] = f"{pred_meta['confidence']:.4f}"
                 extra_response_headers["X-ML-Fallback"] = "true" if pred_meta.get("is_fallback") else "false"
 
+            # Extract Adaptive observability headers if adaptive router was used
+            if hasattr(router, "last_adaptive_decision") and router.last_adaptive_decision:
+                a_dec = router.last_adaptive_decision
+                extra_response_headers["X-Selected-Model"] = str(a_dec.get("selected_model", "none"))
+                if a_dec.get("ml_predicted_server"):
+                    extra_response_headers["X-ML-Predicted-Server"] = str(a_dec["ml_predicted_server"])
+                if a_dec.get("ml_confidence") is not None:
+                    extra_response_headers["X-ML-Confidence"] = f"{a_dec['ml_confidence']:.4f}"
+                extra_response_headers["X-Adaptive-Fallback"] = "true" if a_dec.get("is_fallback") else "false"
+                extra_response_headers["X-Model-Selection-Time"] = f"{a_dec.get('model_selection_time_ms', 0.0):.3f}"
+
             # Populate default priority and deadline observability headers
             extra_response_headers["X-Request-Priority"] = priority_meta.priority.name
             req_slack = priority_meta.calculate_slack_ms(start_time)
@@ -252,11 +263,18 @@ def create_load_balancer(
     backends: Optional[List[str]] = None,
     backend_timeout: float = 2.0,
     model_path: Optional[str] = None,
+    adaptive_strategy: str = "policy",
 ) -> ThreadingHTTPServer:
     """Create and configure a ThreadingHTTPServer instance for the load balancer."""
     backends_list = list(backends) if backends else list(DEFAULT_BACKENDS)
     collector = MetricsCollector(backends=backends_list, timeout=backend_timeout)
-    router = get_router(algorithm, backends_list, collector=collector, model_path=model_path)
+    router = get_router(
+        algorithm,
+        backends_list,
+        collector=collector,
+        model_path=model_path,
+        adaptive_strategy=adaptive_strategy,
+    )
 
     server = ThreadingHTTPServer((host, port), LoadBalancerRequestHandler)
     server.router = router
@@ -274,6 +292,7 @@ def run_load_balancer(
     algorithm: str = "round_robin",
     backends: Optional[List[str]] = None,
     model_path: Optional[str] = None,
+    adaptive_strategy: str = "policy",
 ):
     """Run the load balancer HTTP server."""
     logging.basicConfig(
@@ -286,6 +305,7 @@ def run_load_balancer(
         algorithm=algorithm,
         backends=backends,
         model_path=model_path,
+        adaptive_strategy=adaptive_strategy,
     )
     logger.info(
         "Starting load balancer on %s:%d using %s with backends: %s",
@@ -309,10 +329,15 @@ if __name__ == "__main__":
     parser.add_argument(
         "--algorithm",
         default="round_robin",
-        choices=["round_robin", "least_connections", "ip_hash", "ml", "priority_ml"],
+        choices=["round_robin", "least_connections", "ip_hash", "ml", "priority_ml", "adaptive", "priority_adaptive"],
         help="Routing algorithm to use (default: round_robin)",
     )
-
+    parser.add_argument(
+        "--adaptive-strategy",
+        default="policy",
+        choices=["policy", "meta"],
+        help="Adaptive model selection strategy (default: policy)",
+    )
     parser.add_argument(
         "--backends",
         default=None,
@@ -332,6 +357,7 @@ if __name__ == "__main__":
         algorithm=args.algorithm,
         backends=backends,
         model_path=args.model_path,
+        adaptive_strategy=args.adaptive_strategy,
     )
 
 

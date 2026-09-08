@@ -1,0 +1,313 @@
+{
+  "dataset_overview": {
+    "total_observations": 1550,
+    "total_experiments": 37,
+    "regimes": [
+      "low_load",
+      "medium_load",
+      "high_load",
+      "burst_load",
+      "cpu_heavy",
+      "mixed_workload",
+      "dynamic_workload",
+      "queue_contention",
+      "backend_imbalance"
+    ]
+  },
+  "summary_metrics": [
+    {
+      "strategy": "Baseline: Round Robin",
+      "cv_accuracy_mean": 0.2974,
+      "cv_accuracy_std": 0.0368,
+      "cv_macro_f1_mean": 0.2778,
+      "cv_macro_f1_std": 0.0449,
+      "cv_weighted_f1_mean": 0.3169,
+      "suboptimal_routing_rate": 0.7026,
+      "model_selection_accuracy": 0.0,
+      "avg_inference_overhead_ms": 0.005
+    },
+    {
+      "strategy": "Baseline: Least Connections",
+      "cv_accuracy_mean": 0.03,
+      "cv_accuracy_std": 0.06,
+      "cv_macro_f1_mean": 0.0215,
+      "cv_macro_f1_std": 0.043,
+      "cv_weighted_f1_mean": 0.0161,
+      "suboptimal_routing_rate": 0.97,
+      "model_selection_accuracy": 0.0,
+      "avg_inference_overhead_ms": 0.008
+    },
+    {
+      "strategy": "Baseline: IP Hash",
+      "cv_accuracy_mean": 0.3498,
+      "cv_accuracy_std": 0.021,
+      "cv_macro_f1_mean": 0.3322,
+      "cv_macro_f1_std": 0.0183,
+      "cv_weighted_f1_mean": 0.3653,
+      "suboptimal_routing_rate": 0.6502,
+      "model_selection_accuracy": 0.0,
+      "avg_inference_overhead_ms": 0.006
+    },
+    {
+      "strategy": "Logistic Regression",
+      "cv_accuracy_mean": 0.896,
+      "cv_accuracy_std": 0.0579,
+      "cv_macro_f1_mean": 0.8748,
+      "cv_macro_f1_std": 0.0774,
+      "cv_weighted_f1_mean": 0.8906,
+      "suboptimal_routing_rate": 0.104,
+      "model_selection_accuracy": 1.0,
+      "avg_inference_overhead_ms": 0.005
+    },
+    {
+      "strategy": "Random Forest",
+      "cv_accuracy_mean": 0.9344,
+      "cv_accuracy_std": 0.0651,
+      "cv_macro_f1_mean": 0.9294,
+      "cv_macro_f1_std": 0.069,
+      "cv_weighted_f1_mean": 0.9302,
+      "suboptimal_routing_rate": 0.0656,
+      "model_selection_accuracy": 1.0,
+      "avg_inference_overhead_ms": 0.019
+    },
+    {
+      "strategy": "Decision Tree",
+      "cv_accuracy_mean": 0.9344,
+      "cv_accuracy_std": 0.0651,
+      "cv_macro_f1_mean": 0.9294,
+      "cv_macro_f1_std": 0.069,
+      "cv_weighted_f1_mean": 0.9302,
+      "suboptimal_routing_rate": 0.0656,
+      "model_selection_accuracy": 1.0,
+      "avg_inference_overhead_ms": 0.004
+    },
+    {
+      "strategy": "SVM",
+      "cv_accuracy_mean": 0.9265,
+      "cv_accuracy_std": 0.0642,
+      "cv_macro_f1_mean": 0.8953,
+      "cv_macro_f1_std": 0.0927,
+      "cv_weighted_f1_mean": 0.9287,
+      "suboptimal_routing_rate": 0.0735,
+      "model_selection_accuracy": 1.0,
+      "avg_inference_overhead_ms": 0.005
+    },
+    {
+      "strategy": "XGBoost",
+      "cv_accuracy_mean": 0.9344,
+      "cv_accuracy_std": 0.0651,
+      "cv_macro_f1_mean": 0.9294,
+      "cv_macro_f1_std": 0.069,
+      "cv_weighted_f1_mean": 0.9302,
+      "suboptimal_routing_rate": 0.0656,
+      "model_selection_accuracy": 1.0,
+      "avg_inference_overhead_ms": 0.012
+    },
+    {
+      "strategy": "Adaptive: Policy Selector",
+      "cv_accuracy_mean": 0.9265,
+      "cv_accuracy_std": 0.0642,
+      "cv_macro_f1_mean": 0.8953,
+      "cv_macro_f1_std": 0.0927,
+      "cv_weighted_f1_mean": 0.9287,
+      "suboptimal_routing_rate": 0.0735,
+      "model_selection_accuracy": 0.9265,
+      "avg_inference_overhead_ms": 0.188
+    },
+    {
+      "strategy": "Adaptive: Meta Selector",
+      "cv_accuracy_mean": 0.9265,
+      "cv_accuracy_std": 0.0642,
+      "cv_macro_f1_mean": 0.8953,
+      "cv_macro_f1_std": 0.0927,
+      "cv_weighted_f1_mean": 0.9287,
+      "suboptimal_routing_rate": 0.0735,
+      "model_selection_accuracy": 0.9265,
+      "avg_inference_overhead_ms": 1.916
+    }
+  ],
+  "statistical_comparisons": {
+    "Policy_vs_SVM": {
+      "comparison": "Adaptive Policy vs SVM (Best Fixed)",
+      "sample_size": 5,
+      "mean_difference": 0.0,
+      "std_difference": 0.0,
+      "cohen_d": 0.0,
+      "95_ci": [
+        0.0,
+        0.0
+      ],
+      "t_statistic": null,
+      "p_value": null,
+      "statistically_significant": false
+    },
+    "Policy_vs_RF": {
+      "comparison": "Adaptive Policy vs Random Forest",
+      "sample_size": 5,
+      "mean_difference": -0.0341,
+      "std_difference": 0.0342,
+      "cohen_d": -0.9972,
+      "95_ci": [
+        -0.0765,
+        0.0083
+      ],
+      "t_statistic": -2.2297,
+      "p_value": 0.0896,
+      "statistically_significant": false
+    },
+    "Policy_vs_LR": {
+      "comparison": "Adaptive Policy vs Logistic Regression",
+      "sample_size": 5,
+      "mean_difference": 0.0205,
+      "std_difference": 0.1196,
+      "cohen_d": 0.1718,
+      "95_ci": [
+        -0.1279,
+        0.169
+      ],
+      "t_statistic": 0.3842,
+      "p_value": 0.7204,
+      "statistically_significant": false
+    },
+    "Meta_vs_SVM": {
+      "comparison": "Adaptive Meta vs SVM (Best Fixed)",
+      "sample_size": 5,
+      "mean_difference": 0.0,
+      "std_difference": 0.0,
+      "cohen_d": 0.0,
+      "95_ci": [
+        0.0,
+        0.0
+      ],
+      "t_statistic": null,
+      "p_value": null,
+      "statistically_significant": false
+    },
+    "Policy_vs_Meta": {
+      "comparison": "Adaptive Policy vs Adaptive Meta",
+      "sample_size": 5,
+      "mean_difference": 0.0,
+      "std_difference": 0.0,
+      "cohen_d": 0.0,
+      "95_ci": [
+        0.0,
+        0.0
+      ],
+      "t_statistic": null,
+      "p_value": null,
+      "statistically_significant": false
+    }
+  },
+  "switching_stability": {
+    "Scenario A: Low -> Med -> High": {
+      "timeline": [
+        {
+          "target_regime": "low_load",
+          "inferred_regime": "medium_load",
+          "selected_model": "SVM",
+          "confidence": 0.95
+        },
+        {
+          "target_regime": "medium_load",
+          "inferred_regime": "queue_contention",
+          "selected_model": "Random Forest",
+          "confidence": 0.95
+        },
+        {
+          "target_regime": "high_load",
+          "inferred_regime": "queue_contention",
+          "selected_model": "Random Forest",
+          "confidence": 0.95
+        }
+      ],
+      "switch_count": 1,
+      "switch_rate": 0.3333,
+      "oscillation_detected": false
+    },
+    "Scenario B: Med -> Burst -> Med": {
+      "timeline": [
+        {
+          "target_regime": "medium_load",
+          "inferred_regime": "queue_contention",
+          "selected_model": "Random Forest",
+          "confidence": 0.95
+        },
+        {
+          "target_regime": "burst_load",
+          "inferred_regime": "queue_contention",
+          "selected_model": "Random Forest",
+          "confidence": 0.95
+        },
+        {
+          "target_regime": "medium_load",
+          "inferred_regime": "queue_contention",
+          "selected_model": "Random Forest",
+          "confidence": 0.95
+        }
+      ],
+      "switch_count": 0,
+      "switch_rate": 0.0,
+      "oscillation_detected": false
+    },
+    "Scenario C: Low -> CPU-Heavy -> High": {
+      "timeline": [
+        {
+          "target_regime": "low_load",
+          "inferred_regime": "medium_load",
+          "selected_model": "SVM",
+          "confidence": 0.95
+        },
+        {
+          "target_regime": "cpu_heavy",
+          "inferred_regime": "queue_contention",
+          "selected_model": "Random Forest",
+          "confidence": 0.95
+        },
+        {
+          "target_regime": "high_load",
+          "inferred_regime": "queue_contention",
+          "selected_model": "Random Forest",
+          "confidence": 0.95
+        }
+      ],
+      "switch_count": 1,
+      "switch_rate": 0.3333,
+      "oscillation_detected": false
+    },
+    "Scenario D: Balanced -> Imbalance": {
+      "timeline": [
+        {
+          "target_regime": "medium_load",
+          "inferred_regime": "queue_contention",
+          "selected_model": "Random Forest",
+          "confidence": 0.95
+        },
+        {
+          "target_regime": "backend_imbalance",
+          "inferred_regime": "backend_imbalance",
+          "selected_model": "SVM",
+          "confidence": 0.95
+        }
+      ],
+      "switch_count": 1,
+      "switch_rate": 0.5,
+      "oscillation_detected": false
+    }
+  },
+  "priority_extension": {
+    "total_requests": 160,
+    "priority_levels": {
+      "LOW": 64,
+      "HIGH": 58,
+      "NORMAL": 20,
+      "CRITICAL": 18
+    },
+    "mean_response_time_ms": 130.42,
+    "p50_latency_ms": 129.84,
+    "p95_latency_ms": 212.66,
+    "p99_latency_ms": 237.81,
+    "success_rate": 100.0,
+    "deadline_violation_count": 38,
+    "deadline_violation_rate": 23.75
+  }
+}

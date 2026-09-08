@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-09-08T13:50:43Z",
+  "total_observations": 1550,
+  "total_experiments": 37,
+  "strategies_evaluated": 10,
+  "candidate_models": [
+    "Logistic Regression",
+    "Random Forest",
+    "Decision Tree",
+    "SVM",
+    "XGBoost"
+  ]
+}

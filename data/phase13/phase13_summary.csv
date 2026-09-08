@@ -1,0 +1,11 @@
+strategy,cv_accuracy_mean,cv_accuracy_std,cv_macro_f1_mean,cv_macro_f1_std,cv_weighted_f1_mean,suboptimal_routing_rate,model_selection_accuracy,avg_inference_overhead_ms
+Baseline: Round Robin,0.2974,0.0368,0.2778,0.0449,0.3169,0.7026,0.0,0.005
+Baseline: Least Connections,0.03,0.06,0.0215,0.043,0.0161,0.97,0.0,0.008
+Baseline: IP Hash,0.3498,0.021,0.3322,0.0183,0.3653,0.6502,0.0,0.006
+Logistic Regression,0.896,0.0579,0.8748,0.0774,0.8906,0.104,1.0,0.005
+Random Forest,0.9344,0.0651,0.9294,0.069,0.9302,0.0656,1.0,0.019
+Decision Tree,0.9344,0.0651,0.9294,0.069,0.9302,0.0656,1.0,0.004
+SVM,0.9265,0.0642,0.8953,0.0927,0.9287,0.0735,1.0,0.005
+XGBoost,0.9344,0.0651,0.9294,0.069,0.9302,0.0656,1.0,0.012
+Adaptive: Policy Selector,0.9265,0.0642,0.8953,0.0927,0.9287,0.0735,0.9265,0.188
+Adaptive: Meta Selector,0.9265,0.0642,0.8953,0.0927,0.9287,0.0735,0.9265,1.916

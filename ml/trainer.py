@@ -59,6 +59,40 @@ def train_and_persist_model(
             )),
         ])
         artifact_name = "random_forest.joblib"
+    elif model_type.lower() in ("decision_tree", "decisiontree", "dt"):
+        from sklearn.tree import DecisionTreeClassifier
+        pipeline = Pipeline([
+            ("clf", DecisionTreeClassifier(
+                max_depth=5,
+                min_samples_split=4,
+                random_state=random_state,
+            )),
+        ])
+        artifact_name = "decision_tree.joblib"
+    elif model_type.lower() in ("svm", "svc"):
+        from sklearn.svm import SVC
+        pipeline = Pipeline([
+            ("scaler", StandardScaler()),
+            ("clf", SVC(
+                kernel="rbf",
+                C=1.0,
+                probability=True,
+                random_state=random_state,
+            )),
+        ])
+        artifact_name = "svm.joblib"
+    elif model_type.lower() in ("xgboost", "xgb"):
+        import xgboost as xgb
+        pipeline = Pipeline([
+            ("clf", xgb.XGBClassifier(
+                n_estimators=100,
+                max_depth=4,
+                learning_rate=0.1,
+                random_state=random_state,
+                eval_metric="mlogloss",
+            )),
+        ])
+        artifact_name = "xgboost.joblib"
     else:
         raise ValueError(f"Unsupported model type: {model_type}")
 
@@ -89,6 +123,25 @@ def train_and_persist_model(
     logger.info("Saved model metadata to %s", metadata_path)
 
     return artifact_path, metadata_path
+
+
+def train_all_candidate_models(
+    data_dir: str = "data/processed",
+    output_dir: str = DEFAULT_MODEL_DIR,
+    random_state: int = 42,
+) -> Dict[str, str]:
+    """Train and persist all 5 candidate models for adaptive load balancing."""
+    models_to_train = ["LogisticRegression", "RandomForest", "DecisionTree", "SVM", "XGBoost"]
+    paths = {}
+    for m in models_to_train:
+        art_path, _ = train_and_persist_model(
+            model_type=m,
+            data_dir=data_dir,
+            output_dir=output_dir,
+            random_state=random_state,
+        )
+        paths[m] = art_path
+    return paths
 
 
 if __name__ == "__main__":
