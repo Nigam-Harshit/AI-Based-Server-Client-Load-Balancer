@@ -1,0 +1,22 @@
+{
+  "nominal_3_nodes": {
+    "total_requests": 80,
+    "successful_requests": 80,
+    "success_rate_pct": 100.0,
+    "duration_seconds": 1.514,
+    "throughput_rps": 52.85,
+    "median_latency_ms": 17.77,
+    "p95_latency_ms": 24.04,
+    "p99_latency_ms": 32.12
+  },
+  "degraded_2_nodes": {
+    "total_requests": 60,
+    "successful_requests": 60,
+    "success_rate_pct": 100.0,
+    "duration_seconds": 2.979,
+    "throughput_rps": 20.14,
+    "median_latency_ms": 18.99,
+    "p95_latency_ms": 46.72,
+    "p99_latency_ms": 664.49
+  }
+}

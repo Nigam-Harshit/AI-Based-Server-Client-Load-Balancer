@@ -382,4 +382,45 @@ python -m unittest tests/test_phase14_benchmark.py
 ```
 Comprehensive experimental report and publication-grade plots are available in [docs/phase14_system_benchmark.md](docs/phase14_system_benchmark.md).
 
+---
+
+## Phase 15: Production Hardening, Docker Containerization & Deployment Readiness
+
+### Objective
+Transition the research prototype into an observable, fault-tolerant, containerized, and reproducible production-ready distributed system across Docker Compose and native environments while strictly preserving all historical research findings.
+
+### Key Deliverables & Hardening Features
+- **Hermetic Containerization**: Hardened `Dockerfile` built on `python:3.12-slim` executing under unprivileged non-root user `appuser` (UID 10001) with deterministic dependency layering.
+- **Multi-Service Compose Topology**: Orchestrates 4 isolated services (`load-balancer`, `server-1`, `server-2`, `server-3`) communicating across internal Docker bridge network `loadbalancer-net` with enforced cgroups CPU (`0.5–1.0`) and RAM (`512MB–1024MB`) limits.
+- **Twelve-Factor Configuration**: Complete runtime externalization via environment variables (`LB_PORT`, `LB_HOST`, `ROUTING_ALGORITHM`, `BACKENDS`, `BACKEND_TIMEOUT`, `MODEL_PATH`, `ADAPTIVE_STRATEGY`, `SERVER_ID`, `SERVER_HOST`, `SERVER_PORT`) with zero-code-change flexibility.
+- **Automated Health Probes & Discovery**: Liveness probes on `/health` (backends) and `/lb-health` (load balancer).
+- **Dynamic Failover & Fault Tolerance**: Dynamic unhealthy backend tracking and candidate filtering in all routers (`RoundRobinRouter`, `LeastConnectionsRouter`, `IPHashRouter`, `MLRouter`, `AdaptiveRouter`, `PriorityDeadlineRouter`). Multi-attempt request failover prevents client-visible drops during backend crashes; total backend blackout returns graceful HTTP 502/503 without process crash.
+- **Failure Injection Validation**: Empirical evaluation (Tests A–E) verifying 100% success rate during single-node outages, single-survivor resilience, controlled 502 responses under total blackout, and instant recovery upon node restoration.
+
+### Running Phase 15
+
+```bash
+# 1. Containerized Multi-Service Deployment (Docker Compose)
+cp .env.example .env
+docker compose up --build -d
+
+# Check cluster health
+docker compose ps
+curl -i http://localhost:8000/lb-health
+
+# Tear down cluster
+docker compose down
+
+# 2. Native Failure Injection & Deployment Sanity Evaluation
+python experiments/phase15_deployment_runner.py
+
+# 3. Phase 15 Unit and Integration Tests
+python -m unittest tests/test_phase15_deployment.py
+
+# 4. Full Project Regression Suite (145 tests)
+python -m unittest discover -s tests -p "test_*.py"
+```
+Comprehensive experimental report and failure injection timeline are available in [docs/phase15_production_hardening.md](docs/phase15_production_hardening.md).
+
+
 

@@ -1,0 +1,14 @@
+# AI-Based Server-Client Load Balancer - Core Dependencies
+# Pinned to exact verified runtime versions to guarantee model serialization compatibility
+
+numpy==2.3.3
+pandas==2.3.2
+scipy==1.16.2
+scikit-learn==1.7.2
+joblib==1.5.2
+xgboost==3.4.1
+psutil==7.2.2
+matplotlib==3.10.6
+PyYAML==6.0.3
+pytest==9.1.1
+

@@ -1,0 +1,46 @@
+{
+  "baseline_3_backends": {
+    "success_rate": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  "test_a_server_1_stopped": {
+    "success_rate": 100.0,
+    "active_backends_observed": [
+      "http://127.0.0.1:8002"
+    ],
+    "excluded_stopped_server_1": true,
+    "passed": true
+  },
+  "test_b_server_2_stopped": {
+    "success_rate": 100.0,
+    "active_backends_observed": [
+      "http://127.0.0.1:8003"
+    ],
+    "sole_surviving_server_3": true,
+    "passed": true
+  },
+  "test_c_single_survivor": {
+    "surviving_backend": "http://127.0.0.1:8003",
+    "traffic_sustained": true,
+    "passed": true
+  },
+  "test_d_all_backends_stopped": {
+    "lb_survived_without_crashing": true,
+    "controlled_error_codes": [
+      502,
+      502,
+      502,
+      502
+    ],
+    "passed": true
+  },
+  "test_e_backend_recovery": {
+    "recovered_server": "http://127.0.0.1:8001",
+    "traffic_resumed": true,
+    "active_backends_observed": [
+      "http://127.0.0.1:8001"
+    ],
+    "passed": true
+  }
+}

@@ -2,10 +2,12 @@ import argparse
 import collections
 import json
 import logging
+import os
 import socket
 import time
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from typing import Optional
 from urllib.parse import parse_qs, urlparse
 
 import psutil
@@ -146,16 +148,20 @@ class ServerRequestHandler(BaseHTTPRequestHandler):
 
 
 def create_server(
-    server_id: str,
-    host: str = "127.0.0.1",
-    port: int = 8001,
+    server_id: Optional[str] = None,
+    host: Optional[str] = None,
+    port: Optional[int] = None,
     max_workers: int = 20,
 ) -> ThreadingHTTPServer:
     """Create a configured ThreadingHTTPServer instance with real-time metrics tracking."""
-    server = ThreadingHTTPServer((host, port), ServerRequestHandler)
-    server.server_id = server_id
-    server.server_host = host
-    server.server_port = port
+    resolved_id = server_id or os.getenv("SERVER_ID", "server-1")
+    resolved_host = host or os.getenv("SERVER_HOST", "127.0.0.1")
+    resolved_port = port if port is not None else int(os.getenv("SERVER_PORT", "8001"))
+
+    server = ThreadingHTTPServer((resolved_host, resolved_port), ServerRequestHandler)
+    server.server_id = resolved_id
+    server.server_host = resolved_host
+    server.server_port = resolved_port
     server.max_workers = max_workers
     server._worker_semaphore = threading.Semaphore(max_workers)
     server._lock = threading.Lock()
@@ -170,28 +176,40 @@ def create_server(
     return server
 
 
-def run_server(server_id: str, host: str = "127.0.0.1", port: int = 8001, max_workers: int = 20):
+def run_server(
+    server_id: Optional[str] = None,
+    host: Optional[str] = None,
+    port: Optional[int] = None,
+    max_workers: int = 20,
+):
     """Run the server node indefinitely."""
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     )
-    httpd = create_server(server_id, host, port, max_workers=max_workers)
-    logger.info("Starting server %s on %s:%d (max_workers=%d)", server_id, host, port, max_workers)
+    httpd = create_server(server_id=server_id, host=host, port=port, max_workers=max_workers)
+    logger.info(
+        "Starting server %s on %s:%d (max_workers=%d)",
+        httpd.server_id,
+        httpd.server_host,
+        httpd.server_port,
+        max_workers,
+    )
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        logger.info("Shutting down server %s", server_id)
+        logger.info("Shutting down server %s", httpd.server_id)
     finally:
         httpd.server_close()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Lightweight HTTP Backend Server Node")
-    parser.add_argument("--id", default="server-1", help="Unique identifier for the server node")
-    parser.add_argument("--host", default="127.0.0.1", help="Host address to bind to (default: 127.0.0.1)")
-    parser.add_argument("--port", type=int, default=8001, help="Port to listen on (default: 8001)")
+    parser.add_argument("--id", default=os.getenv("SERVER_ID", "server-1"), help="Unique identifier for the server node")
+    parser.add_argument("--host", default=os.getenv("SERVER_HOST", "127.0.0.1"), help="Host address to bind to (default: 127.0.0.1)")
+    parser.add_argument("--port", type=int, default=int(os.getenv("SERVER_PORT", "8001")), help="Port to listen on (default: 8001)")
     parser.add_argument("--workers", type=int, default=20, help="Maximum concurrent workers (default: 20)")
     args = parser.parse_args()
 
     run_server(server_id=args.id, host=args.host, port=args.port, max_workers=args.workers)
+

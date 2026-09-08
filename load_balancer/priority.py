@@ -5,6 +5,7 @@ from enum import IntEnum
 from contextlib import contextmanager
 import time
 from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 
 
@@ -188,6 +189,16 @@ class PriorityDeadlineRouter:
         self.collector = collector or metrics_collector or getattr(self.base_router, "collector", None)
         self.backends = list(backends) if backends else list(getattr(self.base_router, "backends", []))
         self.last_decision: Dict[str, Any] = {}
+        self._healthy_backends: Optional[set] = None
+
+    def set_healthy_backends(self, healthy: Optional[List[str]]) -> None:
+        """Dynamically propagate healthy backends to base router and local selection."""
+        if hasattr(self.base_router, "set_healthy_backends"):
+            self.base_router.set_healthy_backends(healthy)
+        if healthy:
+            self._healthy_backends = set(healthy)
+        else:
+            self._healthy_backends = None
 
     def select(
         self,
@@ -219,8 +230,14 @@ class PriorityDeadlineRouter:
             b for b in self.backends
             if metrics_by_backend.get(b) is None or getattr(metrics_by_backend[b], "available", True)
         ]
+        if self._healthy_backends is not None:
+            healthy_backends = [b for b in healthy_backends if b in self._healthy_backends]
         if not healthy_backends:
             healthy_backends = list(self.backends)
+            if self._healthy_backends is not None:
+                healthy_backends = [b for b in self.backends if b in self._healthy_backends]
+            else:
+                healthy_backends = list(self.backends)
 
         # 3. Calculate expected turnaround latency for each healthy backend:
         # Expected Turnaround = network_latency + avg_response_time * (1 + active_connections)

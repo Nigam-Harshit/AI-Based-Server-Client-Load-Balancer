@@ -294,6 +294,11 @@ class AdaptiveRouter(BaseRouter):
             else:
                 logger.warning("Model artifact path %s for %s does not exist", path, model_name)
 
+    def set_healthy_backends(self, healthy: Optional[List[str]]) -> None:
+        super().set_healthy_backends(healthy)
+        if hasattr(self.fallback_router, "set_healthy_backends"):
+            self.fallback_router.set_healthy_backends(healthy)
+
     def select(self, client_ip: Optional[str] = None) -> str:
         """Execute adaptive routing decision."""
         self.total_routed_requests += 1
@@ -319,6 +324,8 @@ class AdaptiveRouter(BaseRouter):
 
             # Check healthy backends
             healthy_backends = [b for b in self.backends if availability_map.get(b, True)]
+            if getattr(self, "_healthy_backends", None) is not None:
+                healthy_backends = [b for b in healthy_backends if b in self._healthy_backends]
             if not healthy_backends:
                 t_sel = round((time.perf_counter() - t_start) * 1000.0, 3)
                 return self._fallback_routing(

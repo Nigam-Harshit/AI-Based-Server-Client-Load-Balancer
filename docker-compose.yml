@@ -1,0 +1,118 @@
+services:
+  server-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: server-1
+    command: ["python", "-m", "server.app", "--server-id", "server-1", "--host", "0.0.0.0", "--port", "8001"]
+    environment:
+      - SERVER_ID=server-1
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8001
+      - PYTHONUNBUFFERED=1
+    networks:
+      - loadbalancer-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8001/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 2s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
+  server-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: server-2
+    command: ["python", "-m", "server.app", "--server-id", "server-2", "--host", "0.0.0.0", "--port", "8002"]
+    environment:
+      - SERVER_ID=server-2
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8002
+      - PYTHONUNBUFFERED=1
+    networks:
+      - loadbalancer-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8002/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 2s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
+  server-3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: server-3
+    command: ["python", "-m", "server.app", "--server-id", "server-3", "--host", "0.0.0.0", "--port", "8003"]
+    environment:
+      - SERVER_ID=server-3
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8003
+      - PYTHONUNBUFFERED=1
+    networks:
+      - loadbalancer-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8003/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 2s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
+  load-balancer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: load-balancer
+    command: ["python", "-m", "load_balancer.app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "${LB_PORT:-8000}:8000"
+    environment:
+      - LB_HOST=0.0.0.0
+      - LB_PORT=8000
+      - BACKENDS=http://server-1:8001,http://server-2:8002,http://server-3:8003
+      - ROUTING_ALGORITHM=${ROUTING_ALGORITHM:-round_robin}
+      - ADAPTIVE_STRATEGY=${ADAPTIVE_STRATEGY:-policy}
+      - BACKEND_TIMEOUT=${BACKEND_TIMEOUT:-2.0}
+      - MODEL_PATH=${MODEL_PATH:-models/logistic_regression.joblib}
+      - PYTHONUNBUFFERED=1
+    networks:
+      - loadbalancer-net
+    depends_on:
+      server-1:
+        condition: service_healthy
+      server-2:
+        condition: service_healthy
+      server-3:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/lb-health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 3s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 1024M
+
+networks:
+  loadbalancer-net:
+    driver: bridge
+

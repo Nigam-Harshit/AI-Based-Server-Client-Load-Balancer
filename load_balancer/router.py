@@ -17,6 +17,22 @@ class BaseRouter(ABC):
         if not backends:
             raise ValueError("Backends list cannot be empty")
         self.backends = list(backends)
+        self._healthy_backends: Optional[set] = None
+
+    def set_healthy_backends(self, healthy: Optional[List[str]]) -> None:
+        """Dynamically inform the router of currently known healthy backend servers."""
+        if healthy:
+            self._healthy_backends = set(healthy)
+        else:
+            self._healthy_backends = None
+
+    def get_candidate_backends(self) -> List[str]:
+        """Return subset of configured backends that are currently healthy, or all if none known."""
+        if self._healthy_backends:
+            candidates = [b for b in self.backends if b in self._healthy_backends]
+            if candidates:
+                return candidates
+        return self.backends
 
     @abstractmethod
     def select(self, client_ip: Optional[str] = None) -> str:
@@ -56,8 +72,9 @@ class RoundRobinRouter(BaseRouter):
 
     def select(self, client_ip: Optional[str] = None) -> str:
         with self._lock:
-            selected = self.backends[self._index % len(self.backends)]
-            self._index = (self._index + 1) % len(self.backends)
+            candidates = self.get_candidate_backends()
+            selected = candidates[self._index % len(candidates)]
+            self._index = (self._index + 1) % len(candidates)
             return selected
 
 
@@ -95,10 +112,9 @@ class LeastConnectionsRouter(BaseRouter):
 
     def select(self, client_ip: Optional[str] = None) -> str:
         with self._lock:
-            # Deterministic selection: min by active count.
-            # Python's min is stable: on equal keys, the first element encountered is returned.
-            selected = min(self.backends, key=lambda b: self._active_connections[b])
-            self._active_connections[selected] += 1
+            candidates = self.get_candidate_backends()
+            selected = min(candidates, key=lambda b: self._active_connections.get(b, 0))
+            self._active_connections[selected] = self._active_connections.get(selected, 0) + 1
             return selected
 
     def release(self, backend: str, success: bool = True) -> None:
@@ -124,9 +140,10 @@ class IPHashRouter(BaseRouter):
         if not ip:
             ip = "127.0.0.1"
 
+        candidates = self.get_candidate_backends()
         digest = hashlib.md5(ip.encode("utf-8")).hexdigest()
-        index = int(digest, 16) % len(self.backends)
-        return self.backends[index]
+        index = int(digest, 16) % len(candidates)
+        return candidates[index]
 
 
 class MLRouter(BaseRouter):
@@ -186,6 +203,11 @@ class MLRouter(BaseRouter):
         except Exception:
             self.model = None
 
+    def set_healthy_backends(self, healthy: Optional[List[str]]) -> None:
+        super().set_healthy_backends(healthy)
+        if hasattr(self.fallback_router, "set_healthy_backends"):
+            self.fallback_router.set_healthy_backends(healthy)
+
     def select(self, client_ip: Optional[str] = None) -> str:
         """Predict the best backend server or fall back to LeastConnectionsRouter."""
         inference_start = time.perf_counter()
@@ -219,6 +241,8 @@ class MLRouter(BaseRouter):
 
                 # Determine which backends are actually available
                 healthy_backends = [b for b in self.backends if availability_map.get(b, True)]
+                if getattr(self, "_healthy_backends", None) is not None:
+                    healthy_backends = [b for b in healthy_backends if b in self._healthy_backends]
                 if not healthy_backends:
                     # Fallback if no backend reported available
                     selected = self.fallback_router.select(client_ip=client_ip)
