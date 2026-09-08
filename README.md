@@ -299,5 +299,30 @@ python -m benchmarks.phase10_analysis
 ```
 Comprehensive experimental report and publication-grade plots are available in [docs/priority_deadline_routing.md](docs/priority_deadline_routing.md).
 
+---
 
+## Phase 12: Large-Scale Dataset Expansion & Generalization Analysis
 
+### Objective
+Expand the experimental dataset by over an order of magnitude (from $N=120$ to $N=1,710$ observations across 41 experiments and 9 operational regimes) and evaluate whether the empirical machine-learning load-balancing conclusions established in Phases 6–11 generalize to unseen workload configurations and operational stress regimes.
+
+### Core Verdict on Phase 7 Hypothesis
+**Phase 7 Conclusion is WEAKENED & CONTRADICTED:**
+- **Cross-Validation on Seen Data (Set A)**: **SVM** achieved the highest fidelity (**Accuracy: 96.65%, Macro F1: 92.39%**), outperforming Logistic Regression (**85.88%** Macro F1). Random Forest, Decision Tree, and XGBoost matched Logistic Regression at 91.35% accuracy and 85.88% Macro F1.
+- **Out-of-Distribution Generalization (Set B)**: Under previously unseen traffic configurations, **Random Forest, Decision Tree, and XGBoost** generalized with zero degradation (**Accuracy: 94.51%, Macro F1: 89.14%**, negative generalization gap of $-3.26\%$). In contrast, **Logistic Regression suffered significant performance degradation** (**Macro F1 dropped to 71.85%**, generalization gap of $+14.03\%$), failing to accurately predict server recovery states under domain shift.
+- **High-Load Transfer (Set C)**: All models achieved 100% accuracy and 1.0 Macro F1 transferring from low/medium loads to high-load regimes.
+- **Traditional Baselines Evaluated Separately**: Round Robin achieved 1.0 Macro F1 on unseen configurations, while Least Connections and IP Hash exhibited severe imbalance degradation on asymmetric workloads.
+- **Isolated Priority Extension**: Evaluated across 160 requests, priority-aware routing reduced P95 tail latency by 20.83% and P99 latency by 23.32% while increasing throughput by +45.36%.
+
+### Running Phase 12 Pipeline
+```bash
+# Execute large-scale data collection (41 experiments, 9 operational regimes, ~1,710 requests)
+python -m experiments.phase12_collector
+
+# Run generalization benchmarking, GroupKFold CV, seen/unseen evaluation, and generate 12 research plots
+python -m ml.phase12_generalization
+
+# Run Phase 12 unit and integration tests
+python -m unittest tests.test_phase12_generalization
+```
+Comprehensive experimental report and publication-grade plots are available in [docs/phase12_generalization.md](docs/phase12_generalization.md).

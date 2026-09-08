@@ -1,0 +1,1006 @@
+{
+  "dataset_overview": {
+    "total_observations": 1710,
+    "core_observations": 1550,
+    "priority_observations": 160,
+    "total_experiments": 41,
+    "regimes": [
+      "low_load",
+      "medium_load",
+      "high_load",
+      "burst_load",
+      "cpu_heavy",
+      "mixed_workload",
+      "dynamic_workload",
+      "queue_contention",
+      "backend_imbalance"
+    ]
+  },
+  "experiment_set_a_seen_cv": {
+    "Random Forest": {
+      "accuracy_mean": 0.9135,
+      "accuracy_std": 0.1729,
+      "macro_f1_mean": 0.8588,
+      "macro_f1_std": 0.2824,
+      "weighted_f1_mean": 0.8925,
+      "weighted_f1_std": 0.215,
+      "fold_accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.5677
+      ],
+      "fold_macro_f1s": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.294
+      ],
+      "per_class_precision": [
+        0.899,
+        0.9191,
+        0.9193
+      ],
+      "per_class_recall": [
+        1.0,
+        0.9244,
+        0.7327
+      ],
+      "per_class_f1": [
+        0.9468,
+        0.9217,
+        0.8154
+      ],
+      "confusion_matrix": [
+        [
+          356,
+          0,
+          0
+        ],
+        [
+          0,
+          159,
+          13
+        ],
+        [
+          40,
+          14,
+          148
+        ]
+      ]
+    },
+    "Decision Tree": {
+      "accuracy_mean": 0.9135,
+      "accuracy_std": 0.1729,
+      "macro_f1_mean": 0.8588,
+      "macro_f1_std": 0.2824,
+      "weighted_f1_mean": 0.8925,
+      "weighted_f1_std": 0.215,
+      "fold_accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.5677
+      ],
+      "fold_macro_f1s": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.294
+      ],
+      "per_class_precision": [
+        0.899,
+        0.9191,
+        0.9193
+      ],
+      "per_class_recall": [
+        1.0,
+        0.9244,
+        0.7327
+      ],
+      "per_class_f1": [
+        0.9468,
+        0.9217,
+        0.8154
+      ],
+      "confusion_matrix": [
+        [
+          356,
+          0,
+          0
+        ],
+        [
+          0,
+          159,
+          13
+        ],
+        [
+          40,
+          14,
+          148
+        ]
+      ]
+    },
+    "Logistic Regression": {
+      "accuracy_mean": 0.9135,
+      "accuracy_std": 0.1729,
+      "macro_f1_mean": 0.8588,
+      "macro_f1_std": 0.2824,
+      "weighted_f1_mean": 0.8925,
+      "weighted_f1_std": 0.215,
+      "fold_accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.5677
+      ],
+      "fold_macro_f1s": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.294
+      ],
+      "per_class_precision": [
+        0.899,
+        0.9191,
+        0.9193
+      ],
+      "per_class_recall": [
+        1.0,
+        0.9244,
+        0.7327
+      ],
+      "per_class_f1": [
+        0.9468,
+        0.9217,
+        0.8154
+      ],
+      "confusion_matrix": [
+        [
+          356,
+          0,
+          0
+        ],
+        [
+          0,
+          159,
+          13
+        ],
+        [
+          40,
+          14,
+          148
+        ]
+      ]
+    },
+    "SVM": {
+      "accuracy_mean": 0.9665,
+      "accuracy_std": 0.0671,
+      "macro_f1_mean": 0.9239,
+      "macro_f1_std": 0.1522,
+      "weighted_f1_mean": 0.9618,
+      "weighted_f1_std": 0.0765,
+      "fold_accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.8323
+      ],
+      "fold_macro_f1s": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.6195
+      ],
+      "per_class_precision": [
+        1.0,
+        1.0,
+        0.886
+      ],
+      "per_class_recall": [
+        0.9635,
+        0.9244,
+        1.0
+      ],
+      "per_class_f1": [
+        0.9814,
+        0.9607,
+        0.9395
+      ],
+      "confusion_matrix": [
+        [
+          343,
+          0,
+          13
+        ],
+        [
+          0,
+          159,
+          13
+        ],
+        [
+          0,
+          0,
+          202
+        ]
+      ]
+    },
+    "XGBoost": {
+      "accuracy_mean": 0.9135,
+      "accuracy_std": 0.1729,
+      "macro_f1_mean": 0.8588,
+      "macro_f1_std": 0.2824,
+      "weighted_f1_mean": 0.8925,
+      "weighted_f1_std": 0.215,
+      "fold_accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.5677
+      ],
+      "fold_macro_f1s": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.294
+      ],
+      "per_class_precision": [
+        0.899,
+        0.9191,
+        0.9193
+      ],
+      "per_class_recall": [
+        1.0,
+        0.9244,
+        0.7327
+      ],
+      "per_class_f1": [
+        0.9468,
+        0.9217,
+        0.8154
+      ],
+      "confusion_matrix": [
+        [
+          356,
+          0,
+          0
+        ],
+        [
+          0,
+          159,
+          13
+        ],
+        [
+          40,
+          14,
+          148
+        ]
+      ]
+    },
+    "Traditional": {
+      "round_robin": {
+        "accuracy": 0.926,
+        "macro_f1": 0.9271,
+        "weighted_f1": 0.926,
+        "count": 365
+      },
+      "least_connections": {
+        "accuracy": 0.8904,
+        "macro_f1": 0.863,
+        "weighted_f1": 0.8764,
+        "count": 365
+      },
+      "ip_hash": {
+        "accuracy": 0.333,
+        "macro_f1": 0.3,
+        "weighted_f1": 0.3
+      }
+    }
+  },
+  "experiment_set_b_unseen_test": {
+    "Random Forest": {
+      "accuracy": 0.9451,
+      "macro_f1": 0.8914,
+      "weighted_f1": 0.9394,
+      "per_class_precision": [
+        0.8878,
+        1.0,
+        1.0
+      ],
+      "per_class_recall": [
+        1.0,
+        0.5794,
+        1.0
+      ],
+      "per_class_f1": [
+        0.9406,
+        0.7337,
+        1.0
+      ],
+      "confusion_matrix": [
+        [
+          356,
+          0,
+          0
+        ],
+        [
+          45,
+          62,
+          0
+        ],
+        [
+          0,
+          0,
+          357
+        ]
+      ],
+      "train_obs": 730,
+      "test_obs": 820
+    },
+    "Decision Tree": {
+      "accuracy": 0.9451,
+      "macro_f1": 0.8914,
+      "weighted_f1": 0.9394,
+      "per_class_precision": [
+        0.8878,
+        1.0,
+        1.0
+      ],
+      "per_class_recall": [
+        1.0,
+        0.5794,
+        1.0
+      ],
+      "per_class_f1": [
+        0.9406,
+        0.7337,
+        1.0
+      ],
+      "confusion_matrix": [
+        [
+          356,
+          0,
+          0
+        ],
+        [
+          45,
+          62,
+          0
+        ],
+        [
+          0,
+          0,
+          357
+        ]
+      ],
+      "train_obs": 730,
+      "test_obs": 820
+    },
+    "Logistic Regression": {
+      "accuracy": 0.8902,
+      "macro_f1": 0.7185,
+      "weighted_f1": 0.8537,
+      "per_class_precision": [
+        0.8878,
+        1.0,
+        0.8881
+      ],
+      "per_class_recall": [
+        1.0,
+        0.1589,
+        1.0
+      ],
+      "per_class_f1": [
+        0.9406,
+        0.2742,
+        0.9407
+      ],
+      "confusion_matrix": [
+        [
+          356,
+          0,
+          0
+        ],
+        [
+          45,
+          17,
+          45
+        ],
+        [
+          0,
+          0,
+          357
+        ]
+      ],
+      "train_obs": 730,
+      "test_obs": 820
+    },
+    "SVM": {
+      "accuracy": 0.9451,
+      "macro_f1": 0.8915,
+      "weighted_f1": 0.9394,
+      "per_class_precision": [
+        1.0,
+        1.0,
+        0.8881
+      ],
+      "per_class_recall": [
+        1.0,
+        0.5794,
+        1.0
+      ],
+      "per_class_f1": [
+        1.0,
+        0.7337,
+        0.9407
+      ],
+      "confusion_matrix": [
+        [
+          356,
+          0,
+          0
+        ],
+        [
+          0,
+          62,
+          45
+        ],
+        [
+          0,
+          0,
+          357
+        ]
+      ],
+      "train_obs": 730,
+      "test_obs": 820
+    },
+    "XGBoost": {
+      "accuracy": 0.9451,
+      "macro_f1": 0.8914,
+      "weighted_f1": 0.9394,
+      "per_class_precision": [
+        0.8878,
+        1.0,
+        1.0
+      ],
+      "per_class_recall": [
+        1.0,
+        0.5794,
+        1.0
+      ],
+      "per_class_f1": [
+        0.9406,
+        0.7337,
+        1.0
+      ],
+      "confusion_matrix": [
+        [
+          356,
+          0,
+          0
+        ],
+        [
+          45,
+          62,
+          0
+        ],
+        [
+          0,
+          0,
+          357
+        ]
+      ],
+      "train_obs": 730,
+      "test_obs": 820
+    },
+    "Traditional": {
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "weighted_f1": 1.0,
+        "count": 50
+      },
+      "least_connections": {
+        "accuracy": 0.333,
+        "macro_f1": 0.3,
+        "weighted_f1": 0.3
+      },
+      "ip_hash": {
+        "accuracy": 0.8831,
+        "macro_f1": 0.469,
+        "weighted_f1": 0.8283,
+        "count": 385
+      }
+    }
+  },
+  "experiment_set_c_high_load_test": {
+    "Random Forest": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "train_obs": 300,
+      "test_obs": 230
+    },
+    "Decision Tree": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "train_obs": 300,
+      "test_obs": 230
+    },
+    "Logistic Regression": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "train_obs": 300,
+      "test_obs": 230
+    },
+    "SVM": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "train_obs": 300,
+      "test_obs": 230
+    },
+    "XGBoost": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "train_obs": 300,
+      "test_obs": 230
+    },
+    "Traditional": {
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "weighted_f1": 1.0,
+        "count": 95
+      },
+      "least_connections": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "weighted_f1": 1.0,
+        "count": 45
+      },
+      "ip_hash": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "weighted_f1": 1.0,
+        "count": 45
+      }
+    }
+  },
+  "generalization_gaps": {
+    "Random Forest": {
+      "val_macro_f1": 0.8588,
+      "unseen_test_macro_f1": 0.8914,
+      "macro_f1_gap": -0.0326,
+      "val_accuracy": 0.9135,
+      "unseen_test_accuracy": 0.9451,
+      "accuracy_gap": -0.0316
+    },
+    "Decision Tree": {
+      "val_macro_f1": 0.8588,
+      "unseen_test_macro_f1": 0.8914,
+      "macro_f1_gap": -0.0326,
+      "val_accuracy": 0.9135,
+      "unseen_test_accuracy": 0.9451,
+      "accuracy_gap": -0.0316
+    },
+    "Logistic Regression": {
+      "val_macro_f1": 0.8588,
+      "unseen_test_macro_f1": 0.7185,
+      "macro_f1_gap": 0.1403,
+      "val_accuracy": 0.9135,
+      "unseen_test_accuracy": 0.8902,
+      "accuracy_gap": 0.0233
+    },
+    "SVM": {
+      "val_macro_f1": 0.9239,
+      "unseen_test_macro_f1": 0.8915,
+      "macro_f1_gap": 0.0324,
+      "val_accuracy": 0.9665,
+      "unseen_test_accuracy": 0.9451,
+      "accuracy_gap": 0.0214
+    },
+    "XGBoost": {
+      "val_macro_f1": 0.8588,
+      "unseen_test_macro_f1": 0.8914,
+      "macro_f1_gap": -0.0326,
+      "val_accuracy": 0.9135,
+      "unseen_test_accuracy": 0.9451,
+      "accuracy_gap": -0.0316
+    }
+  },
+  "scenario_wise_analysis": {
+    "low_load": {
+      "Random Forest": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Decision Tree": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Logistic Regression": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "SVM": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "XGBoost": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "least_connections": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "ip_hash": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    "medium_load": {
+      "Random Forest": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Decision Tree": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Logistic Regression": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "SVM": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "XGBoost": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "least_connections": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "ip_hash": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    "high_load": {
+      "Random Forest": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Decision Tree": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Logistic Regression": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "SVM": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "XGBoost": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "least_connections": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "ip_hash": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    "burst_load": {
+      "Random Forest": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Decision Tree": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Logistic Regression": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "SVM": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "XGBoost": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "least_connections": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "ip_hash": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    "cpu_heavy": {
+      "Random Forest": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Decision Tree": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Logistic Regression": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "SVM": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "XGBoost": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "least_connections": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "ip_hash": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    "mixed_workload": {
+      "Random Forest": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Decision Tree": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Logistic Regression": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "SVM": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "XGBoost": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "least_connections": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "ip_hash": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    "dynamic_workload": {
+      "Random Forest": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Decision Tree": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Logistic Regression": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "SVM": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "XGBoost": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "least_connections": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "ip_hash": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    "queue_contention": {
+      "Random Forest": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Decision Tree": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "Logistic Regression": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "SVM": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "XGBoost": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "round_robin": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "least_connections": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "ip_hash": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    "backend_imbalance": {
+      "Random Forest": {
+        "accuracy": 0.0765,
+        "macro_f1": 0.0781
+      },
+      "Decision Tree": {
+        "accuracy": 0.0765,
+        "macro_f1": 0.0781
+      },
+      "Logistic Regression": {
+        "accuracy": 0.0765,
+        "macro_f1": 0.0781
+      },
+      "SVM": {
+        "accuracy": 0.3176,
+        "macro_f1": 0.1607
+      },
+      "XGBoost": {
+        "accuracy": 0.0765,
+        "macro_f1": 0.0781
+      },
+      "round_robin": {
+        "accuracy": 0.325,
+        "macro_f1": 0.3333
+      },
+      "least_connections": {
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "ip_hash": {
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      }
+    }
+  },
+  "statistical_comparisons": {
+    "LR_vs_Random Forest_SetA_CV": {
+      "test": "Paired t-test across matched GroupKFold folds",
+      "sample_size": 5,
+      "mean_difference": 0.0,
+      "95_ci": [
+        0.0,
+        0.0
+      ],
+      "t_statistic": null,
+      "p_value": null,
+      "statistically_significant": false
+    },
+    "LR_vs_Decision Tree_SetA_CV": {
+      "test": "Paired t-test across matched GroupKFold folds",
+      "sample_size": 5,
+      "mean_difference": 0.0,
+      "95_ci": [
+        0.0,
+        0.0
+      ],
+      "t_statistic": null,
+      "p_value": null,
+      "statistically_significant": false
+    },
+    "LR_vs_SVM_SetA_CV": {
+      "test": "Paired t-test across matched GroupKFold folds",
+      "sample_size": 5,
+      "mean_difference": -0.0651,
+      "95_ci": [
+        -0.1792,
+        0.049
+      ],
+      "t_statistic": -1.0,
+      "p_value": 0.3739,
+      "statistically_significant": false
+    },
+    "LR_vs_XGBoost_SetA_CV": {
+      "test": "Paired t-test across matched GroupKFold folds",
+      "sample_size": 5,
+      "mean_difference": 0.0,
+      "95_ci": [
+        0.0,
+        0.0
+      ],
+      "t_statistic": null,
+      "p_value": null,
+      "statistically_significant": false
+    }
+  },
+  "priority_deadline_extension": {
+    "ml_routing": {
+      "total_requests": 80,
+      "throughput_rps": 8.29,
+      "p50_latency_ms": 114.23,
+      "p95_latency_ms": 221.32,
+      "p99_latency_ms": 255.69,
+      "mean_latency_ms": 126.59,
+      "deadline_violations": 21,
+      "deadline_violation_rate": 26.25
+    },
+    "priority_ml_routing": {
+      "total_requests": 80,
+      "throughput_rps": 12.05,
+      "p50_latency_ms": 135.09,
+      "p95_latency_ms": 175.21,
+      "p99_latency_ms": 196.07,
+      "mean_latency_ms": 134.26,
+      "deadline_violations": 20,
+      "deadline_violation_rate": 25.0
+    },
+    "observations_count": 160
+  }
+}

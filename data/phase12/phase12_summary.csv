@@ -1,0 +1,9 @@
+model,set_a_cv_accuracy,set_a_cv_macro_f1,set_b_unseen_accuracy,set_b_unseen_macro_f1,set_c_high_load_accuracy,set_c_high_load_macro_f1,generalization_gap_macro_f1,generalization_gap_accuracy
+Random Forest,0.9135,0.8588,0.9451,0.8914,1.0,1.0,-0.0326,-0.0316
+Decision Tree,0.9135,0.8588,0.9451,0.8914,1.0,1.0,-0.0326,-0.0316
+Logistic Regression,0.9135,0.8588,0.8902,0.7185,1.0,1.0,0.1403,0.0233
+SVM,0.9665,0.9239,0.9451,0.8915,1.0,1.0,0.0324,0.0214
+XGBoost,0.9135,0.8588,0.9451,0.8914,1.0,1.0,-0.0326,-0.0316
+Baseline: Round Robin,0.926,0.9271,1.0,1.0,1.0,1.0,0.0,0.0
+Baseline: Least Connections,0.8904,0.863,0.333,0.3,1.0,1.0,0.0,0.0
+Baseline: Ip Hash,0.333,0.3,0.8831,0.469,1.0,1.0,0.0,0.0
