@@ -422,5 +422,38 @@ python -m unittest discover -s tests -p "test_*.py"
 ```
 Comprehensive experimental report and failure injection timeline are available in [docs/phase15_production_hardening.md](docs/phase15_production_hardening.md).
 
+---
+
+## Phase 16: Real-Time Demonstration, Observability & Control Console
+
+### Objective
+Build an interactive browser-based demonstration and observability console allowing live workload execution, dynamic algorithm switching, chaos fault injection, and real-time visualization across all completed phases (1–15) while strictly preserving Outcome C (Heuristic Dominance).
+
+### Key Features
+- **Interactive Web Dashboard (`demo/ui/`)**: Self-contained HTML5/CSS3/ES6 vanilla JS console featuring real-time cluster topology, live request stream, KPI cards, and traffic distribution charts.
+- **REST Control Plane (`demo/server.py`)**: Multi-threaded Python server on port `8080` providing endpoints for live telemetry, algorithm switching, chaos control, and data export.
+- **Dynamic Algorithm Switching**: Real-time transitions across 12 algorithms (`round_robin`, `least_connections`, `ip_hash`, `logistic_regression`, `random_forest`, `decision_tree`, `svm`, `xgboost`, `adaptive_policy`, `adaptive_meta`, `priority_ml`, `priority_adaptive`) via `POST /lb-algorithm`.
+- **Chaos Engineering & Fault Injection**: Toggle individual backend nodes to observe instant, zero-drop failover.
+- **Professor Guided Demo Mode**: One-click 5-stage automated benchmark comparing heuristics, ML inference, adaptive switching, and fault recovery.
+- **Preservation of Outcome C**: Strictly empirical metrics — zero fabrication, transparent routing overhead reporting.
+
+### Running Phase 16
+
+```bash
+# 1. Start the Demonstration Console Server (auto-boots local cluster if needed)
+python -m demo.server --port 8080 --lb-url http://127.0.0.1:8000
+
+# 2. Open Web Browser
+# Open http://127.0.0.1:8080
+
+# 3. Run Phase 16 Validation Suite (32 tests)
+python -m unittest tests/test_phase16_demo.py
+
+# 4. Run Full Project Regression Suite (177 tests)
+python -m unittest discover -s tests -p "test_*.py"
+```
+Detailed documentation and architecture specifications are available in [docs/phase16_demo.md](docs/phase16_demo.md) and [docs/phase16_interface_contract.md](docs/phase16_interface_contract.md).
+
+
 
 

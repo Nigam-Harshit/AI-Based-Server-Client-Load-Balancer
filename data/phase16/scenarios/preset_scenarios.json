@@ -1,0 +1,59 @@
+[
+  {
+    "id": "steady_state",
+    "name": "Steady State (Baseline)",
+    "description": "Uniform moderate arrival rate testing steady baseline response time and connection balancing.",
+    "num_requests": 30,
+    "concurrency": 5,
+    "request_rate": 10.0,
+    "endpoint": "/process",
+    "request_duration": 0.03,
+    "priority_profile": "equal"
+  },
+  {
+    "id": "burst_traffic",
+    "name": "Burst Traffic Spikes",
+    "description": "Sharp sudden bursts of requests testing surge handling, queue management, and model reactivity.",
+    "num_requests": 50,
+    "concurrency": 10,
+    "request_rate": null,
+    "burst_size": 10,
+    "burst_interval": 0.25,
+    "endpoint": "/process",
+    "request_duration": 0.04,
+    "priority_profile": "equal"
+  },
+  {
+    "id": "stress_overload",
+    "name": "Stress / High Load Overload",
+    "description": "High concurrency and heavy processing load testing saturation, thread starvation, and adaptive tree-model activation.",
+    "num_requests": 60,
+    "concurrency": 12,
+    "request_rate": null,
+    "endpoint": "/process",
+    "request_duration": 0.06,
+    "priority_profile": "equal"
+  },
+  {
+    "id": "mixed_priority",
+    "name": "Mixed Priority & Deadlines",
+    "description": "Heterogeneous request stream with LOW, NORMAL, HIGH, and CRITICAL requests under tight deadline envelopes.",
+    "num_requests": 40,
+    "concurrency": 6,
+    "request_rate": null,
+    "endpoint": "/process",
+    "request_duration": 0.03,
+    "priority_profile": "mixed"
+  },
+  {
+    "id": "high_contention_conflict",
+    "name": "High Contention & Priority Conflict",
+    "description": "Interleaved bursts with tight deadlines, testing EDF (Earliest Deadline First) and priority queue scheduling.",
+    "num_requests": 40,
+    "concurrency": 8,
+    "request_rate": null,
+    "endpoint": "/process",
+    "request_duration": 0.04,
+    "priority_profile": "conflict"
+  }
+]

@@ -178,9 +178,10 @@ def get_scenario(
 class WorkloadGenerator:
     """Executes controlled, reproducible HTTP traffic against targets."""
 
-    def __init__(self, config: WorkloadConfig):
+    def __init__(self, config: WorkloadConfig, stop_event: Optional[threading.Event] = None):
         config.validate()
         self.config = config
+        self.stop_event = stop_event
         self._rng = random.Random(config.seed)
         self._records: List[RequestRecord] = []
         self._lock = threading.Lock()
@@ -209,6 +210,22 @@ class WorkloadGenerator:
 
     def _execute_single_request(self, request_id: int, url: str, req_type: str, req_duration: float) -> RequestRecord:
         """Execute a single HTTP request and record its latency and metadata."""
+        if self.stop_event and self.stop_event.is_set():
+            t_now = time.time()
+            return RequestRecord(
+                request_id=request_id,
+                timestamp=t_now,
+                target=url,
+                request_type=req_type,
+                request_duration=req_duration,
+                request_start=time.perf_counter(),
+                request_end=time.perf_counter(),
+                success=False,
+                status_code=499,
+                response_time=0.0,
+                error="Cancelled by user stop_event",
+            )
+
         start_perf = time.perf_counter()
         timestamp = time.time()
         success = False
@@ -349,6 +366,8 @@ class WorkloadGenerator:
             if burst_size:
                 # Burst dispatch mode
                 for i in range(0, total_requests, burst_size):
+                    if self.stop_event and self.stop_event.is_set():
+                        break
                     batch = request_items[i : i + burst_size]
                     for idx, (url, rtype, rduration) in enumerate(batch, start=i + 1):
                         futures.append(
@@ -360,6 +379,8 @@ class WorkloadGenerator:
                 # Rate-controlled dispatch mode
                 delay = 1.0 / rate
                 for req_id, (url, rtype, rduration) in enumerate(request_items, start=1):
+                    if self.stop_event and self.stop_event.is_set():
+                        break
                     futures.append(
                         executor.submit(self._execute_single_request, req_id, url, rtype, rduration)
                     )
@@ -367,6 +388,8 @@ class WorkloadGenerator:
             else:
                 # Concurrent unthrottled dispatch
                 for req_id, (url, rtype, rduration) in enumerate(request_items, start=1):
+                    if self.stop_event and self.stop_event.is_set():
+                        break
                     futures.append(
                         executor.submit(self._execute_single_request, req_id, url, rtype, rduration)
                     )

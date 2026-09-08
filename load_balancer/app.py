@@ -67,6 +67,16 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
             })
             return
 
+        # Direct algorithm inspection endpoint
+        if self.path == "/lb-algorithm":
+            router = getattr(self.server, "router", None)
+            self._send_json(200, {
+                "algorithm": getattr(self.server, "algorithm", "unknown"),
+                "backends": getattr(self.server, "backends", []),
+                "router_class": router.__class__.__name__ if router else None,
+            })
+            return
+
         router: BaseRouter = getattr(self.server, "router", None)
         algorithm_name: str = getattr(self.server, "algorithm", "unknown")
         backend_timeout: float = getattr(self.server, "backend_timeout", 2.0)
@@ -320,6 +330,50 @@ class LoadBalancerRequestHandler(BaseHTTPRequestHandler):
                                 request_start=start_time,
                                 request_end=end_time,
                             )
+
+    def do_POST(self):
+        # Dynamic algorithm switching endpoint
+        if self.path == "/lb-algorithm":
+            content_length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(content_length) if content_length > 0 else b"{}"
+            try:
+                payload = json.loads(body.decode("utf-8"))
+            except Exception as e:
+                self._send_json(400, {"error": f"Invalid JSON payload: {e}"})
+                return
+
+            new_algorithm = payload.get("algorithm")
+            if not new_algorithm:
+                self._send_json(400, {"error": "Missing 'algorithm' in payload"})
+                return
+
+            model_path = payload.get("model_path")
+            adaptive_strategy = payload.get("adaptive_strategy", "policy")
+
+            try:
+                collector = getattr(self.server, "collector", None)
+                backends = getattr(self.server, "backends", [])
+                new_router = get_router(
+                    new_algorithm,
+                    backends,
+                    collector=collector,
+                    model_path=model_path,
+                    adaptive_strategy=adaptive_strategy,
+                )
+                self.server.router = new_router
+                self.server.algorithm = new_algorithm
+                self._send_json(200, {
+                    "status": "ok",
+                    "algorithm": new_algorithm,
+                    "router_class": new_router.__class__.__name__,
+                    "model_path": model_path,
+                    "adaptive_strategy": adaptive_strategy,
+                })
+            except Exception as e:
+                self._send_json(400, {"error": f"Failed to switch algorithm: {e}"})
+            return
+
+        self._send_json(404, {"error": "Not Found"})
 
 
 def create_load_balancer(

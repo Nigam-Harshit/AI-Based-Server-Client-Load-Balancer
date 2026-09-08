@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Load Balancer — Observability & Control Console</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="dark-theme">
+  <!-- Top Navigation / Header -->
+  <header class="top-header">
+    <div class="header-left">
+      <div class="brand-logo">
+        <span class="logo-icon">⚖️</span>
+        <div class="brand-text">
+          <h1>AI-Based Server-Client Load Balancer</h1>
+          <span class="badge phase-badge">Phase 16 Demonstration Console</span>
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="status-indicator">
+        <span class="status-dot" id="cluster-status-dot"></span>
+        <span class="status-label" id="cluster-status-label">Cluster Checking...</span>
+      </div>
+      <div class="active-algo-pill">
+        <span class="pill-label">Active Algorithm:</span>
+        <span class="pill-value" id="header-active-algo">round_robin</span>
+      </div>
+      <button class="btn btn-secondary btn-sm" id="btn-export-json">Export JSON</button>
+      <button class="btn btn-secondary btn-sm" id="btn-export-csv">Export CSV</button>
+    </div>
+  </header>
+
+  <!-- Outcome C Research Banner -->
+  <aside class="research-banner">
+    <div class="banner-badge">Empirical Baseline (Phase 14)</div>
+    <div class="banner-text">
+      <strong>Outcome C (Heuristic Dominance):</strong> Conventional heuristics achieve lowest end-to-end latency due to zero polling overhead, while ML models demonstrate preemptive imbalance avoidance under sustained stress. Zero fabricated metrics — strictly measured empirical execution.
+    </div>
+  </aside>
+
+  <!-- Main Grid Layout -->
+  <main class="dashboard-grid">
+    <!-- Left Column: Controls & Configuration -->
+    <section class="control-panel">
+      <!-- Section 1: Algorithm Switching -->
+      <div class="card control-card">
+        <div class="card-header">
+          <h3>Routing Algorithm</h3>
+          <span class="badge" id="algo-type-badge">Traditional</span>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="algo-select">Select Strategy:</label>
+            <select id="algo-select" class="form-control">
+              <optgroup label="Traditional Baselines">
+                <option value="round_robin">Round Robin (Cyclic)</option>
+                <option value="least_connections">Least Connections (Reactive)</option>
+                <option value="ip_hash">IP Hash (Deterministic MD5)</option>
+              </optgroup>
+              <optgroup label="Machine Learning Models (15-Feature Engine)">
+                <option value="logistic_regression">Logistic Regression</option>
+                <option value="random_forest">Random Forest</option>
+                <option value="decision_tree">Decision Tree</option>
+                <option value="svm">Support Vector Machine (SVM)</option>
+                <option value="xgboost">XGBoost Classifier</option>
+              </optgroup>
+              <optgroup label="Adaptive Context-Aware Routing">
+                <option value="adaptive_policy">Adaptive Policy (Regime-Driven)</option>
+                <option value="adaptive_meta">Adaptive Meta-Selector (Meta-Model)</option>
+              </optgroup>
+              <optgroup label="Priority & Deadline Aware">
+                <option value="priority_ml">Priority ML Router (EDF / Urgency)</option>
+                <option value="priority_adaptive">Priority Adaptive Router</option>
+              </optgroup>
+            </select>
+          </div>
+          <button id="btn-apply-algo" class="btn btn-primary btn-block">Apply Algorithm</button>
+          <div id="algo-status-msg" class="msg-box"></div>
+        </div>
+      </div>
+
+      <!-- Section 2: Workload Generator -->
+      <div class="card control-card">
+        <div class="card-header">
+          <h3>Workload Generator</h3>
+          <span class="status-pill" id="workload-status-pill">IDLE</span>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="scenario-select">Preset Scenario:</label>
+            <select id="scenario-select" class="form-control">
+              <option value="steady_state">Steady State (30 reqs, c=5)</option>
+              <option value="burst_traffic">Burst Spikes (50 reqs, burst=10)</option>
+              <option value="stress_overload">Stress Overload (60 reqs, c=12)</option>
+              <option value="mixed_priority">Mixed Priority (40 reqs, tight deadlines)</option>
+              <option value="high_contention_conflict">Priority Conflict & Contention</option>
+              <option value="custom">Custom Parameters...</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="inp-num-requests">Requests:</label>
+              <input type="number" id="inp-num-requests" class="form-control" value="30" min="1" max="500">
+            </div>
+            <div class="form-group col">
+              <label for="inp-concurrency">Concurrency:</label>
+              <input type="number" id="inp-concurrency" class="form-control" value="5" min="1" max="50">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="inp-duration">Duration (s):</label>
+              <input type="number" id="inp-duration" class="form-control" value="0.03" step="0.01" min="0">
+            </div>
+            <div class="form-group col">
+              <label for="inp-priority-profile">Priority Profile:</label>
+              <select id="inp-priority-profile" class="form-control">
+                <option value="equal">Equal (Normal)</option>
+                <option value="mixed">Mixed (Low/Norm/High/Crit)</option>
+                <option value="tight_deadlines">Tight Deadlines</option>
+                <option value="conflict">Priority Conflict</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="btn-group-row">
+            <button id="btn-start-workload" class="btn btn-success btn-block">▶ Run Workload</button>
+            <button id="btn-stop-workload" class="btn btn-danger btn-block" disabled>⏹ Stop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Fault Injection -->
+      <div class="card control-card">
+        <div class="card-header">
+          <h3>Fault Injection & Chaos</h3>
+          <span class="badge badge-warning">Live Control</span>
+        </div>
+        <div class="card-body">
+          <p class="section-desc">Toggle individual backend availability to trigger real-time failover and verify resilience.</p>
+          <div class="fault-nodes-list" id="fault-nodes-container">
+            <!-- Rendered by app.js -->
+            <div class="node-toggle-row">
+              <span class="node-name">Backend 1 (8001)</span>
+              <button class="btn btn-sm btn-outline-danger" data-backend="http://127.0.0.1:8001">Simulate Crash</button>
+            </div>
+            <div class="node-toggle-row">
+              <span class="node-name">Backend 2 (8002)</span>
+              <button class="btn btn-sm btn-outline-danger" data-backend="http://127.0.0.1:8002">Simulate Crash</button>
+            </div>
+            <div class="node-toggle-row">
+              <span class="node-name">Backend 3 (8003)</span>
+              <button class="btn btn-sm btn-outline-danger" data-backend="http://127.0.0.1:8003">Simulate Crash</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Professor Guided Demo Mode -->
+      <div class="card control-card">
+        <div class="card-header">
+          <h3>Professor Demo Mode</h3>
+          <span class="badge badge-accent">1-Click Tour</span>
+        </div>
+        <div class="card-body">
+          <p class="section-desc">Automated 5-stage research demonstration comparing heuristics, ML inference, adaptive switching, and fault recovery.</p>
+          <button id="btn-run-guided-demo" class="btn btn-accent btn-block">🚀 Launch 5-Stage Demo Tour</button>
+          <div id="guided-demo-progress-box" class="demo-progress-box" style="display: none;">
+            <div class="demo-stage-title" id="demo-stage-title">Stage 1 of 5</div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar" id="demo-progress-bar" style="width: 20%;"></div>
+            </div>
+            <p class="demo-stage-desc" id="demo-stage-desc">Preparing baseline...</p>
+            <div class="demo-logs" id="demo-logs-console"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Center & Right Columns: Topology, Charts, Live Stream -->
+    <section class="observability-panel">
+      <!-- Cluster Topology Diagram -->
+      <div class="card topology-card">
+        <div class="card-header">
+          <h3>Live Cluster Topology & Health</h3>
+          <button id="btn-refresh-cluster" class="btn btn-secondary btn-sm">↻ Refresh Status</button>
+        </div>
+        <div class="card-body">
+          <div class="topology-container">
+            <div class="topology-node client-node">
+              <div class="node-icon">💻</div>
+              <div class="node-title">Traffic Generator</div>
+              <div class="node-sub" id="topo-traffic-rate">0.0 req/s</div>
+            </div>
+
+            <div class="topology-flow-line">
+              <div class="flow-pulse"></div>
+            </div>
+
+            <div class="topology-node lb-node">
+              <div class="node-icon">⚖️</div>
+              <div class="node-title">Load Balancer (8000)</div>
+              <div class="node-sub" id="topo-lb-algo">round_robin</div>
+              <div class="node-meta" id="topo-lb-overhead">Overhead: ~0.05ms</div>
+            </div>
+
+            <div class="topology-fork-lines">
+              <div class="fork-line fork-1"></div>
+              <div class="fork-line fork-2"></div>
+              <div class="fork-line fork-3"></div>
+            </div>
+
+            <div class="topology-backends-group" id="topo-backends-container">
+              <!-- Rendered dynamically by app.js -->
+              <div class="topology-node backend-node" id="topo-backend-8001">
+                <div class="node-icon">🖥️</div>
+                <div class="node-title">Node 8001</div>
+                <div class="node-status-badge healthy">HEALTHY</div>
+                <div class="node-stats">CPU: 0% | Conns: 0</div>
+              </div>
+              <div class="topology-node backend-node" id="topo-backend-8002">
+                <div class="node-icon">🖥️</div>
+                <div class="node-title">Node 8002</div>
+                <div class="node-status-badge healthy">HEALTHY</div>
+                <div class="node-stats">CPU: 0% | Conns: 0</div>
+              </div>
+              <div class="topology-node backend-node" id="topo-backend-8003">
+                <div class="node-icon">🖥️</div>
+                <div class="node-title">Node 8003</div>
+                <div class="node-status-badge healthy">HEALTHY</div>
+                <div class="node-stats">CPU: 0% | Conns: 0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Requests</div>
+          <div class="kpi-value" id="kpi-total-requests">0</div>
+          <div class="kpi-sub" id="kpi-success-sub">0 succ / 0 fail</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Throughput</div>
+          <div class="kpi-value" id="kpi-throughput">0.0</div>
+          <div class="kpi-sub">req / sec</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Avg Response Time</div>
+          <div class="kpi-value" id="kpi-avg-latency">0.00</div>
+          <div class="kpi-sub">ms (end-to-end)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">P95 Response Time</div>
+          <div class="kpi-value" id="kpi-p95-latency">0.00</div>
+          <div class="kpi-sub">ms (95th percentile)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Avg Routing Overhead</div>
+          <div class="kpi-value highlight-overhead" id="kpi-routing-overhead">0.000</div>
+          <div class="kpi-sub">ms (decision latency)</div>
+        </div>
+      </div>
+
+      <!-- Real-Time Charts Grid -->
+      <div class="charts-grid">
+        <!-- Backend Request Distribution Chart -->
+        <div class="card chart-card">
+          <div class="card-header">
+            <h3>Backend Traffic Distribution</h3>
+            <span class="card-hint">Balance Quality</span>
+          </div>
+          <div class="card-body">
+            <div class="bar-chart-container" id="chart-backend-distribution">
+              <!-- Rendered by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Adaptive Model Selection Breakdown -->
+        <div class="card chart-card">
+          <div class="card-header">
+            <h3>Adaptive Model Selection Breakdown</h3>
+            <span class="card-hint" id="adaptive-hint">Context-Aware</span>
+          </div>
+          <div class="card-body">
+            <div class="adaptive-models-container" id="chart-adaptive-distribution">
+              <div class="empty-state-text">Active when using Adaptive Policy or Meta-Selector</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Request Stream Table -->
+      <div class="card stream-card">
+        <div class="card-header">
+          <h3>Live Request Stream & ML Telemetry</h3>
+          <div class="table-controls">
+            <button id="btn-clear-stream" class="btn btn-secondary btn-sm">Clear Stream</button>
+          </div>
+        </div>
+        <div class="card-body table-responsive">
+          <table class="stream-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Priority</th>
+                <th>Target Backend</th>
+                <th>Status</th>
+                <th>End-to-End Latency</th>
+                <th>Routing Overhead</th>
+                <th>ML Prediction / Fallback</th>
+                <th>Selected Model</th>
+              </tr>
+            </thead>
+            <tbody id="stream-table-body">
+              <tr>
+                <td colspan="8" class="text-center text-muted">Awaiting traffic... Launch a workload to observe live routing decisions.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <span>AI-Based Server-Client Load Balancer &copy; 2026</span>
+      <span>Empirically Validated via Controlled Experimentation (Phases 1–16)</span>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

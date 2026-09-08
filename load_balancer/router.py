@@ -363,8 +363,29 @@ def get_router(
             strategy=adaptive_strategy,
         )
 
+    if normalized in ("adaptive_policy", "policy_adaptive"):
+        from ml.adaptive_selector import AdaptiveRouter
+        return AdaptiveRouter(
+            backends=backends,
+            collector=collector,
+            strategy="policy",
+        )
+
+    if normalized in ("adaptive_meta", "meta_adaptive"):
+        from ml.adaptive_selector import AdaptiveRouter
+        return AdaptiveRouter(
+            backends=backends,
+            collector=collector,
+            strategy="meta",
+        )
+
+    ml_models = ["logistic_regression", "random_forest", "decision_tree", "svm", "xgboost"]
+    if normalized in ml_models:
+        resolved_path = model_path or f"models/{normalized}.joblib"
+        return MLRouter(backends=backends, collector=collector, model_path=resolved_path)
+
     if normalized not in ROUTER_REGISTRY:
-        supported = list(ROUTER_REGISTRY.keys()) + ["adaptive", "priority_ml", "priority_adaptive"]
+        supported = list(ROUTER_REGISTRY.keys()) + ["adaptive", "priority_ml", "priority_adaptive", "adaptive_policy", "adaptive_meta"] + ml_models
         raise ValueError(f"Unknown algorithm '{algorithm}'. Supported: {supported}")
     router_cls = ROUTER_REGISTRY[normalized]
     if normalized == "ml":
