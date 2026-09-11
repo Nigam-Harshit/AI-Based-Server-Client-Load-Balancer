@@ -391,7 +391,7 @@ def create_load_balancer(
     resolved_algorithm = algorithm or os.getenv("ROUTING_ALGORITHM", "round_robin")
     resolved_timeout = backend_timeout if backend_timeout is not None else float(os.getenv("BACKEND_TIMEOUT", "2.0"))
     resolved_model_path = model_path or os.getenv("MODEL_PATH", None)
-    resolved_adaptive = adaptive_strategy or os.getenv("ADAPTIVE_STRATEGY", "policy")
+    resolved_adaptive = adaptive_strategy or os.getenv("ADAPTIVE_STRATEGY", "meta")
 
     if backends is not None:
         backends_list = list(backends)

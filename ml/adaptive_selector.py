@@ -17,6 +17,8 @@ from typing import Dict, List, Optional, Tuple, Any
 import joblib
 import numpy as np
 import pandas as pd
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.pipeline import Pipeline
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 
@@ -177,10 +179,58 @@ class EvidenceBasedPolicySelector:
         return selected, confidence, regime
 
 
+class ClusterFeatureTransformer(BaseEstimator, TransformerMixin):
+    """Transforms raw 15-feature telemetry into cluster-level load and regime indicators.
+
+    Mitigates single-node cold-start / unrouted 0.0ms bias by computing cluster-wide
+    load metrics: total connections, max CPU, mean active response time, and node load spread.
+    """
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        if isinstance(X, pd.DataFrame):
+            X_df = X.copy()
+        else:
+            X_df = pd.DataFrame(X, columns=ACTIVE_PRE_ROUTING_FEATURES)
+
+        for feat in ACTIVE_PRE_ROUTING_FEATURES:
+            if feat not in X_df.columns:
+                X_df[feat] = 0.0
+
+        out = X_df.copy()
+        c1 = out["server_1_connections"].astype(float)
+        c2 = out["server_2_connections"].astype(float)
+        c3 = out["server_3_connections"].astype(float)
+        u1 = out["server_1_cpu"].astype(float)
+        u2 = out["server_2_cpu"].astype(float)
+        u3 = out["server_3_cpu"].astype(float)
+        r1 = out["server_1_response_time"].astype(float)
+        r2 = out["server_2_response_time"].astype(float)
+        r3 = out["server_3_response_time"].astype(float)
+
+        out["cluster_total_connections"] = c1 + c2 + c3
+        out["cluster_max_cpu"] = np.maximum(u1, np.maximum(u2, u3))
+        out["cluster_mean_cpu"] = (u1 + u2 + u3) / 3.0
+        out["cluster_cpu_spread"] = out["cluster_max_cpu"] - np.minimum(u1, np.minimum(u2, u3))
+
+        out["cluster_max_response_time"] = np.maximum(r1, np.maximum(r2, r3))
+        active_nodes = (r1 > 0).astype(int) + (r2 > 0).astype(int) + (r3 > 0).astype(int)
+        out["cluster_active_nodes"] = active_nodes
+
+        sum_r = r1 + r2 + r3
+        safe_active = np.maximum(1, active_nodes)
+        out["cluster_mean_active_response_time"] = np.where(active_nodes > 0, sum_r / safe_active, 0.0)
+
+        return out
+
+
 class LearnedMetaSelector:
     """Strategy B: Learned Meta-Selector.
 
     A lightweight machine-learning classifier (DecisionTree or LogisticRegression)
+    A lightweight machine-learning classifier (DecisionTree or Pipeline)
     trained on pre-routing context vectors to predict which candidate model
     achieves the highest routing performance.
     """
@@ -198,6 +248,18 @@ class LearnedMetaSelector:
             min_samples_split=5,
             random_state=42,
         )
+        self.meta_model = meta_model or Pipeline([
+            ("cluster_features", ClusterFeatureTransformer()),
+            (
+                "tree",
+                DecisionTreeClassifier(
+                    max_depth=5,
+                    min_samples_split=10,
+                    min_samples_leaf=5,
+                    random_state=42,
+                ),
+            ),
+        ])
         self.is_fitted = False
 
     def fit(self, X_context: pd.DataFrame, y_best_model: pd.Series) -> "LearnedMetaSelector":

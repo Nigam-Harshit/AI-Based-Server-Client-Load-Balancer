@@ -109,7 +109,7 @@ SCENARIO_TEMPLATES: Dict[str, Dict[str, Any]] = {
         "request_duration": 0.015,
         "priority_profile": "equal",
     },
-    "dynamic_moderate": {
+    "moderate_load": {
         "num_requests": 40,
         "concurrency": 5,
         "request_rate": None,

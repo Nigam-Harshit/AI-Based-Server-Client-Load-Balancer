@@ -186,7 +186,7 @@ class TestPriorityLiveIntegration(unittest.TestCase):
         cls.lb = create_load_balancer(
             host="127.0.0.1",
             port=cls.lb_port,
-            algorithm="priority_ml",
+            algorithm="priority_adaptive",
             backends=cls.backends,
             model_path="models/logistic_regression.joblib",
         )

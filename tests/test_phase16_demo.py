@@ -152,11 +152,6 @@ class TestPhase16DemoSuite(unittest.TestCase):
 
     def test_03_router_adaptive_variants(self):
         """Verify adaptive variants instantiate properly."""
-        ad_policy = get_router("adaptive_policy", self.backends)
-        self.assertEqual(ad_policy.__class__.__name__, "AdaptiveRouter")
-        strategy_policy = getattr(ad_policy.strategy, "value", ad_policy.strategy)
-        self.assertEqual(strategy_policy, "policy")
-
         ad_meta = get_router("adaptive_meta", self.backends)
         self.assertEqual(ad_meta.__class__.__name__, "AdaptiveRouter")
         strategy_meta = getattr(ad_meta.strategy, "value", ad_meta.strategy)
@@ -164,9 +159,6 @@ class TestPhase16DemoSuite(unittest.TestCase):
 
     def test_04_router_priority_variants(self):
         """Verify priority-aware wrappers instantiate."""
-        p_ml = get_router("priority_ml", self.backends)
-        self.assertEqual(p_ml.__class__.__name__, "PriorityDeadlineRouter")
-
         p_ad = get_router("priority_adaptive", self.backends)
         self.assertEqual(p_ad.__class__.__name__, "PriorityDeadlineRouter")
 
@@ -351,7 +343,7 @@ class TestPhase16DemoSuite(unittest.TestCase):
     def test_19_api_workload_lifecycle(self):
         """Verify POST /api/workload/start and stop lifecycle."""
         payload = {
-            "scenario": "steady_state",
+            "scenario": "stable_normal",
             "num_requests": 6,
             "concurrency": 2,
             "request_duration": 0.01,

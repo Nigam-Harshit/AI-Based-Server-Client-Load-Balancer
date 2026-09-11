@@ -139,6 +139,7 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
                 return
             model_path = body.get("model_path")
             adaptive_strategy = body.get("adaptive_strategy", "policy")
+            adaptive_strategy = body.get("adaptive_strategy", "meta")
             try:
                 res = self.cluster_mgr.switch_algorithm(algo, model_path=model_path, adaptive_strategy=adaptive_strategy)
                 self._send_json(200, res)

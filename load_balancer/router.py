@@ -323,11 +323,23 @@ class MLRouter(BaseRouter):
             self.fallback_router.release(backend, success=success)
 
 
+SUPPORTED_ALGORITHMS = [
+    "round_robin",
+    "least_connections",
+    "ip_hash",
+    "logistic_regression",
+    "random_forest",
+    "decision_tree",
+    "svm",
+    "xgboost",
+    "adaptive_meta",
+    "priority_adaptive",
+]
+
 ROUTER_REGISTRY = {
     "round_robin": RoundRobinRouter,
     "least_connections": LeastConnectionsRouter,
     "ip_hash": IPHashRouter,
-    "ml": MLRouter,
 }
 
 
@@ -338,22 +350,18 @@ def get_router(
     model_path: Optional[str] = None,
     adaptive_strategy: str = "meta",
 ) -> BaseRouter:
-    """Factory to instantiate a router by name."""
+    """Factory to instantiate a router by name. Strictly supports the 10 canonical strategies."""
     normalized = algorithm.lower().replace("-", "_").strip()
-    if normalized == "priority_ml" or normalized == "ml_priority":
-        ml_base = MLRouter(backends=backends, collector=collector, model_path=model_path)
-        from load_balancer.priority import PriorityDeadlineRouter
-        return PriorityDeadlineRouter(base_router=ml_base, collector=collector, backends=backends)
 
-    if normalized == "priority_adaptive" or normalized == "adaptive_priority":
-        from ml.adaptive_selector import AdaptiveRouter
-        adaptive_base = AdaptiveRouter(
-            backends=backends,
-            collector=collector,
-            strategy=adaptive_strategy,
-        )
-        from load_balancer.priority import PriorityDeadlineRouter
-        return PriorityDeadlineRouter(base_router=adaptive_base, collector=collector, backends=backends)
+    if normalized == "round_robin":
+        return RoundRobinRouter(backends=backends)
+    if normalized == "least_connections":
+        return LeastConnectionsRouter(backends=backends)
+    if normalized == "ip_hash":
+        return IPHashRouter(backends=backends)
+
+    if normalized == "ml":
+        return MLRouter(backends=backends, collector=collector, model_path=model_path)
 
     if normalized == "adaptive":
         from ml.adaptive_selector import AdaptiveRouter
@@ -363,15 +371,12 @@ def get_router(
             strategy=adaptive_strategy,
         )
 
-    if normalized in ("adaptive_policy", "policy_adaptive"):
-        from ml.adaptive_selector import AdaptiveRouter
-        return AdaptiveRouter(
-            backends=backends,
-            collector=collector,
-            strategy="policy",
-        )
+    ml_models = ["logistic_regression", "random_forest", "decision_tree", "svm", "xgboost"]
+    if normalized in ml_models:
+        resolved_path = model_path or f"models/{normalized}.joblib"
+        return MLRouter(backends=backends, collector=collector, model_path=resolved_path)
 
-    if normalized in ("adaptive_meta", "meta_adaptive"):
+    if normalized == "adaptive_meta":
         from ml.adaptive_selector import AdaptiveRouter
         return AdaptiveRouter(
             backends=backends,
@@ -379,18 +384,17 @@ def get_router(
             strategy="meta",
         )
 
-    ml_models = ["logistic_regression", "random_forest", "decision_tree", "svm", "xgboost"]
-    if normalized in ml_models:
-        resolved_path = model_path or f"models/{normalized}.joblib"
-        return MLRouter(backends=backends, collector=collector, model_path=resolved_path)
+    if normalized == "priority_adaptive":
+        from ml.adaptive_selector import AdaptiveRouter
+        from load_balancer.priority import PriorityDeadlineRouter
+        adaptive_base = AdaptiveRouter(
+            backends=backends,
+            collector=collector,
+            strategy="meta",
+        )
+        return PriorityDeadlineRouter(base_router=adaptive_base, collector=collector, backends=backends)
 
-    if normalized not in ROUTER_REGISTRY:
-        supported = list(ROUTER_REGISTRY.keys()) + ["adaptive", "priority_ml", "priority_adaptive", "adaptive_policy", "adaptive_meta"] + ml_models
-        raise ValueError(f"Unknown algorithm '{algorithm}'. Supported: {supported}")
-    router_cls = ROUTER_REGISTRY[normalized]
-    if normalized == "ml":
-        return router_cls(backends=backends, collector=collector, model_path=model_path)
-    return router_cls(backends=backends)
+    raise ValueError(f"Unknown algorithm '{algorithm}'. Supported: {SUPPORTED_ALGORITHMS}")
 
 
 

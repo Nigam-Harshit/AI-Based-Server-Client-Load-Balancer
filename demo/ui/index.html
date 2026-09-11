@@ -87,14 +87,17 @@
           <div class="form-group">
             <label for="scenario-select">Preset Scenario:</label>
             <select id="scenario-select" class="form-control">
-              <option value="stable_normal">Stable Normal (30 reqs, c=2, 0.015s)</option>
-              <option value="dynamic_moderate">Dynamic Moderate (40 reqs, c=5, 0.035s)</option>
-              <option value="burst_spike">Burst Spikes (50 reqs, c=10, 0.045s)</option>
-              <option value="sustained_stress">Sustained Stress (60 reqs, c=14, 0.080s)</option>
-              <option value="priority_conflict">Priority Conflict (45 reqs, c=8, 0.040s)</option>
-              <option value="adaptive_multiphase">Adaptive Multi-Phase (75 reqs, 5 Stages)</option>
+              <option value="stable_normal">Stable Normal</option>
+              <option value="moderate_load">Moderate Load</option>
+              <option value="burst_spike">Burst Spike</option>
+              <option value="sustained_stress">Sustained Stress</option>
+              <option value="priority_conflict">Priority Conflict</option>
+              <option value="adaptive_multiphase">Adaptive Multi-Phase</option>
               <option value="custom">Custom Parameters...</option>
             </select>
+            <p id="scenario-description" class="scenario-help-text" style="font-size: 0.82rem; color: #94a3b8; margin-top: 6px; margin-bottom: 0;">
+              Low, steady traffic representing normal cluster operation.
+            </p>
           </div>
 
           <div class="form-row">
@@ -288,7 +291,14 @@
           </div>
           <div class="card-body">
             <div class="adaptive-models-container" id="chart-adaptive-distribution">
-              <div class="empty-state-text">Active when using Adaptive Policy or Meta-Selector</div>
+              <div class="empty-state-text">Active when using Adaptive Meta-Selector or Priority Adaptive Router</div>
+            </div>
+            <!-- Dynamic Explainability Panel -->
+            <div id="adaptive-explanation-panel" class="adaptive-explain-box" style="display: none; margin-top: 14px; padding: 12px; background: rgba(139, 92, 246, 0.08); border-left: 3px solid #8b5cf6; border-radius: 6px; font-size: 0.85rem;">
+              <div style="font-weight: 600; color: #f1f5f9; margin-bottom: 4px;" id="explain-scenario-label">Scenario Telemetry Analysis</div>
+              <div id="explain-regime-label" style="color: #cbd5e1; margin-bottom: 3px;"><strong>Observed Regime:</strong> <span id="explain-regime-val">—</span></div>
+              <div id="explain-model-label" style="color: #cbd5e1; margin-bottom: 3px;"><strong>Adaptive Model:</strong> <span id="explain-model-val">—</span></div>
+              <div id="explain-reason-label" style="color: #a5b4fc; font-style: italic;"><strong>Why:</strong> <span id="explain-reason-val">—</span></div>
             </div>
           </div>
         </div>

@@ -181,6 +181,18 @@ class ClusterManager:
                 except Exception as e:
                     return {"backend": backend_url, "port": port, "status": "error", "error": str(e)}
 
+    def shutdown_local_servers(self) -> None:
+        """Shutdown all locally started backend servers and load balancer."""
+        with self._lock:
+            for port, srv in list(self._local_servers.items()):
+                try:
+                    srv.shutdown()
+                    srv.server_close()
+                except Exception as e:
+                    logger.debug("Error stopping server %d: %s", port, e)
+            self._local_servers.clear()
+            self._local_threads.clear()
+
     # ----------------------------------------------------------------------
     # Cluster Telemetry & LB Status
     # ----------------------------------------------------------------------
@@ -281,7 +293,7 @@ class ClusterManager:
         self,
         algorithm: str,
         model_path: Optional[str] = None,
-        adaptive_strategy: str = "policy",
+        adaptive_strategy: str = "meta",
     ) -> Dict[str, Any]:
         """Post algorithm switch request to the Load Balancer."""
         payload = {
@@ -385,8 +397,33 @@ class ClusterManager:
                 "concurrency": config.concurrency,
             }
 
+    def _run_backend_stress(self, backend_url: str, duration: float, stop_event: threading.Event):
+        """Send continuous processing requests directly to one backend to create real load asymmetry."""
+        target = f"{backend_url.rstrip('/')}/process?duration={duration}"
+        while not stop_event.is_set():
+            try:
+                req = urllib.request.Request(target, headers={"User-Agent": "BackendStressWorker/1.0"})
+                with urllib.request.urlopen(req, timeout=1.5) as resp:
+                    resp.read()
+            except Exception:
+                pass
+            time.sleep(0.005)
+
     def _run_workload_worker(self, generator: WorkloadGenerator, config: WorkloadConfig):
         """Worker thread executing workload and collecting live metrics."""
+        stress_stop = None
+        stress_thread = None
+        if config.scenario_name == "backend_imbalance" and self.backends:
+            stress_stop = threading.Event()
+            stress_thread = threading.Thread(
+                target=self._run_backend_stress,
+                args=(self.backends[0], 0.08, stress_stop),
+                daemon=True,
+                name="BackendImbalanceStressWorker",
+            )
+            stress_thread.start()
+            time.sleep(0.1)  # Allow backend 1 to register CPU load before client traffic begins
+
         try:
             records = generator.run()
             with self._lock:
@@ -422,6 +459,10 @@ class ClusterManager:
         except Exception as e:
             logger.error("Error running workload: %s", e, exc_info=True)
         finally:
+            if stress_stop is not None:
+                stress_stop.set()
+                if stress_thread is not None:
+                    stress_thread.join(timeout=1.0)
             with self._lock:
                 self._is_workload_running = False
 
@@ -632,35 +673,35 @@ class ClusterManager:
                 1,
                 "Stage 1: Conventional Baseline (Round Robin)",
                 "round_robin",
-                {"scenario": "steady_state", "num_requests": 25, "concurrency": 5},
+                {"scenario": "stable_normal", "num_requests": 25, "concurrency": 2, "request_duration": 0.015},
                 "Demonstrates classic deterministic cyclic distribution. Note near-zero routing overhead (~0.05ms) and balanced distribution.",
             ),
             (
                 2,
                 "Stage 2: Heuristic Load Awareness (Least Connections)",
                 "least_connections",
-                {"scenario": "burst_traffic", "num_requests": 30, "concurrency": 8, "burst_size": 10, "burst_interval": 0.2},
+                {"scenario": "burst_spike", "num_requests": 30, "concurrency": 8, "burst_size": 10, "burst_interval": 0.2, "request_duration": 0.04},
                 "Demonstrates dynamic reactive distribution based on active in-flight sockets under burst traffic.",
             ),
             (
                 3,
-                "Stage 3: ML Router (Random Forest / SVM Preemptive Routing)",
+                "Stage 3: ML Router (Random Forest Preemptive Routing)",
                 "random_forest",
-                {"scenario": "steady_state", "num_requests": 25, "concurrency": 5},
+                {"scenario": "stable_normal", "num_requests": 25, "concurrency": 5, "request_duration": 0.03},
                 "Demonstrates 15-feature inference engine predicting optimal server. Observe non-negative routing overhead (~1-3ms).",
             ),
             (
                 4,
-                "Stage 4: Context-Aware Adaptive Routing (Dynamic Selector)",
+                "Stage 4: Adaptive Meta-Selector (Dynamic Multi-Model Switching)",
                 "adaptive_meta",
-                {"scenario": "stress_overload", "num_requests": 35, "concurrency": 10, "request_duration": 0.05},
-                "Under high CPU/load stress, the adaptive router dynamically switches models (e.g. from SVM to Random Forest/Decision Tree).",
+                {"scenario": "sustained_stress", "num_requests": 35, "concurrency": 10, "request_duration": 0.06},
+                "Under high CPU/load stress, the adaptive router dynamically switches models based on real-time telemetry.",
             ),
             (
                 5,
                 "Stage 5: Fault Injection & Safety Fallback",
                 "round_robin",
-                {"scenario": "steady_state", "num_requests": 20, "concurrency": 4},
+                {"scenario": "stable_normal", "num_requests": 20, "concurrency": 4, "request_duration": 0.02},
                 "Demonstrates cluster resilience: Node 8002 is temporarily taken offline, router immediately detects failure and safely routes to healthy nodes.",
             ),
         ]

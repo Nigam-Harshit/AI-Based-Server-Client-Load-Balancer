@@ -174,6 +174,21 @@ Supported algorithm values:
 - `adaptive_meta`
 - `priority_ml`
 - `priority_adaptive`
+Supported algorithm values (Strictly 10 Strategies across 3 Categories):
+- **Traditional Baselines**:
+  - `round_robin` (Round Robin - Cyclic)
+  - `least_connections` (Least Connections - Reactive)
+  - `ip_hash` (IP Hash - Deterministic MD5)
+- **Machine Learning Models (15-Feature Engine)**:
+  - `logistic_regression` (Logistic Regression)
+  - `random_forest` (Random Forest)
+  - `decision_tree` (Decision Tree)
+  - `svm` (Support Vector Machine)
+  - `xgboost` (XGBoost Classifier)
+- **Adaptive Routing**:
+- **Adaptive & Priority Routing**:
+  - `adaptive_meta` (Adaptive Meta-Selector)
+  - `priority_adaptive` (Priority Adaptive Router)
 
 ---
 
@@ -217,19 +232,90 @@ For conference presentations and lab demonstrations, the console features a 1-Cl
 - **Stage 2: Heuristic Load Awareness (Least Connections)**: Demonstrates reactive socket-based load distribution under burst spikes.
 - **Stage 3: ML Router (Random Forest Preemptive Routing)**: Demonstrates 15-feature real-time inference routing to prevent future queue buildups.
 - **Stage 4: Context-Aware Adaptive Routing (Dynamic Selector)**: Evaluates dynamic model switching (e.g. SVM to Tree-based) under sustained high-concurrency overload.
+- **Stage 4: Adaptive Meta-Selector (Dynamic Multi-Model Switching)**: Evaluates dynamic model switching across candidate ML models based on real-time cluster telemetry.
 - **Stage 5: Fault Injection & Safety Fallback**: Automatically disables Backend 8002 during traffic, proves instant zero-drop failover, and restores the node cleanly.
 
 ---
 
 ## 12. Preset Workload Scenarios & Custom Traffic Profiles
+## 12. Canonical Preset Workload Scenarios & Technical Explanations
 
 Preset scenarios stored in `data/phase16/scenarios/preset_scenarios.json`:
+The demonstration environment provides **exactly six curated presets** stored in `data/phase16/scenarios/preset_scenarios.json`. These represent clearly distinguishable operating regimes for professor and evaluator presentations:
 
 1. **Steady State**: 30 requests, concurrency 5, duration 0.03s, rate 10 req/s.
 2. **Burst Traffic Spikes**: 50 requests, concurrency 10, bursts of 10 requests with 0.25s pause.
 3. **Stress Overload**: 60 requests, concurrency 12, duration 0.06s.
 4. **Mixed Priority & Deadlines**: 40 requests, mixed priority profile (LOW, NORMAL, HIGH, CRITICAL) with deadline slacks.
 5. **Priority Conflict & Contention**: 40 requests, tight deadline envelopes testing EDF scheduling.
+### Scenario 1 — Stable Normal
+### Scenario 1 — Stable Normal (`stable_normal`)
+- **Purpose**: Baseline operating regime representing a lightly loaded, stable cluster.
+- **Workload**: 30 requests, concurrency=2, request_rate=8.0 rps, duration=0.015s, priority=equal.
+- **Cluster State**: Low CPU (< 17%), minimal queue contention, symmetric low latency.
+- **Expected Adaptive Tendency**: `Logistic Regression`.
+- **Technical Rationale**: Phase 14 empirical benchmarking demonstrated that simpler linear models minimize routing overhead and maintain optimal fairness (Jain's index = 1.0) in un-congested regimes.
+- **Technical Rationale**: Phase 14 empirical benchmarking demonstrated that simpler linear models minimize routing overhead and maintain optimal fairness in un-congested regimes.
+- **Telemetry to Watch**: CPU utilization, active connection count, end-to-end latency, fairness.
+
+### Scenario 2 — Moderate Load
+### Scenario 2 — Moderate Load (`moderate_load`)
+- **Purpose**: Dynamic regime representing increasing concurrency and moderate multi-node traffic.
+- **Workload**: 40 requests, concurrency=5, duration=0.035s, priority=equal.
+- **Cluster State**: Concurrency within moderate operating envelope (max latency <= 53.8 ms), rising connection activity.
+- **Expected Adaptive Tendency**: `SVM`.
+- **Technical Rationale**: Phase 14 empirical results showed SVM performing strongly under moderate, balanced dynamic load where decision boundaries separate lightly loaded nodes from emerging hot spots.
+- **Cluster State**: Concurrency within moderate operating envelope, rising connection activity.
+- **Expected Adaptive Tendency**: `Decision Tree`.
+- **Technical Rationale**: Decision tree splits provide fast, accurate separation between lightly loaded nodes and emerging hot spots.
+- **Telemetry to Watch**: Active connection distribution, response time, CPU utilization.
+
+### Scenario 3 — Burst Spike
+### Scenario 3 — Burst Spike (`burst_spike`)
+- **Purpose**: Surge regime representing a sudden spike in request concurrency and transient queuing.
+- **Workload**: 50 requests, concurrency=10, burst_size=15, burst_interval=0.20s, duration=0.045s, priority=equal.
+- **Cluster State**: Short high-intensity request burst creating temporary socket backlog.
+- **Expected Adaptive Tendency**: `XGBoost`.
+- **Technical Rationale**: Phase 14 empirical benchmarking associated gradient boosted trees with superior routing accuracy (39.4%) under nonlinear queue contention.
+- **Expected Adaptive Tendency**: `Random Forest`.
+- **Technical Rationale**: Robust ensemble bagging reduces variance and handles transient spikes without degrading routing quality.
+- **Telemetry to Watch**: Max response time, surge queue depth, CPU spread.
+
+### Scenario 4 — Sustained Stress
+### Scenario 4 — Sustained Stress (`sustained_stress`)
+- **Purpose**: High-stress regime representing prolonged concurrency approaching cluster saturation.
+- **Workload**: 60 requests, concurrency=14, duration=0.080s, priority=equal.
+- **Cluster State**: Sustained high concurrency, multiple active connections per node, elevated cluster response time.
+- **Expected Adaptive Tendency**: `Random Forest` / `XGBoost`.
+- **Technical Rationale**: Robust tree ensembles empirically excel under high-contention overload conditions by distributing requests away from saturating backends.
+- **Expected Adaptive Tendency**: `XGBoost`.
+- **Technical Rationale**: Gradient boosted trees excel under heavy contention overload by accurately targeting the optimal backend node.
+- **Telemetry to Watch**: Maximum CPU, active connections, mean active response time.
+
+### Scenario 5 — Backend Imbalance
+- **Purpose**: Asymmetric cluster condition where one backend becomes significantly more loaded than others.
+- **Workload**: 35 requests, concurrency=6, duration=0.035s with continuous background processing against Backend 1.
+- **Cluster State**: High CPU and response-time spread across nodes (`cluster_cpu_spread > 36.8%`).
+- **Expected Adaptive Tendency**: `Decision Tree`.
+- **Technical Rationale**: Decision tree splits specifically detect cluster asymmetry, routing subsequent traffic to lightly loaded survivors.
+- **Telemetry to Watch**: CPU spread, backend response-time variance, traffic steering to nodes 8002/8003.
+
+### Scenario 6 — Priority Conflict
+### Scenario 5 — Priority Conflict (`priority_conflict`)
+- **Purpose**: Quality-of-Service demonstration with mixed request urgencies and tight deadlines.
+- **Workload**: 45 requests, concurrency=8, duration=0.040s, priority=conflict (interleaved HIGH relaxed vs. LOW tight deadline requests).
+- **Cluster State**: Contended cluster with heterogeneous request deadlines.
+- **Expected Routing Mechanism**: `Priority Adaptive Router`.
+- **Technical Rationale**: Combines Earliest Deadline First (EDF) request scheduling with adaptive ML routing to satisfy deadline envelopes.
+- **Telemetry to Watch**: Priority distribution (HIGH vs. LOW), deadline slack, per-priority success rate.
+
+### Scenario 6 — Adaptive Multi-Phase (`adaptive_multiphase`)
+- **Purpose**: Comprehensive multi-stage scenario transitioning dynamically across regimes.
+- **Workload**: 75 requests, concurrency=8, duration=0.040s, priority=mixed.
+- **Cluster State**: Dynamic transition across varying load levels, demonstrating real-time model switching.
+- **Expected Routing Mechanism**: Dynamic transitions across candidate models via Adaptive Meta-Selector.
+- **Technical Rationale**: Directly validates online adaptation under non-stationary traffic conditions.
+- **Telemetry to Watch**: Model switching count, adaptive model distribution chart, throughput consistency.
 
 ---
 
