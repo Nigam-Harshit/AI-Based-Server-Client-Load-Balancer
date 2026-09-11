@@ -66,12 +66,8 @@
                 <option value="svm">Support Vector Machine (SVM)</option>
                 <option value="xgboost">XGBoost Classifier</option>
               </optgroup>
-              <optgroup label="Adaptive Context-Aware Routing">
-                <option value="adaptive_policy">Adaptive Policy (Regime-Driven)</option>
-                <option value="adaptive_meta">Adaptive Meta-Selector (Meta-Model)</option>
-              </optgroup>
-              <optgroup label="Priority & Deadline Aware">
-                <option value="priority_ml">Priority ML Router (EDF / Urgency)</option>
+              <optgroup label="Adaptive & Priority Routing">
+                <option value="adaptive_meta">Adaptive Meta-Selector</option>
                 <option value="priority_adaptive">Priority Adaptive Router</option>
               </optgroup>
             </select>
@@ -91,11 +87,12 @@
           <div class="form-group">
             <label for="scenario-select">Preset Scenario:</label>
             <select id="scenario-select" class="form-control">
-              <option value="steady_state">Steady State (30 reqs, c=5)</option>
-              <option value="burst_traffic">Burst Spikes (50 reqs, burst=10)</option>
-              <option value="stress_overload">Stress Overload (60 reqs, c=12)</option>
-              <option value="mixed_priority">Mixed Priority (40 reqs, tight deadlines)</option>
-              <option value="high_contention_conflict">Priority Conflict & Contention</option>
+              <option value="stable_normal">Stable Normal (30 reqs, c=2, 0.015s)</option>
+              <option value="dynamic_moderate">Dynamic Moderate (40 reqs, c=5, 0.035s)</option>
+              <option value="burst_spike">Burst Spikes (50 reqs, c=10, 0.045s)</option>
+              <option value="sustained_stress">Sustained Stress (60 reqs, c=14, 0.080s)</option>
+              <option value="priority_conflict">Priority Conflict (45 reqs, c=8, 0.040s)</option>
+              <option value="adaptive_multiphase">Adaptive Multi-Phase (75 reqs, 5 Stages)</option>
               <option value="custom">Custom Parameters...</option>
             </select>
           </div>
@@ -340,3 +337,4 @@
   <script src="/app.js"></script>
 </body>
 </html>
+

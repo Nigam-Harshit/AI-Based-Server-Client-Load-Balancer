@@ -1,7 +1,76 @@
 [
   {
+    "id": "stable_normal",
+    "name": "Stable Normal (Low Load)",
+    "description": "Low concurrency and light requests (0.015s) establishing baseline latency with minimal queuing.",
+    "num_requests": 30,
+    "concurrency": 2,
+    "request_rate": 8.0,
+    "endpoint": "/process",
+    "request_duration": 0.015,
+    "priority_profile": "equal"
+  },
+  {
+    "id": "dynamic_moderate",
+    "name": "Dynamic Moderate Load",
+    "description": "Balanced moderate concurrency (c=5) and standard processing (0.035s) creating realistic multi-node traffic.",
+    "num_requests": 40,
+    "concurrency": 5,
+    "request_rate": null,
+    "endpoint": "/process",
+    "request_duration": 0.035,
+    "priority_profile": "equal"
+  },
+  {
+    "id": "burst_spike",
+    "name": "Burst Traffic Spikes",
+    "description": "Sudden wave of concurrent requests testing surge resilience, queue handling, and high-load model selection.",
+    "num_requests": 50,
+    "concurrency": 10,
+    "request_rate": null,
+    "burst_size": 15,
+    "burst_interval": 0.20,
+    "endpoint": "/process",
+    "request_duration": 0.045,
+    "priority_profile": "equal"
+  },
+  {
+    "id": "sustained_stress",
+    "name": "Sustained Stress Overload",
+    "description": "High concurrency (c=14) and heavy compute duration (0.080s) inducing queue contention and backend saturation.",
+    "num_requests": 60,
+    "concurrency": 14,
+    "request_rate": null,
+    "endpoint": "/process",
+    "request_duration": 0.080,
+    "priority_profile": "equal"
+  },
+  {
+    "id": "priority_conflict",
+    "name": "Priority Conflict & Contention",
+    "description": "Interleaved high-priority relaxed requests with low-priority tight deadline requests under high contention.",
+    "num_requests": 45,
+    "concurrency": 8,
+    "request_rate": null,
+    "endpoint": "/process",
+    "request_duration": 0.040,
+    "priority_profile": "conflict"
+  },
+  {
+    "id": "adaptive_multiphase",
+    "name": "Adaptive Multi-Phase Progression",
+    "description": "Sequential 5-stage progression (Normal -> Moderate -> Burst -> Stress -> Recovery) demonstrating real-time model switching.",
+    "num_requests": 75,
+    "concurrency": 8,
+    "request_rate": null,
+    "endpoint": "/process",
+    "request_duration": 0.040,
+    "priority_profile": "mixed"
+  },
+  {
     "id": "steady_state",
     "name": "Steady State (Baseline)",
+    "name": "Steady State (Legacy)",
     "description": "Uniform moderate arrival rate testing steady baseline response time and connection balancing.",
     "num_requests": 30,
     "concurrency": 5,
@@ -13,6 +82,7 @@
   {
     "id": "burst_traffic",
     "name": "Burst Traffic Spikes",
+    "name": "Burst Traffic Spikes (Legacy)",
     "description": "Sharp sudden bursts of requests testing surge handling, queue management, and model reactivity.",
     "num_requests": 50,
     "concurrency": 10,
@@ -26,6 +96,7 @@
   {
     "id": "stress_overload",
     "name": "Stress / High Load Overload",
+    "name": "Stress / High Load Overload (Legacy)",
     "description": "High concurrency and heavy processing load testing saturation, thread starvation, and adaptive tree-model activation.",
     "num_requests": 60,
     "concurrency": 12,
@@ -37,6 +108,7 @@
   {
     "id": "mixed_priority",
     "name": "Mixed Priority & Deadlines",
+    "name": "Mixed Priority & Deadlines (Legacy)",
     "description": "Heterogeneous request stream with LOW, NORMAL, HIGH, and CRITICAL requests under tight deadline envelopes.",
     "num_requests": 40,
     "concurrency": 6,
@@ -48,6 +120,7 @@
   {
     "id": "high_contention_conflict",
     "name": "High Contention & Priority Conflict",
+    "name": "High Contention & Priority Conflict (Legacy)",
     "description": "Interleaved bursts with tight deadlines, testing EDF (Earliest Deadline First) and priority queue scheduling.",
     "num_requests": 40,
     "concurrency": 8,
@@ -57,3 +130,4 @@
     "priority_profile": "conflict"
   }
 ]
+

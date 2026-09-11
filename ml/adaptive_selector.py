@@ -299,7 +299,11 @@ class AdaptiveRouter(BaseRouter):
         if hasattr(self.fallback_router, "set_healthy_backends"):
             self.fallback_router.set_healthy_backends(healthy)
 
-    def select(self, client_ip: Optional[str] = None) -> str:
+    def select(
+        self,
+        client_ip: Optional[str] = None,
+        priority_meta: Optional[Any] = None,
+    ) -> str:
         """Execute adaptive routing decision."""
         self.total_routed_requests += 1
         t_start = time.perf_counter()
@@ -408,6 +412,14 @@ class AdaptiveRouter(BaseRouter):
 
             # Record decision metadata
             switch_rate = round(self.switch_count / max(1, self.total_routed_requests), 4)
+            p_name = None
+            slack_ms = None
+            if priority_meta is not None:
+                p_level = getattr(priority_meta, "priority", None)
+                p_name = getattr(p_level, "name", str(p_level)) if p_level else None
+                if hasattr(priority_meta, "calculate_slack_ms"):
+                    slack_ms = priority_meta.calculate_slack_ms()
+
             self.last_adaptive_decision = {
                 "selected_model": selected_model,
                 "strategy": self.strategy.value,
@@ -422,6 +434,8 @@ class AdaptiveRouter(BaseRouter):
                 "switch_count": self.switch_count,
                 "switch_rate": switch_rate,
                 "inference_time_ms": inference_time_ms,
+                "priority": p_name,
+                "deadline_slack_ms": slack_ms,
             }
             # For backward compatibility with standard ML response headers
             self.last_prediction = {

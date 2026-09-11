@@ -100,6 +100,90 @@ class WorkloadConfig:
 
 # Pre-configured reproducible workload scenarios
 SCENARIO_TEMPLATES: Dict[str, Dict[str, Any]] = {
+    # Phase 16 Calibrated Regimes
+    "stable_normal": {
+        "num_requests": 30,
+        "concurrency": 2,
+        "request_rate": 8.0,
+        "endpoint": "/process",
+        "request_duration": 0.015,
+        "priority_profile": "equal",
+    },
+    "dynamic_moderate": {
+        "num_requests": 40,
+        "concurrency": 5,
+        "request_rate": None,
+        "endpoint": "/process",
+        "request_duration": 0.035,
+        "priority_profile": "equal",
+    },
+    "burst_spike": {
+        "num_requests": 50,
+        "concurrency": 10,
+        "request_rate": None,
+        "endpoint": "/process",
+        "request_duration": 0.045,
+        "burst_size": 15,
+        "burst_interval": 0.20,
+        "priority_profile": "equal",
+    },
+    "sustained_stress": {
+        "num_requests": 60,
+        "concurrency": 14,
+        "request_rate": None,
+        "endpoint": "/process",
+        "request_duration": 0.080,
+        "priority_profile": "equal",
+    },
+    "priority_conflict": {
+        "num_requests": 45,
+        "concurrency": 8,
+        "request_rate": None,
+        "endpoint": "/process",
+        "request_duration": 0.040,
+        "priority_profile": "conflict",
+    },
+    "adaptive_multiphase": {
+        "num_requests": 75,
+        "concurrency": 8,
+        "request_rate": None,
+        "endpoint": "/process",
+        "request_duration": 0.040,
+        "priority_profile": "mixed",
+    },
+    # Backward Compatibility & Legacy Templates
+    "steady_state": {
+        "num_requests": 30,
+        "concurrency": 5,
+        "request_rate": 10.0,
+        "endpoint": "/process",
+        "request_duration": 0.03,
+        "priority_profile": "equal",
+    },
+    "stress_overload": {
+        "num_requests": 60,
+        "concurrency": 12,
+        "request_rate": None,
+        "endpoint": "/process",
+        "request_duration": 0.06,
+        "priority_profile": "equal",
+    },
+    "mixed_priority": {
+        "num_requests": 40,
+        "concurrency": 6,
+        "request_rate": None,
+        "endpoint": "/process",
+        "request_duration": 0.03,
+        "priority_profile": "mixed",
+    },
+    "high_contention_conflict": {
+        "num_requests": 40,
+        "concurrency": 8,
+        "request_rate": None,
+        "endpoint": "/process",
+        "request_duration": 0.04,
+        "priority_profile": "conflict",
+    },
     "low_traffic": {
         "num_requests": 20,
         "concurrency": 2,
@@ -204,6 +288,25 @@ class WorkloadGenerator:
                 return f"{base}/process?duration={duration}", "process", duration
         elif endpoint == "/health":
             return f"{base}/health", "health", 0.0
+        elif self.config.scenario_name == "adaptive_multiphase":
+            # 5-stage progression across num_requests:
+            # Stage 1 (0-20%): Low Load / Normal (duration = 0.015s)
+            # Stage 2 (20-40%): Moderate Load (duration = 0.035s)
+            # Stage 3 (40-60%): Burst Spike (duration = 0.045s)
+            # Stage 4 (60-80%): Stress Overload (duration = 0.080s)
+            # Stage 5 (80-100%): Recovery (duration = 0.015s)
+            fraction = (request_id - 1) / max(1, self.config.num_requests)
+            if fraction < 0.20:
+                duration = 0.015
+            elif fraction < 0.40:
+                duration = 0.035
+            elif fraction < 0.60:
+                duration = 0.045
+            elif fraction < 0.80:
+                duration = 0.080
+            else:
+                duration = 0.015
+            return f"{base}/process?duration={duration}", "process", duration
         else:
             duration = self.config.request_duration
             return f"{base}/process?duration={duration}", "process", duration

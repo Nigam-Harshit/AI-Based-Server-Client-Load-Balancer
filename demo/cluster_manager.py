@@ -480,7 +480,7 @@ class ClusterManager:
             adaptive_dist: Dict[str, int] = {}
             for r in all_records:
                 sm = r.get("selected_model")
-                if sm:
+                if sm and sm.lower() not in ("none", "null"):
                     adaptive_dist[sm] = adaptive_dist.get(sm, 0) + 1
 
             # Latency and routing overhead computations
@@ -652,7 +652,7 @@ class ClusterManager:
             (
                 4,
                 "Stage 4: Context-Aware Adaptive Routing (Dynamic Selector)",
-                "adaptive_policy",
+                "adaptive_meta",
                 {"scenario": "stress_overload", "num_requests": 35, "concurrency": 10, "request_duration": 0.05},
                 "Under high CPU/load stress, the adaptive router dynamically switches models (e.g. from SVM to Random Forest/Decision Tree).",
             ),

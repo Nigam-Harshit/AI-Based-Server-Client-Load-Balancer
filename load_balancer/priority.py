@@ -211,8 +211,11 @@ class PriorityDeadlineRouter:
         slack_ms = meta.calculate_slack_ms(now)
         urgency = meta.classify_urgency(now)
 
-        # 1. Obtain underlying base router (ML) prediction
-        ml_predicted = self.base_router.select(client_ip=client_ip)
+        # 1. Obtain underlying base router (ML / Adaptive) prediction
+        try:
+            ml_predicted = self.base_router.select(client_ip=client_ip, priority_meta=meta)
+        except TypeError:
+            ml_predicted = self.base_router.select(client_ip=client_ip)
         ml_pred_meta = getattr(self.base_router, "last_prediction", {})
         raw_ml_pred = ml_pred_meta.get("predicted_server") or ml_predicted
 
@@ -308,6 +311,16 @@ class PriorityDeadlineRouter:
         }
 
         return final_backend
+
+    @property
+    def last_adaptive_decision(self) -> Dict[str, Any]:
+        """Propagate adaptive routing telemetry from underlying base router."""
+        return getattr(self.base_router, "last_adaptive_decision", {})
+
+    @property
+    def last_prediction(self) -> Dict[str, Any]:
+        """Propagate ML prediction telemetry from underlying base router."""
+        return getattr(self.base_router, "last_prediction", {})
 
     def release(self, backend: str, success: bool = True) -> None:
         """Forward release notification to base router."""

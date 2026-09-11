@@ -336,7 +336,7 @@ def get_router(
     backends: List[str],
     collector: Optional[Any] = None,
     model_path: Optional[str] = None,
-    adaptive_strategy: str = "policy",
+    adaptive_strategy: str = "meta",
 ) -> BaseRouter:
     """Factory to instantiate a router by name."""
     normalized = algorithm.lower().replace("-", "_").strip()

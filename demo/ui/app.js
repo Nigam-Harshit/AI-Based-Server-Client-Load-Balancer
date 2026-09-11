@@ -66,14 +66,20 @@
     decision_tree: 'Machine Learning',
     svm: 'Machine Learning',
     xgboost: 'Machine Learning',
-    adaptive_policy: 'Adaptive ML',
     adaptive_meta: 'Adaptive ML',
-    priority_ml: 'Priority ML',
-    priority_adaptive: 'Priority ML',
+    priority_adaptive: 'Priority Adaptive',
   };
 
   // Preset Scenario Definitions
   const PRESET_MAP = {
+    // Calibrated Phase 16 presets
+    stable_normal: { num: 30, conc: 2, dur: 0.015, priority: 'equal' },
+    dynamic_moderate: { num: 40, conc: 5, dur: 0.035, priority: 'equal' },
+    burst_spike: { num: 50, conc: 10, dur: 0.045, priority: 'equal' },
+    sustained_stress: { num: 60, conc: 14, dur: 0.080, priority: 'equal' },
+    priority_conflict: { num: 45, conc: 8, dur: 0.040, priority: 'conflict' },
+    adaptive_multiphase: { num: 75, conc: 8, dur: 0.040, priority: 'mixed' },
+    // Legacy Presets
     steady_state: { num: 30, conc: 5, dur: 0.03, priority: 'equal' },
     burst_traffic: { num: 50, conc: 10, dur: 0.04, priority: 'equal' },
     stress_overload: { num: 60, conc: 12, dur: 0.06, priority: 'equal' },
@@ -396,7 +402,7 @@
     chartAdaptiveDistribution.innerHTML = '';
     const entries = Object.entries(dist);
     if (entries.length === 0) {
-      chartAdaptiveDistribution.innerHTML = '<div class="empty-state-text">Active when using Adaptive Policy or Meta-Selector</div>';
+      chartAdaptiveDistribution.innerHTML = '<div class="empty-state-text">Active when using Adaptive Meta-Selector or Priority Adaptive Router</div>';
       return;
     }
 
@@ -509,3 +515,4 @@
   // Kick off on page load
   document.addEventListener('DOMContentLoaded', init);
 })();
+
